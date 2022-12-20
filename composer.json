@@ -33,7 +33,12 @@
 		"sirbrillig/phpcs-variable-analysis": "^2.8"
 	},
 	"require": {
-		"composer/installers": "~1.0"
+		"composer/installers": "~1.0",
+		"symfony/event-dispatcher": "^5.4",
+		"nyholm/psr7": "^1.5",
+		"guzzlehttp/guzzle": "^7.5",
+		"php-http/cache-plugin": "^1.7",
+		"php-tmdb/api": "^4"
 	},
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",

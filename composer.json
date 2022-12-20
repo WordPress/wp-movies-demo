@@ -1,0 +1,42 @@
+{
+	"name": "wordpress/movies-demo",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"description": "Experiments with frontend hydration for blocks",
+	"homepage": "https://wordpress.github.io/gutenberg/",
+	"keywords": [
+		"block-hydration-experiments",
+        "wordpress-movies-demo",
+		"wordpress",
+		"wp",
+		"react",
+		"javascript"
+	],
+	"support": {
+		"issues": "https://github.com/WordPress/block-hydration-experiments/issues"
+	},
+	"config": {
+		"process-timeout": 0,
+		"platform": {
+			"php": "7.4"
+		},
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"composer/installers": true
+		}
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+		"squizlabs/php_codesniffer": "^3.5",
+		"phpcompatibility/phpcompatibility-wp": "^2.1.3",
+		"wp-coding-standards/wpcs": "^2.2",
+		"sirbrillig/phpcs-variable-analysis": "^2.8"
+	},
+	"require": {
+		"composer/installers": "~1.0"
+	},
+	"scripts": {
+		"format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
+		"lint": "phpcs --standard=phpcs.xml.dist"
+	}
+}

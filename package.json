@@ -1,0 +1,43 @@
+{
+	"name": "wordpress-movies-demo",
+	"version": "0.1.0",
+	"author": "The WordPress Contributors",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "webpack --mode=production",
+		"dev": "npm start",
+		"format:php": "wp-env run composer run-script format",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "webpack --mode=development --watch",
+		"wp-env": "wp-env"
+	},
+	"prettier": {
+		"useTabs": true,
+		"tabWidth": 4,
+		"printWidth": 80,
+		"singleQuote": true,
+		"trailingComma": "es5",
+		"bracketSameLine": false,
+		"bracketSpacing": true,
+		"semi": true,
+		"arrowParens": "always",
+		"phpVersion": "5.6"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.17.10",
+		"@babel/preset-env": "^7.17.10",
+		"@prettier/plugin-php": "^0.18.9",
+		"@types/jest": "^27.5.1",
+		"@wordpress/env": "^4.4.0",
+		"@wordpress/scripts": "^24.3.0",
+		"babel-jest": "^28.1.0",
+		"jest": "^28.1.0",
+		"prettier": "^2.7.1"
+	},
+	"dependencies": {
+		"@preact/signals": "^1.1.2",
+		"hpq": "^1.3.0",
+		"preact": "^10.10.6"
+	}
+}

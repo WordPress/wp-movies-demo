@@ -29,6 +29,8 @@
 	<arg name="extensions" value="php"/>
 
 	<file>./wpmovies.php</file>
+	<file>./lib</file>
+	<file>./src</file>
 
 	<!-- Exclude generated files -->
 	<exclude-pattern>./build</exclude-pattern>

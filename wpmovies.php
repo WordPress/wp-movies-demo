@@ -31,6 +31,5 @@ if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 require_once __DIR__ . '/lib/init.php';
 require_once __DIR__ . '/src/custom-post-types.php';
 require_once __DIR__ . '/src/custom-taxonomies.php';
-require_once __DIR__ . '/src/movies-database-api.php';
 
 

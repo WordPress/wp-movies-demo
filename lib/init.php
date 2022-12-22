@@ -32,3 +32,4 @@ function wp_directives_uninstall() {
 register_uninstall_hook( __FILE__, 'wp_directives_uninstall' );
 
 require_once __DIR__ . '/client-side-transitions.php';
+require_once __DIR__ . '/settings-page.php';

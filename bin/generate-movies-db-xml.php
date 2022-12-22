@@ -37,12 +37,25 @@ function createXML() {
 	$channel->appendChild( $wp_base_blog_url );
 	$generator = $dom->createElement( 'generator', 'https://wordpress.org/?v=6.1.1' );
 	$channel->appendChild( $generator );
-
+    $author = $dom->createElement( 'wp:author' );
+    $channel->appendChild( $author );
+    $author_id = $dom->createElement( 'wp:author_id', '2' );
+    $author->appendChild( $author_id );
+    $author_login = $dom->createElement( 'wp:author_login', 'moviefan' );
+    $author->appendChild( $author_login );
+    $author_email = $dom->createElement( 'wp:author_email', 'moviefan@wordpress.org' );
+    $author->appendChild( $author_email );
+    $author_display_name = $dom->createElement( 'wp:author_display_name', 'moviefan' );
+    $author->appendChild( $author_display_name );
+    $author_first_name = $dom->createElement( 'wp:author_first_name', 'moviefan' );
+    $author->appendChild( $author_first_name );
+    $author_last_name = $dom->createElement( 'wp:author_last_name', '' );
+    $author->appendChild( $author_last_name );
 	$repository = new MovieRepository( $client );
 	$counter    = readline( 'Enter first ID that will be created: ' ) + 1;
 	// force counter to be at least an integer with value 1
 	$counter = max( 1, (int) $counter );
-	for ( $i = 1; $i <= 5; $i++ ) {
+	for ( $i = 1; $i <= 3; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
 			$item_attachment = addMovieAttachment( $movie, $dom, $counter );
@@ -146,5 +159,5 @@ $dom = createXML();
 
 $dom->save( 'wpmoviesdb_sampledata.xml' );
 
-echo 'Movies xml file created';
+echo PHP_EOL.'Movies xml file created 🍿🎬'.PHP_EOL;
 exit;

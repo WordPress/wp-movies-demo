@@ -8,6 +8,7 @@
 		"build": "webpack --mode=production",
 		"dev": "npm start",
 		"format:php": "wp-env run composer run-script format",
+		"create-xml": "wp-env run composer run-script create-xml",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "webpack --mode=development --watch",
 		"wp-env": "wp-env"

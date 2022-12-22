@@ -4,7 +4,7 @@
 
 	<config name="testVersion" value="5.6-"/>
 	<rule ref="PHPCompatibilityWP">
-		<include-pattern>*\.php$</include-pattern>
+		<include-pattern>./php$</include-pattern>
 	</rule>
 
 	<rule ref="WordPress-Core"/>
@@ -29,10 +29,9 @@
 	<arg name="extensions" value="php"/>
 
 	<file>./wpmovies.php</file>
-	<file>./setup-client.php</file>
-	<file>./generate-movies-db-xml.php</file>
 	<file>./lib</file>
 	<file>./src</file>
+	<file>./bin</file>
 
 	<!-- Exclude generated files -->
 	<exclude-pattern>./build</exclude-pattern>

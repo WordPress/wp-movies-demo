@@ -11,11 +11,11 @@ use Tmdb\Event\RequestEvent;
 use Tmdb\Token\Api\ApiToken;
 use Tmdb\Token\Api\BearerToken;
 
-$api_key = readline('Enter TMDB API key: ');
+$api_key = readline( 'Enter TMDB API key: ' );
 
-if ($api_key === false || $api_key === '') {
-    echo 'No API key provided, exiting.' . PHP_EOL;
-    exit(1);
+if ( $api_key === false || $api_key === '' ) {
+	echo 'No API key provided, exiting.' . PHP_EOL;
+	exit( 1 );
 }
 
 $token = defined( 'TMDB_BEARER_TOKEN' ) && TMDB_BEARER_TOKEN !== 'TMDB_BEARER_TOKEN' ?

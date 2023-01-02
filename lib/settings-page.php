@@ -69,8 +69,9 @@ function wp_directives_validate_settings($input)
 
 function wp_directives_client_side_transitions_input()
 {
-	$options = get_option('wp_directives_plugin_settings'); ?>
-
+	$options = get_option('wp_directives_plugin_settings');
+	?>
+	
 	<input type="checkbox" name="<?= esc_attr('wp_directives_plugin_settings[client_side_transitions]') ?>"
 		<?= $options['client_side_transitions'] ? 'checked' : '' ?>
 	>

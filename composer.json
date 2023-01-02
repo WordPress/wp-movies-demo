@@ -35,7 +35,8 @@
 		"composer/installers": "~1.0",
 		"symfony/event-dispatcher": "^5.4",
 		"guzzlehttp/guzzle": "^7.5",
-		"php-tmdb/api": "^4"
+		"php-tmdb/api": "^4",
+		"cocur/slugify": "^4.3"
 
 	},
 	"scripts": {

@@ -8,9 +8,23 @@ require_once (__DIR__.'/../vendor/autoload.php');
 function createXML() {
 	$client                  = require_once( __DIR__ . '/setup-client.php' );
 	$slugify = new Slugify();
+	$moviesDom = createDom();
+	$repository = new MovieRepository( $client );
+	$moviesDom = addMovies( $moviesDom, $repository, $slugify );
+	$moviesDom->save( 'wp_sampledata_movies.xml' );
+	echo PHP_EOL.'Movies xml file created 🍿🎬'.PHP_EOL;
+	$actorsDom = createDom();
+	$actorsDom = addActors( $actorsDom, $repository, $slugify );
+	$actorsDom->save( 'wp_sampledata_actors.xml' );
+	echo PHP_EOL.'Actors xml file created 🍿🧍'.PHP_EOL;
+
+}
+
+function createDom() {
 	$dom                     = new DOMDocument( '1.0', 'UTF-8' );
 	$dom->formatOutput       = true;
 	$dom->preserveWhiteSpace = false;
+	$dom->validateOnParse    = true;
 	$root                    = $dom->createElement( 'rss' );
 	$root->setAttribute( 'version', '2.0' );
 	$root->setAttribute( 'xmlns:excerpt', 'http://wordpress.org/export/1.2/excerpt/' );
@@ -53,7 +67,10 @@ function createXML() {
     $author->appendChild( $author_first_name );
     $author_last_name = $dom->createElement( 'wp:author_last_name', '' );
     $author->appendChild( $author_last_name );
-	$repository = new MovieRepository( $client );
+	return $dom;
+}
+
+function addMovies($dom, $repository, $slugify) {
 	for ( $i = 1; $i <= 1; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
@@ -61,25 +78,18 @@ function createXML() {
 			$item            = addMovie( $movie, $dom );
 			echo 'Adding '.$movie->getTitle() . PHP_EOL;
 			$credits = $repository->getCredits( $movie->getId() );
-			$movie_category = $dom->createElement( 'category' );
-			$movie_category->setAttribute( 'domain', 'movies_tax' );
-			$movie_category->setAttribute( 'nicename', $slugify->slugify($movie->getTitle()) );
-			$movie_category->appendChild( $dom->createCDATASection( $movie->getTitle() ) );
-			$item->appendChild($movie_category);
+			$castNumber = 0;
 			foreach ( $credits->getCast() as $person ) {
-				$actorPost = addMovie( $person, $dom, true );
-				$actor_attachment = addMovieAttachment( $person, $dom, true );
-				$channel->appendChild( $actorPost );
-				if ( $actor_attachment ) {
-					$channel->appendChild( $actor_attachment );
+				if ($castNumber < 5) {
+					$category = $dom->createElement( 'category' );
+					$category->setAttribute( 'domain', 'actors_tax' );
+					$category->setAttribute( 'nicename', $slugify->slugify($person->getName()) );
+					$category->appendChild( $dom->createCDATASection( $person->getName() ) );
+					$item->appendChild($category);
+					$castNumber++;
 				}
-				$item->appendChild( addPostMeta( 'actor', $person->getId(), $dom ) );
-				$category = $dom->createElement( 'category' );
-				$category->setAttribute( 'domain', 'actors_tax' );
-				$category->setAttribute( 'nicename', $slugify->slugify($person->getName()) );
-				$category->appendChild( $dom->createCDATASection( $person->getName() ) );
-				$item->appendChild($category);
 			}
+			$channel = $dom->getElementsByTagName( 'channel' )->item( 0 );
 			$channel->appendChild( $item );
 			if ( $item_attachment ) {
 				$channel->appendChild( $item_attachment );
@@ -88,6 +98,36 @@ function createXML() {
 	}
 	return $dom;
 }
+
+function addActors($dom, $repository, $slugify) {
+	for ( $i = 1; $i <= 1; $i++ ) {
+		$movies = $repository->getPopular( array( 'page' => $i ) );
+		foreach ( $movies as $movie ) {
+			$credits = $repository->getCredits( $movie->getId() );
+			$castNumber = 0;
+			foreach ( $credits->getCast() as $person ) {
+				if ($castNumber < 5) {
+					echo 'Adding '.$person->getName() . PHP_EOL;
+					$item_attachment = addMovieAttachment( $person, $dom, true );
+					$item = addMovie( $person, $dom, true );
+					$category = $dom->createElement( 'category' );
+					$category->setAttribute( 'domain', 'movies_tax' );
+					$category->setAttribute( 'nicename', $slugify->slugify($movie->getTitle()) );
+					$category->appendChild( $dom->createCDATASection( $movie->getTitle() ) );
+					$item->appendChild($category);
+					$channel = $dom->getElementsByTagName( 'channel' )->item( 0 );
+					$channel->appendChild( $item );
+					if ( $item_attachment ) {
+						$channel->appendChild( $item_attachment );
+					}
+					$castNumber++;
+				}
+			}
+		}
+	}
+	return $dom;
+}
+
 
 function addPostMeta( $key, $value, $dom, $cdata = false ) {
 	$wp_postmeta     = $dom->createElement( 'wp:postmeta' );
@@ -109,6 +149,7 @@ function addMovie( $movie, $dom, $is_actor = false ) {
 		$slugify = new Slugify();
 		$movie_title = htmlspecialchars( $is_actor ? $movie->getName() : $movie->getTitle() );
 		$item        = $dom->createElement( 'item' );
+		$item->setAttribute( 'id', $movie->getId() );
 		$title       = $dom->createElement( 'title', $movie_title );
 		$item->appendChild( $title );
 		if ( ! $is_actor ) {
@@ -203,9 +244,5 @@ function addMovieAttachment( $movie, $dom, $is_actor = false ) {
 		return $item;
 	}
 }
-$dom = createXML();
-
-$dom->save( 'wpmoviesdb_sampledata.xml' );
-
-echo PHP_EOL.'Movies xml file created 🍿🎬'.PHP_EOL;
+createXML();
 exit;

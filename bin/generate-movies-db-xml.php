@@ -3,20 +3,20 @@
 use Tmdb\Repository\MovieRepository;
 use Cocur\Slugify\Slugify;
 
-require_once (__DIR__.'/../vendor/autoload.php');
+require_once( __DIR__ . '/../vendor/autoload.php' );
 
 function createXML() {
-	$client                  = require_once( __DIR__ . '/setup-client.php' );
-	$slugify = new Slugify();
-	$moviesDom = createDom();
+	$client     = require_once( __DIR__ . '/setup-client.php' );
+	$slugify    = new Slugify();
+	$moviesDom  = createDom();
 	$repository = new MovieRepository( $client );
-	$moviesDom = addMovies( $moviesDom, $repository, $slugify );
+	$moviesDom  = addMovies( $moviesDom, $repository, $slugify );
 	$moviesDom->save( 'wp_sampledata_movies.xml' );
-	echo PHP_EOL.'Movies xml file created 🍿🎬'.PHP_EOL;
+	echo PHP_EOL . 'Movies xml file created 🍿🎬' . PHP_EOL;
 	$actorsDom = createDom();
 	$actorsDom = addActors( $actorsDom, $repository, $slugify );
 	$actorsDom->save( 'wp_sampledata_actors.xml' );
-	echo PHP_EOL.'Actors xml file created 🍿🧍'.PHP_EOL;
+	echo PHP_EOL . 'Actors xml file created 🍿🧍' . PHP_EOL;
 
 }
 
@@ -53,39 +53,39 @@ function createDom() {
 	$channel->appendChild( $wp_base_blog_url );
 	$generator = $dom->createElement( 'generator', 'https://wordpress.org/?v=6.1.1' );
 	$channel->appendChild( $generator );
-    $author = $dom->createElement( 'wp:author' );
-    $channel->appendChild( $author );
-    $author_id = $dom->createElement( 'wp:author_id', '2' );
-    $author->appendChild( $author_id );
-    $author_login = $dom->createElement( 'wp:author_login', 'moviefan' );
-    $author->appendChild( $author_login );
-    $author_email = $dom->createElement( 'wp:author_email', 'moviefan@wordpress.org' );
-    $author->appendChild( $author_email );
-    $author_display_name = $dom->createElement( 'wp:author_display_name', 'moviefan' );
-    $author->appendChild( $author_display_name );
-    $author_first_name = $dom->createElement( 'wp:author_first_name', 'moviefan' );
-    $author->appendChild( $author_first_name );
-    $author_last_name = $dom->createElement( 'wp:author_last_name', '' );
-    $author->appendChild( $author_last_name );
+	$author = $dom->createElement( 'wp:author' );
+	$channel->appendChild( $author );
+	$author_id = $dom->createElement( 'wp:author_id', '2' );
+	$author->appendChild( $author_id );
+	$author_login = $dom->createElement( 'wp:author_login', 'moviefan' );
+	$author->appendChild( $author_login );
+	$author_email = $dom->createElement( 'wp:author_email', 'moviefan@wordpress.org' );
+	$author->appendChild( $author_email );
+	$author_display_name = $dom->createElement( 'wp:author_display_name', 'moviefan' );
+	$author->appendChild( $author_display_name );
+	$author_first_name = $dom->createElement( 'wp:author_first_name', 'moviefan' );
+	$author->appendChild( $author_first_name );
+	$author_last_name = $dom->createElement( 'wp:author_last_name', '' );
+	$author->appendChild( $author_last_name );
 	return $dom;
 }
 
-function addMovies($dom, $repository, $slugify) {
+function addMovies( $dom, $repository, $slugify ) {
 	for ( $i = 1; $i <= 1; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
 			$item_attachment = addMovieAttachment( $movie, $dom );
 			$item            = addMovie( $movie, $dom );
-			echo 'Adding '.$movie->getTitle() . PHP_EOL;
-			$credits = $repository->getCredits( $movie->getId() );
+			echo 'Adding ' . $movie->getTitle() . PHP_EOL;
+			$credits    = $repository->getCredits( $movie->getId() );
 			$castNumber = 0;
 			foreach ( $credits->getCast() as $person ) {
-				if ($castNumber < 5) {
+				if ( $castNumber < 5 ) {
 					$category = $dom->createElement( 'category' );
 					$category->setAttribute( 'domain', 'actors_tax' );
-					$category->setAttribute( 'nicename', $slugify->slugify($person->getName()) );
+					$category->setAttribute( 'nicename', $slugify->slugify( $person->getName() ) );
 					$category->appendChild( $dom->createCDATASection( $person->getName() ) );
-					$item->appendChild($category);
+					$item->appendChild( $category );
 					$castNumber++;
 				}
 			}
@@ -99,22 +99,22 @@ function addMovies($dom, $repository, $slugify) {
 	return $dom;
 }
 
-function addActors($dom, $repository, $slugify) {
+function addActors( $dom, $repository, $slugify ) {
 	for ( $i = 1; $i <= 1; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
-			$credits = $repository->getCredits( $movie->getId() );
+			$credits    = $repository->getCredits( $movie->getId() );
 			$castNumber = 0;
 			foreach ( $credits->getCast() as $person ) {
-				if ($castNumber < 5) {
-					echo 'Adding '.$person->getName() . PHP_EOL;
+				if ( $castNumber < 5 ) {
+					echo 'Adding ' . $person->getName() . PHP_EOL;
 					$item_attachment = addMovieAttachment( $person, $dom, true );
-					$item = addMovie( $person, $dom, true );
-					$category = $dom->createElement( 'category' );
+					$item            = addMovie( $person, $dom, true );
+					$category        = $dom->createElement( 'category' );
 					$category->setAttribute( 'domain', 'movies_tax' );
-					$category->setAttribute( 'nicename', $slugify->slugify($movie->getTitle()) );
+					$category->setAttribute( 'nicename', $slugify->slugify( $movie->getTitle() ) );
 					$category->appendChild( $dom->createCDATASection( $movie->getTitle() ) );
-					$item->appendChild($category);
+					$item->appendChild( $category );
 					$channel = $dom->getElementsByTagName( 'channel' )->item( 0 );
 					$channel->appendChild( $item );
 					if ( $item_attachment ) {
@@ -146,20 +146,20 @@ function addPostMeta( $key, $value, $dom, $cdata = false ) {
 
 function addMovie( $movie, $dom, $is_actor = false ) {
 	if ( $dom ) {
-		$slugify = new Slugify();
+		$slugify     = new Slugify();
 		$movie_title = htmlspecialchars( $is_actor ? $movie->getName() : $movie->getTitle() );
 		$item        = $dom->createElement( 'item' );
 		$item->setAttribute( 'id', $movie->getId() );
-		$title       = $dom->createElement( 'title', $movie_title );
+		$title = $dom->createElement( 'title', $movie_title );
 		$item->appendChild( $title );
 		if ( ! $is_actor ) {
 			$content_encoded = $dom->createElement( 'content:encoded', $movie->getOverview() );
 			$item->appendChild( $content_encoded );
 		}
-        if ( ! $is_actor && $movie->getTagline() ) {
-            $excerpt_encoded = $dom->createElement( 'excerpt:encoded', $movie->getTagline() );
-            $item->appendChild( $excerpt_encoded );
-        }
+		if ( ! $is_actor && $movie->getTagline() ) {
+			$excerpt_encoded = $dom->createElement( 'excerpt:encoded', $movie->getTagline() );
+			$item->appendChild( $excerpt_encoded );
+		}
 		$wp_comment_status = $dom->createElement( 'wp:comment_status', 'closed' );
 		$item->appendChild( $wp_comment_status );
 		$wp_ping_status = $dom->createElement( 'wp:ping_status', 'closed' );
@@ -168,7 +168,7 @@ function addMovie( $movie, $dom, $is_actor = false ) {
 		$item->appendChild( $wp_status );
 		$wp_post_type = $dom->createElement( 'wp:post_type', $is_actor ? 'actors' : 'movies' );
 		$item->appendChild( $wp_post_type );
-		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify($movie_title) );
+		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify( $movie_title ) );
 		$item->appendChild( $wp_post_name );
 		if ( ! $is_actor ) {
 			$wp_post_date = $dom->createElement( 'wp:post_date', $movie->getReleaseDate()->format( 'Y-m-d H:i:s' ) );
@@ -196,10 +196,10 @@ function addMovie( $movie, $dom, $is_actor = false ) {
 
 function addMovieAttachment( $movie, $dom, $is_actor = false ) {
 	if ( $dom ) {
-		$slugify = new Slugify();
+		$slugify     = new Slugify();
 		$movie_title = htmlspecialchars( $is_actor ? $movie->getName() : $movie->getTitle() );
 		if ( $is_actor ) {
-			if ($movie->getProfileImage()->getFilePath()) {
+			if ( $movie->getProfileImage()->getFilePath() ) {
 				$poster_path = 'https://image.tmdb.org/t/p/original' . $movie->getProfileImage();
 			} else {
 				return;
@@ -207,8 +207,8 @@ function addMovieAttachment( $movie, $dom, $is_actor = false ) {
 		} else {
 			$poster_path = 'https://image.tmdb.org/t/p/original' . $movie->getPosterPath();
 		}
-		$item        = $dom->createElement( 'item' );
-		$title       = $dom->createElement( 'title', $movie_title );
+		$item  = $dom->createElement( 'item' );
+		$title = $dom->createElement( 'title', $movie_title );
 		$item->appendChild( $title );
 		$link = $dom->createElement( 'link', $poster_path );
 		$item->appendChild( $link );
@@ -231,7 +231,7 @@ function addMovieAttachment( $movie, $dom, $is_actor = false ) {
 		$item->appendChild( $wp_status );
 		$wp_post_type = $dom->createElement( 'wp:post_type', 'attachment' );
 		$item->appendChild( $wp_post_type );
-		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify($movie_title) . '.jpg' );
+		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify( $movie_title ) . '.jpg' );
 		$item->appendChild( $wp_post_name );
 		$attachment_url = $dom->createElement( 'wp:attachment_url', $poster_path );
 		$item->appendChild( $attachment_url );

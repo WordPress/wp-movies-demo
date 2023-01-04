@@ -2,6 +2,7 @@
 node_modules
 vendor
 build
+.env
 
 # Directories/files that may appear in your environment
 *.log

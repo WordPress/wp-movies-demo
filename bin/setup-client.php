@@ -1,5 +1,6 @@
 <?php
 
+use Dotenv\Dotenv;
 use Tmdb\Client;
 use Tmdb\Event\BeforeRequestEvent;
 use Tmdb\Event\Listener\Request\AcceptJsonRequestListener;
@@ -11,22 +12,22 @@ use Tmdb\Event\RequestEvent;
 use Tmdb\Token\Api\ApiToken;
 use Tmdb\Token\Api\BearerToken;
 
-$api_key = readline( 'Enter TMDB API key: ' );
+$dotenv = Dotenv::createImmutable( dirname( __DIR__ ) );
+$dotenv->load();
 
+$api_key = $_ENV['TMDB_API_KEY'];
 if ( $api_key === false || $api_key === '' ) {
-	echo 'No API key provided, exiting.' . PHP_EOL;
+	echo 'No API key provided, please update your .env file, exiting.' . PHP_EOL;
 	exit( 1 );
 }
 
-$token = defined( 'TMDB_BEARER_TOKEN' ) && TMDB_BEARER_TOKEN !== 'TMDB_BEARER_TOKEN' ?
-	new BearerToken( TMDB_BEARER_TOKEN ) :
-	new ApiToken( $api_key );
+$token = new ApiToken( $api_key );
 
 $ed = new Symfony\Component\EventDispatcher\EventDispatcher();
 
 $client = new Client(
 	array(
-		/** @var ApiToken|BearerToken */
+		/** @var ApiToken */
 		'api_token'        => $token,
 		'event_dispatcher' => array(
 			'adapter' => $ed,

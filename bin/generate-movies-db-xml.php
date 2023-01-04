@@ -9,13 +9,13 @@ function createXML() {
 	$client     = require_once( __DIR__ . '/setup-client.php' );
 	$slugify    = new Slugify();
 	$moviesDom  = createDom();
+	$actorsDom  = createDom();
 	$repository = new MovieRepository( $client );
 	$moviesDom  = addMovies( $moviesDom, $repository, $slugify );
 	$moviesDom->save( 'wp_sampledata_movies.xml' );
 	echo PHP_EOL . 'Movies xml file created 🍿🎬' . PHP_EOL;
-	$actorsDom                   = createDom();
-	array( $actorsDom, $actors ) = addActors( $actorsDom, $repository );
-	$actorsDom                   = updateActors( $actorsDom, $actors, $slugify );
+	$cast      = addActors( $actorsDom, $repository );
+	$actorsDom = updateActors( $cast['dom'], $cast['actors'], $slugify );
 	$actorsDom->save( 'wp_sampledata_actors.xml' );
 	echo PHP_EOL . 'Actors xml file created 🍿🧍' . PHP_EOL;
 }
@@ -124,7 +124,10 @@ function addActors( $dom, $repository ) {
 			}
 		}
 	}
-	return array( $dom, $actors );
+	return array(
+		'dom'    => $dom,
+		'actors' => $actors,
+	);
 }
 
 function updateActors( $dom, $actors, $slugify ) {
@@ -202,7 +205,6 @@ function addMovie( $movie, $dom, $is_actor = false ) {
 			$item->appendChild( $wp_post_date );
 			$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', date( 'Y-m-d H:i:s' ) );
 			$item->appendChild( $wp_post_date_gmt );
-			// <category domain="movies_tax" nicename="ad-astra"><![CDATA[Ad Astra]]></category>
 		}
 		$wp_post_parent = $dom->createElement( 'wp:post_parent', '0' );
 		$item->appendChild( $wp_post_parent );

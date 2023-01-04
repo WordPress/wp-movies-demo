@@ -13,11 +13,11 @@ function createXML() {
 	$moviesDom  = addMovies( $moviesDom, $repository, $slugify );
 	$moviesDom->save( 'wp_sampledata_movies.xml' );
 	echo PHP_EOL . 'Movies xml file created 🍿🎬' . PHP_EOL;
-	$actorsDom = createDom();
-	$actorsDom = addActors( $actorsDom, $repository, $slugify );
+	$actorsDom                   = createDom();
+	array( $actorsDom, $actors ) = addActors( $actorsDom, $repository );
+	$actorsDom                   = updateActors( $actorsDom, $actors, $slugify );
 	$actorsDom->save( 'wp_sampledata_actors.xml' );
 	echo PHP_EOL . 'Actors xml file created 🍿🧍' . PHP_EOL;
-
 }
 
 function createDom() {
@@ -71,7 +71,7 @@ function createDom() {
 }
 
 function addMovies( $dom, $repository, $slugify ) {
-	for ( $i = 1; $i <= 1; $i++ ) {
+	for ( $i = 1; $i <= 2; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
 			$item_attachment = addMovieAttachment( $movie, $dom );
@@ -99,28 +99,48 @@ function addMovies( $dom, $repository, $slugify ) {
 	return $dom;
 }
 
-function addActors( $dom, $repository, $slugify ) {
+function addActors( $dom, $repository ) {
 	for ( $i = 1; $i <= 1; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
+		$actors = array();
 		foreach ( $movies as $movie ) {
 			$credits    = $repository->getCredits( $movie->getId() );
 			$castNumber = 0;
 			foreach ( $credits->getCast() as $person ) {
 				if ( $castNumber < 5 ) {
-					echo 'Adding ' . $person->getName() . PHP_EOL;
-					$item_attachment = addMovieAttachment( $person, $dom, true );
-					$item            = addMovie( $person, $dom, true );
-					$category        = $dom->createElement( 'category' );
-					$category->setAttribute( 'domain', 'movies_tax' );
-					$category->setAttribute( 'nicename', $slugify->slugify( $movie->getTitle() ) );
-					$category->appendChild( $dom->createCDATASection( $movie->getTitle() ) );
-					$item->appendChild( $category );
-					$channel = $dom->getElementsByTagName( 'channel' )->item( 0 );
-					$channel->appendChild( $item );
-					if ( $item_attachment ) {
-						$channel->appendChild( $item_attachment );
+					if ( ! array_key_exists( $person->getId(), $actors ) ) {
+						echo 'Adding ' . $person->getName() . PHP_EOL;
+						$item_attachment = addMovieAttachment( $person, $dom, true );
+						$item            = addMovie( $person, $dom, true );
+						$channel         = $dom->getElementsByTagName( 'channel' )->item( 0 );
+						$channel->appendChild( $item );
+						if ( $item_attachment ) {
+							$channel->appendChild( $item_attachment );
+						}
+						$castNumber++;
 					}
-					$castNumber++;
+					$actors[ $person->getId() ][] = $movie->getTitle();
+				}
+			}
+		}
+	}
+	return array( $dom, $actors );
+}
+
+function updateActors( $dom, $actors, $slugify ) {
+	echo 'Updating Actors with extra films...' . PHP_EOL;
+	foreach ( $actors as $actorId => $movies ) {
+		$channel = $dom->getElementsByTagName( 'channel' )->item( 0 );
+		$items   = $channel->getElementsByTagName( 'item' );
+		foreach ( $items as $item ) {
+			$guid = $item->getElementsByTagName( 'guid' )->item( 0 );
+			if ( $guid && $guid->nodeValue == $actorId ) {
+				foreach ( $movies as $movie ) {
+					$category = $dom->createElement( 'category' );
+					$category->setAttribute( 'domain', 'movies_tax' );
+					$category->setAttribute( 'nicename', $slugify->slugify( $movie ) );
+					$category->appendChild( $dom->createCDATASection( $movie ) );
+					$item->appendChild( $category );
 				}
 			}
 		}
@@ -149,7 +169,9 @@ function addMovie( $movie, $dom, $is_actor = false ) {
 		$slugify     = new Slugify();
 		$movie_title = htmlspecialchars( $is_actor ? $movie->getName() : $movie->getTitle() );
 		$item        = $dom->createElement( 'item' );
-		$item->setAttribute( 'id', $movie->getId() );
+		$guid        = $dom->createElement( 'guid', $movie->getId() );
+		$guid->setAttribute( 'isPermaLink', 'false' );
+		$item->appendChild( $guid );
 		$title = $dom->createElement( 'title', $movie_title );
 		$item->appendChild( $title );
 		if ( ! $is_actor ) {

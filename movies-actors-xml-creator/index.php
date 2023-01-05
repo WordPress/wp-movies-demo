@@ -6,6 +6,9 @@ use Tmdb\Repository\MovieRepository;
 
 require_once( __DIR__ . '/../vendor/autoload.php' );
 
+/**
+ * Create the XML ready to be imported into a WordPress site.
+ */
 function createXML() {
 	$client     = require_once( __DIR__ . '/setup-client.php' );
 	$slugify    = new Slugify();
@@ -15,12 +18,17 @@ function createXML() {
 	$moviesDom  = addMovies( $moviesDom, $repository, $slugify );
 	$moviesDom->save( 'wp_sampledata_movies.xml' );
 	echo PHP_EOL . 'Movies xml file created 🍿🎬' . PHP_EOL;
-	$cast      = addActors( $actorsDom, $repository );
+	$cast      = addActors( $actorsDom, $repository, $slugify );
 	$actorsDom = updateActors( $cast['dom'], $cast['actors'], $slugify );
 	$actorsDom->save( 'wp_sampledata_actors.xml' );
 	echo PHP_EOL . 'Actors xml file created 🍿🧍' . PHP_EOL;
 }
 
+/**
+ * Create a DOMDocument with the basic structure for a XML import in a WordPress site.
+ * 
+ * @return DOMDocument
+ */
 function createDom() {
 	$dom                     = new DOMDocument( '1.0', 'UTF-8' );
 	$dom->formatOutput       = true;
@@ -71,6 +79,14 @@ function createDom() {
 	return $dom;
 }
 
+/**
+ * Add movies to the XML.
+ * 
+ * @param DOMDocument $dom
+ * @param MovieRepository $repository - of movies created by the TMDb API PHP library.
+ * @param Slugify $slugify - library to convert any string into a slug.
+ * @return DOMDocument with the movies added.
+ */
 function addMovies( $dom, $repository, $slugify ) {
 	$dotenv = Dotenv::createImmutable( dirname( __DIR__ ) );
 	$dotenv->load();
@@ -79,8 +95,8 @@ function addMovies( $dom, $repository, $slugify ) {
 	for ( $i = 1; $i <= $pages ; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
-			$item_attachment = addMovieAttachment( $movie, $dom );
-			$item            = addMovie( $movie, $dom );
+			$item_attachment = addItemAttachment( $movie, $dom, 'movie', $slugify );
+			$item            = addItem( $movie, $dom, 'movie', $slugify );
 			echo 'Adding ' . $movie->getTitle() . PHP_EOL;
 			$credits    = $repository->getCredits( $movie->getId() );
 			$castNumber = 0;
@@ -103,8 +119,16 @@ function addMovies( $dom, $repository, $slugify ) {
 	}
 	return $dom;
 }
+/**
+ * Add actors to the XML.
+ * 
+ * @param DOMDocument $dom
+ * @param MovieRepository $repository - of movies created by the TMDb API PHP library.
+ * @param Slugify $slugify - library to convert any string into a slug.
+ * @return array with two keys, one for the DOMDocument with the actors added and the other for the array of actors.
+ */
 
-function addActors( $dom, $repository ) {
+function addActors( $dom, $repository, $slugify ) {
 	for ( $i = 1; $i <= 1; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		$actors = array();
@@ -115,8 +139,8 @@ function addActors( $dom, $repository ) {
 				if ( $castNumber < 5 ) {
 					if ( ! array_key_exists( $person->getId(), $actors ) ) {
 						echo 'Adding ' . $person->getName() . PHP_EOL;
-						$item_attachment = addMovieAttachment( $person, $dom, true );
-						$item            = addMovie( $person, $dom, true );
+						$item_attachment = addItemAttachment( $person, $dom, 'actor', $slugify );
+						$item            = addItem( $person, $dom, 'actor', $slugify );
 						$channel         = $dom->getElementsByTagName( 'channel' )->item( 0 );
 						$channel->appendChild( $item );
 						if ( $item_attachment ) {
@@ -135,11 +159,19 @@ function addActors( $dom, $repository ) {
 	);
 }
 
+/**
+ * Update the actors with the extra movies they have been in.
+ * 
+ * @param DOMDocument $dom
+ * @param array $actors - array of actors with the movies they have been in.
+ * @param Slugify $slugify - library to convert any string into a slug.
+ * @return DOMDocument with the actors updated.
+ */
+
 function updateActors( $dom, $actors, $slugify ) {
 	echo 'Updating Actors with extra films...' . PHP_EOL;
 	foreach ( $actors as $actorId => $movies ) {
-		$channel = $dom->getElementsByTagName( 'channel' )->item( 0 );
-		$items   = $channel->getElementsByTagName( 'item' );
+		$items   = $dom->getElementsByTagName( 'item' );
 		foreach ( $items as $item ) {
 			$guid = $item->getElementsByTagName( 'guid' )->item( 0 );
 			if ( $guid && $guid->nodeValue == $actorId ) {
@@ -156,6 +188,14 @@ function updateActors( $dom, $actors, $slugify ) {
 	return $dom;
 }
 
+/**
+ * Add WordPress post meta tags to the XML.
+ * 
+ * @param string $key - the key of the post meta.
+ * @param string $value - the value of the post meta.
+ * @param DOMDocument $dom
+ * @param boolean $cdata - whether to wrap the value in CDATA tags.
+ */
 
 function addPostMeta( $key, $value, $dom, $cdata = false ) {
 	$wp_postmeta     = $dom->createElement( 'wp:postmeta' );
@@ -172,92 +212,115 @@ function addPostMeta( $key, $value, $dom, $cdata = false ) {
 	return $wp_postmeta;
 }
 
-function addMovie( $movie, $dom, $is_actor = false ) {
+/**
+ * Add a post type to the XML. Can be a movie or an actor.
+ * 
+ * @param Movie $item - the movie or actor.
+ * @param DOMDocument $dom
+ * @param string $type - the type of item, either 'movie' or 'actor'.
+ * @param Slugify $slugify - library to convert any string into a slug.
+ * @return DOMElement with the attachment.
+ */
+
+function addItem( $item, $dom, $type = 'movie', $slugify ) {
 	if ( $dom ) {
-		$slugify     = new Slugify();
-		$movie_title = htmlspecialchars( $is_actor ? $movie->getName() : $movie->getTitle() );
-		$item        = $dom->createElement( 'item' );
-		$guid        = $dom->createElement( 'guid', $movie->getId() );
+		$is_actor = $type === 'actor';
+		$item_title = htmlspecialchars( $is_actor ? $item->getName() : $item->getTitle() );
+		$dom_item        = $dom->createElement( 'item' );
+		$guid        = $dom->createElement( 'guid', $item->getId() );
 		$guid->setAttribute( 'isPermaLink', 'false' );
-		$item->appendChild( $guid );
-		$title = $dom->createElement( 'title', $movie_title );
-		$item->appendChild( $title );
+		$dom_item->appendChild( $guid );
+		$title = $dom->createElement( 'title', $item_title );
+		$dom_item->appendChild( $title );
 		if ( ! $is_actor ) {
-			$content_encoded = $dom->createElement( 'content:encoded', $movie->getOverview() );
-			$item->appendChild( $content_encoded );
+			$content_encoded = $dom->createElement( 'content:encoded', $item->getOverview() );
+			$dom_item->appendChild( $content_encoded );
 		}
-		if ( ! $is_actor && $movie->getTagline() ) {
-			$excerpt_encoded = $dom->createElement( 'excerpt:encoded', $movie->getTagline() );
-			$item->appendChild( $excerpt_encoded );
+		if ( ! $is_actor && $item->getTagline() ) {
+			$excerpt_encoded = $dom->createElement( 'excerpt:encoded', $item->getTagline() );
+			$dom_item->appendChild( $excerpt_encoded );
 		}
 		$wp_comment_status = $dom->createElement( 'wp:comment_status', 'closed' );
-		$item->appendChild( $wp_comment_status );
+		$dom_item->appendChild( $wp_comment_status );
 		$wp_ping_status = $dom->createElement( 'wp:ping_status', 'closed' );
-		$item->appendChild( $wp_ping_status );
+		$dom_item->appendChild( $wp_ping_status );
 		$wp_status = $dom->createElement( 'wp:status', 'publish' );
-		$item->appendChild( $wp_status );
+		$dom_item->appendChild( $wp_status );
 		$wp_post_type = $dom->createElement( 'wp:post_type', $is_actor ? 'actors' : 'movies' );
-		$item->appendChild( $wp_post_type );
-		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify( $movie_title ) );
-		$item->appendChild( $wp_post_name );
+		$dom_item->appendChild( $wp_post_type );
+		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify( $item_title ) );
+		$dom_item->appendChild( $wp_post_name );
 		$wp_post_date = $dom->createElement( 'wp:post_date', date( 'Y-m-d H:i:s' ) );
-		$item->appendChild( $wp_post_date );
+		$dom_item->appendChild( $wp_post_date );
 		$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', date( 'Y-m-d H:i:s' ) );
-		$item->appendChild( $wp_post_date_gmt );
+		$dom_item->appendChild( $wp_post_date_gmt );
 		$wp_post_parent = $dom->createElement( 'wp:post_parent', '0' );
-		$item->appendChild( $wp_post_parent );
+		$dom_item->appendChild( $wp_post_parent );
 		$wp_menu_order = $dom->createElement( 'wp:menu_order', '0' );
-		$item->appendChild( $wp_menu_order );
-		$wp_postmeta = addPostMeta( '_wp_attachment_image_alt', $movie_title, $dom );
-		$item->appendChild( $wp_postmeta );
-		$wp_postmeta = addPostMeta( '_thumbnail_id', $movie->getId(), $dom, true );
-		$item->appendChild( $wp_postmeta );
-		return $item;
+		$dom_item->appendChild( $wp_menu_order );
+		$wp_postmeta = addPostMeta( '_wp_attachment_image_alt', $item_title, $dom );
+		$dom_item->appendChild( $wp_postmeta );
+		$wp_postmeta = addPostMeta( '_thumbnail_id', $item->getId(), $dom, true );
+		$dom_item->appendChild( $wp_postmeta );
+		return $dom_item;
 	}
 }
 
-function addMovieAttachment( $movie, $dom, $is_actor = false ) {
+/**
+ * Add a post type attachment to the XML. Can be a movie or an actor.
+ * 
+ * @param Movie $item - the movie or actor.
+ * @param DOMDocument $dom
+ * @param string $type - the type of item, either 'movie' or 'actor'.
+ * @param Slugify $slugify - library to convert any string into a slug.
+ * @return DOMElement with the attachment.
+ */
+
+function addItemAttachment( $item, $dom, $type = 'movie', $slugify ) {
 	if ( $dom ) {
-		$slugify     = new Slugify();
-		$movie_title = htmlspecialchars( $is_actor ? $movie->getName() : $movie->getTitle() );
+		$is_actor = $type === 'actor';
+		$item_title = htmlspecialchars( $is_actor ? $item->getName() : $item->getTitle() );
 		if ( $is_actor ) {
-			if ( $movie->getProfileImage()->getFilePath() ) {
-				$poster_path = 'https://image.tmdb.org/t/p/w500' . $movie->getProfileImage();
+			if ( $item->getProfileImage()->getFilePath() ) {
+				$poster_path = 'https://image.tmdb.org/t/p/w500' . $item->getProfileImage();
 			} else {
 				return;
 			}
 		} else {
-			$poster_path = 'https://image.tmdb.org/t/p/w500' . $movie->getPosterPath();
+			$poster_path = 'https://image.tmdb.org/t/p/w500' . $item->getPosterPath();
 		}
-		$item  = $dom->createElement( 'item' );
-		$title = $dom->createElement( 'title', $movie_title );
-		$item->appendChild( $title );
+		$dom_item  = $dom->createElement( 'item' );
+		$title = $dom->createElement( 'title', $item_title );
+		$dom_item->appendChild( $title );
 		$link = $dom->createElement( 'link', $poster_path );
-		$item->appendChild( $link );
+		$dom_item->appendChild( $link );
 		$wp_post_date = $dom->createElement( 'wp:post_date', date( 'Y-m-d H:i:s' ) );
-		$item->appendChild( $wp_post_date );
+		$dom_item->appendChild( $wp_post_date );
 		$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', date( 'Y-m-d H:i:s' ) );
-		$item->appendChild( $wp_post_date_gmt );
+		$dom_item->appendChild( $wp_post_date_gmt );
 		$wp_comment_status = $dom->createElement( 'wp:comment_status', 'closed' );
-		$item->appendChild( $wp_comment_status );
+		$dom_item->appendChild( $wp_comment_status );
 		$wp_ping_status = $dom->createElement( 'wp:ping_status', 'closed' );
-		$item->appendChild( $wp_ping_status );
+		$dom_item->appendChild( $wp_ping_status );
 		$wp_status = $dom->createElement( 'wp:status', 'inherit' );
-		$item->appendChild( $wp_status );
+		$dom_item->appendChild( $wp_status );
 		$wp_post_type = $dom->createElement( 'wp:post_type', 'attachment' );
-		$item->appendChild( $wp_post_type );
-		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify( $movie_title ) . '.jpg' );
-		$item->appendChild( $wp_post_name );
+		$dom_item->appendChild( $wp_post_type );
+		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify( $item_title ) . '.jpg' );
+		$dom_item->appendChild( $wp_post_name );
 		$attachment_url = $dom->createElement( 'wp:attachment_url', $poster_path );
-		$item->appendChild( $attachment_url );
-		$post_id = $dom->createElement( 'wp:post_id', $movie->getId() );
-		$item->appendChild( $post_id );
+		$dom_item->appendChild( $attachment_url );
+		$post_id = $dom->createElement( 'wp:post_id', $item->getId() );
+		$dom_item->appendChild( $post_id );
 		$wp_post_parent = $dom->createElement( 'wp:is_sticky', '0' );
-		$item->appendChild( $wp_post_parent );
+		$dom_item->appendChild( $wp_post_parent );
 		$wp_postmeta = addPostMeta( '_wc_attachment_source', $poster_path, $dom, true );
-		$item->appendChild( $wp_postmeta );
-		return $item;
+		$dom_item->appendChild( $wp_postmeta );
+		return $dom_item;
 	}
 }
+
+// Create the XML.
 createXML();
+
 exit;

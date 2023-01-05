@@ -31,7 +31,6 @@
 	<file>./wpmovies.php</file>
 	<file>./lib</file>
 	<file>./src</file>
-	<file>./bin</file>
 
 	<!-- Exclude generated files -->
 	<exclude-pattern>./build</exclude-pattern>

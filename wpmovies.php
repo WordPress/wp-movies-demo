@@ -28,7 +28,7 @@ if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 	deactivate_plugins( plugin_basename( __FILE__ ) );
 	return;
 }
-require_once __DIR__ . '/lib/init.php';
+require_once __DIR__ . '/lib/interactivity-api/init.php';
 require_once __DIR__ . '/src/custom-post-types.php';
 require_once __DIR__ . '/src/custom-taxonomies.php';
 

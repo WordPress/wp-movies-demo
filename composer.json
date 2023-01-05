@@ -43,6 +43,6 @@
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
 		"lint": "phpcs --standard=phpcs.xml.dist",
-		"create-xml": "php ./bin/generate-movies-db-xml.php"
+		"create-xml": "php ./movies-actors-xml-creator/index.php"
 	}
 }

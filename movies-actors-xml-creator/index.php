@@ -5,12 +5,13 @@ use Dotenv\Dotenv;
 use Tmdb\Repository\MovieRepository;
 
 require_once( __DIR__ . '/../vendor/autoload.php' );
+require_once( __DIR__ . '/setup-client.php' );
 
 /**
  * Create the XML ready to be imported into a WordPress site.
  */
 function createXML() {
-	$client     = require_once( __DIR__ . '/setup-client.php' );
+	$client     = setup_client();
 	$slugify    = new Slugify();
 	$moviesDom  = createDom();
 	$actorsDom  = createDom();
@@ -95,8 +96,8 @@ function addMovies( $dom, $repository, $slugify ) {
 	for ( $i = 1; $i <= $pages ; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
-			$item_attachment = addItemAttachment( $movie, $dom, 'movie', $slugify );
-			$item            = addItem( $movie, $dom, 'movie', $slugify );
+			$item_attachment = addItemAttachment( $movie, $dom, $slugify );
+			$item            = addItem( $movie, $dom, $slugify);
 			echo 'Adding ' . $movie->getTitle() . PHP_EOL;
 			$credits    = $repository->getCredits( $movie->getId() );
 			$castNumber = 0;
@@ -139,8 +140,8 @@ function addActors( $dom, $repository, $slugify ) {
 				if ( $castNumber < 5 ) {
 					if ( ! array_key_exists( $person->getId(), $actors ) ) {
 						echo 'Adding ' . $person->getName() . PHP_EOL;
-						$item_attachment = addItemAttachment( $person, $dom, 'actor', $slugify );
-						$item            = addItem( $person, $dom, 'actor', $slugify );
+						$item_attachment = addItemAttachment( $person, $dom, $slugify, 'actor' );
+						$item            = addItem( $person, $dom, $slugify, 'actor' );
 						$channel         = $dom->getElementsByTagName( 'channel' )->item( 0 );
 						$channel->appendChild( $item );
 						if ( $item_attachment ) {
@@ -222,7 +223,7 @@ function addPostMeta( $key, $value, $dom, $cdata = false ) {
  * @return DOMElement with the attachment.
  */
 
-function addItem( $item, $dom, $type = 'movie', $slugify ) {
+function addItem( $item, $dom, $slugify, $type = 'movie' ) {
 	if ( $dom ) {
 		$is_actor = $type === 'actor';
 		$item_title = htmlspecialchars( $is_actor ? $item->getName() : $item->getTitle() );
@@ -276,7 +277,7 @@ function addItem( $item, $dom, $type = 'movie', $slugify ) {
  * @return DOMElement with the attachment.
  */
 
-function addItemAttachment( $item, $dom, $type = 'movie', $slugify ) {
+function addItemAttachment( $item, $dom, $slugify, $type = 'movie' ) {
 	if ( $dom ) {
 		$is_actor = $type === 'actor';
 		$item_title = htmlspecialchars( $is_actor ? $item->getName() : $item->getTitle() );

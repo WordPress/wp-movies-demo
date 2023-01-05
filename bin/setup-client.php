@@ -10,7 +10,6 @@ use Tmdb\Event\Listener\Request\UserAgentRequestListener;
 use Tmdb\Event\Listener\RequestListener;
 use Tmdb\Event\RequestEvent;
 use Tmdb\Token\Api\ApiToken;
-use Tmdb\Token\Api\BearerToken;
 
 $dotenv = Dotenv::createImmutable( dirname( __DIR__ ) );
 $dotenv->load();

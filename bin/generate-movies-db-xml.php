@@ -1,7 +1,8 @@
 <?php
 
-use Tmdb\Repository\MovieRepository;
 use Cocur\Slugify\Slugify;
+use Dotenv\Dotenv;
+use Tmdb\Repository\MovieRepository;
 
 require_once( __DIR__ . '/../vendor/autoload.php' );
 
@@ -71,7 +72,11 @@ function createDom() {
 }
 
 function addMovies( $dom, $repository, $slugify ) {
-	for ( $i = 1; $i <= 2; $i++ ) {
+	$dotenv = Dotenv::createImmutable( dirname( __DIR__ ) );
+	$dotenv->load();
+	$pages = isset($_ENV['MOVIE_PAGES'] ) ? intval($_ENV['MOVIE_PAGES']) : 1;
+	$actors_per_movie = isset($_ENV['ACTORS_PER_MOVIE'] ) ? intval($_ENV['ACTORS_PER_MOVIE']) : 5;
+	for ( $i = 1; $i <= $pages ; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
 			$item_attachment = addMovieAttachment( $movie, $dom );
@@ -80,7 +85,7 @@ function addMovies( $dom, $repository, $slugify ) {
 			$credits    = $repository->getCredits( $movie->getId() );
 			$castNumber = 0;
 			foreach ( $credits->getCast() as $person ) {
-				if ( $castNumber < 5 ) {
+				if ( $castNumber < $actors_per_movie ) {
 					$category = $dom->createElement( 'category' );
 					$category->setAttribute( 'domain', 'actors_tax' );
 					$category->setAttribute( 'nicename', $slugify->slugify( $person->getName() ) );
@@ -195,17 +200,10 @@ function addMovie( $movie, $dom, $is_actor = false ) {
 		$item->appendChild( $wp_post_type );
 		$wp_post_name = $dom->createElement( 'wp:post_name', $slugify->slugify( $movie_title ) );
 		$item->appendChild( $wp_post_name );
-		if ( ! $is_actor ) {
-			$wp_post_date = $dom->createElement( 'wp:post_date', $movie->getReleaseDate()->format( 'Y-m-d H:i:s' ) );
-			$item->appendChild( $wp_post_date );
-			$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', $movie->getReleaseDate()->format( 'Y-m-d H:i:s' ) );
-			$item->appendChild( $wp_post_date_gmt );
-		} else {
-			$wp_post_date = $dom->createElement( 'wp:post_date', date( 'Y-m-d H:i:s' ) );
-			$item->appendChild( $wp_post_date );
-			$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', date( 'Y-m-d H:i:s' ) );
-			$item->appendChild( $wp_post_date_gmt );
-		}
+		$wp_post_date = $dom->createElement( 'wp:post_date', date( 'Y-m-d H:i:s' ) );
+		$item->appendChild( $wp_post_date );
+		$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', date( 'Y-m-d H:i:s' ) );
+		$item->appendChild( $wp_post_date_gmt );
 		$wp_post_parent = $dom->createElement( 'wp:post_parent', '0' );
 		$item->appendChild( $wp_post_parent );
 		$wp_menu_order = $dom->createElement( 'wp:menu_order', '0' );
@@ -224,29 +222,22 @@ function addMovieAttachment( $movie, $dom, $is_actor = false ) {
 		$movie_title = htmlspecialchars( $is_actor ? $movie->getName() : $movie->getTitle() );
 		if ( $is_actor ) {
 			if ( $movie->getProfileImage()->getFilePath() ) {
-				$poster_path = 'https://image.tmdb.org/t/p/original' . $movie->getProfileImage();
+				$poster_path = 'https://image.tmdb.org/t/p/w500' . $movie->getProfileImage();
 			} else {
 				return;
 			}
 		} else {
-			$poster_path = 'https://image.tmdb.org/t/p/original' . $movie->getPosterPath();
+			$poster_path = 'https://image.tmdb.org/t/p/w500' . $movie->getPosterPath();
 		}
 		$item  = $dom->createElement( 'item' );
 		$title = $dom->createElement( 'title', $movie_title );
 		$item->appendChild( $title );
 		$link = $dom->createElement( 'link', $poster_path );
 		$item->appendChild( $link );
-		if ( ! $is_actor ) {
-			$wp_post_date = $dom->createElement( 'wp:post_date', $movie->getReleaseDate()->format( 'Y-m-d H:i:s' ) );
-			$item->appendChild( $wp_post_date );
-			$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', $movie->getReleaseDate()->format( 'Y-m-d H:i:s' ) );
-			$item->appendChild( $wp_post_date_gmt );
-		} else {
-			$wp_post_date = $dom->createElement( 'wp:post_date', date( 'Y-m-d H:i:s' ) );
-			$item->appendChild( $wp_post_date );
-			$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', date( 'Y-m-d H:i:s' ) );
-			$item->appendChild( $wp_post_date_gmt );
-		}
+		$wp_post_date = $dom->createElement( 'wp:post_date', date( 'Y-m-d H:i:s' ) );
+		$item->appendChild( $wp_post_date );
+		$wp_post_date_gmt = $dom->createElement( 'wp:post_date_gmt', date( 'Y-m-d H:i:s' ) );
+		$item->appendChild( $wp_post_date_gmt );
 		$wp_comment_status = $dom->createElement( 'wp:comment_status', 'closed' );
 		$item->appendChild( $wp_comment_status );
 		$wp_ping_status = $dom->createElement( 'wp:ping_status', 'closed' );

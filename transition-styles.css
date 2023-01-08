@@ -1,0 +1,80 @@
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slide-from-right {
+    from {
+        transform: translateX(30px);
+    }
+}
+
+@keyframes slide-to-left {
+    to {
+        transform: translateX(-30px);
+    }
+}
+
+::page-transition-outgoing-image(main-movies),
+::page-transition-outgoing-image(main-movie),
+::page-transition-outgoing-image(main-actors),
+::page-transition-outgoing-image(main-actor) {
+    animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out, 300ms cubic-bezier(0.4,
+            0,
+            0.2,
+            1) both slide-to-left;
+}
+
+::page-transition-incoming-image(main-movies),
+::page-transition-incoming-image(main-movie),
+::page-transition-incoming-image(main-actors),
+::page-transition-incoming-image(main-actor) {
+    animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in, 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+}
+
+::page-transition-outgoing-image(picture),
+::page-transition-incoming-image(picture) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::page-transition-image-wrapper(picture) {
+    isolation: none;
+}
+
+header {
+    page-transition-tag: header;
+    contain: paint;
+}
+
+main {
+    contain: paint;
+}
+
+.home main {
+    page-transition-tag: main-movies;
+}
+
+.single-movies main {
+    page-transition-tag: main-movie;
+}
+
+.post-type-archive-actors main {
+    page-transition-tag: main-actors;
+}
+
+.single-actors main {
+    page-transition-tag: main-actor;
+}
+
+
+.wp-block-post-featured-image img {
+    contain: paint;
+}

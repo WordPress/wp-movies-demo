@@ -2,7 +2,7 @@ const { resolve } = require('path');
 
 module.exports = {
 	entry: {
-		runtime: './src/runtime',
+		runtime: './lib/interactivity-api/runtime',
 	},
 	output: {
 		filename: '[name].js',

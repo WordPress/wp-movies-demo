@@ -31,5 +31,37 @@ function wp_directives_uninstall() {
 }
 register_uninstall_hook( __FILE__, 'wp_directives_uninstall' );
 
+/**
+ * Register the scripts
+ */
+function wp_directives_register_scripts()
+{
+	wp_register_script(
+		'wp-directive-vendors',
+		plugins_url('../build/vendors.js', __DIR__),
+		[],
+		'1.0.0',
+		true
+	);
+	wp_register_script(
+		'wp-directive-runtime',
+		plugins_url('../build/runtime.js', __DIR__),
+		['wp-directive-vendors'],
+		'1.0.0',
+		true
+	);
+
+	// For now we can always enqueue the runtime. We'll figure out how to
+	// conditionally enqueue directives later.
+	wp_enqueue_script('wp-directive-runtime');
+
+	wp_register_style(
+		'transition-styles',
+		plugin_dir_url(__DIR__) . '../transition-styles.css'
+	);
+	wp_enqueue_style('transition-styles');
+}
+add_action('wp_enqueue_scripts', 'wp_directives_register_scripts');
+
 require_once __DIR__ . '/client-side-transitions.php';
 require_once __DIR__ . '/settings-page.php';

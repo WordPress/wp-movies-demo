@@ -4,8 +4,9 @@ use Cocur\Slugify\Slugify;
 use Dotenv\Dotenv;
 use Tmdb\Repository\MovieRepository;
 
-require_once( __DIR__ . '/../vendor/autoload.php' );
-require_once( __DIR__ . '/setup-client.php' );
+
+require_once( dirname(__FILE__) . '/../../vendor/autoload.php' );
+require_once( dirname(__FILE__) . '/setup-client.php' );
 
 /**
  * Create the XML ready to be imported into a WordPress site.
@@ -89,7 +90,7 @@ function createDom() {
  * @return DOMDocument with the movies added.
  */
 function addMovies( $dom, $repository, $slugify ) {
-	$dotenv = Dotenv::createImmutable( dirname( __DIR__ ) );
+	$dotenv = Dotenv::createImmutable(  __DIR__ . '/../..' );
 	$dotenv->load();
 	$pages = isset($_ENV['MOVIE_PAGES'] ) ? intval($_ENV['MOVIE_PAGES']) : 1;
 	$actors_per_movie = isset($_ENV['ACTORS_PER_MOVIE'] ) ? intval($_ENV['ACTORS_PER_MOVIE']) : 5;
@@ -131,25 +132,31 @@ function addMovies( $dom, $repository, $slugify ) {
 
 function addActors( $dom, $repository, $slugify ) {
 	for ( $i = 1; $i <= 1; $i++ ) {
+		$dotenv = Dotenv::createImmutable(  __DIR__ . '/../..' );
+		$dotenv->load();
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		$actors = array();
-		foreach ( $movies as $movie ) {
-			$credits    = $repository->getCredits( $movie->getId() );
-			$castNumber = 0;
-			foreach ( $credits->getCast() as $person ) {
-				if ( $castNumber < 5 ) {
-					if ( ! array_key_exists( $person->getId(), $actors ) ) {
-						echo 'Adding ' . $person->getName() . PHP_EOL;
-						$item_attachment = addItemAttachment( $person, $dom, $slugify, 'actor' );
-						$item            = addItem( $person, $dom, $slugify, 'actor' );
-						$channel         = $dom->getElementsByTagName( 'channel' )->item( 0 );
-						$channel->appendChild( $item );
-						if ( $item_attachment ) {
-							$channel->appendChild( $item_attachment );
+		$pages = isset($_ENV['MOVIE_PAGES'] ) ? intval($_ENV['MOVIE_PAGES']) : 1;
+		$actors_per_movie = isset($_ENV['ACTORS_PER_MOVIE'] ) ? intval($_ENV['ACTORS_PER_MOVIE']) : 5;
+		for ( $i = 1; $i <= $pages ; $i++ ) {
+			foreach ( $movies as $movie ) {
+				$credits    = $repository->getCredits( $movie->getId() );
+				$castNumber = 0;
+				foreach ( $credits->getCast() as $person ) {
+					if ( $castNumber < $actors_per_movie ) {
+						if ( ! array_key_exists( $person->getId(), $actors ) ) {
+							echo 'Adding ' . $person->getName() . PHP_EOL;
+							$item_attachment = addItemAttachment( $person, $dom, $slugify, 'actor' );
+							$item            = addItem( $person, $dom, $slugify, 'actor' );
+							$channel         = $dom->getElementsByTagName( 'channel' )->item( 0 );
+							$channel->appendChild( $item );
+							if ( $item_attachment ) {
+								$channel->appendChild( $item_attachment );
+							}
+							$castNumber++;
 						}
-						$castNumber++;
+						$actors[ $person->getId() ][] = $movie->getTitle();
 					}
-					$actors[ $person->getId() ][] = $movie->getTitle();
 				}
 			}
 		}

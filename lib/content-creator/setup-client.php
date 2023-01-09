@@ -17,7 +17,7 @@ use Tmdb\Token\Api\ApiToken;
  * @return Client
  */
 function setup_client() {
-	$dotenv = Dotenv::createImmutable( dirname( __DIR__ ) );
+	$dotenv = Dotenv::createImmutable(  __DIR__ . '/../..' );
 	$dotenv->load();
 	
 	$api_key = $_ENV['TMDB_API_KEY'];

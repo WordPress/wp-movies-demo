@@ -17,10 +17,11 @@ function createXML() {
 	$moviesDom  = createDom();
 	$actorsDom  = createDom();
 	$repository = new MovieRepository( $client );
-	$moviesDom  = addMovies( $moviesDom, $repository, $slugify );
+	$movies  	= addMovies( $moviesDom, $repository, $slugify );
+	$moviesDom = $movies['dom'];
 	$moviesDom->save( 'wp_sampledata_movies.xml' );
 	echo PHP_EOL . 'Movies xml file created 🍿🎬' . PHP_EOL;
-	$cast      = addActors( $actorsDom, $repository, $slugify );
+	$cast      = addActors( $actorsDom, $repository, $slugify, $movies['movies'] );
 	$actorsDom = updateActors( $cast['dom'], $cast['actors'], $slugify );
 	$actorsDom->save( 'wp_sampledata_actors.xml' );
 	echo PHP_EOL . 'Actors xml file created 🍿🧍' . PHP_EOL;
@@ -94,6 +95,7 @@ function addMovies( $dom, $repository, $slugify ) {
 	$dotenv->load();
 	$pages = isset($_ENV['MOVIE_PAGES'] ) ? intval($_ENV['MOVIE_PAGES']) : 1;
 	$actors_per_movie = isset($_ENV['ACTORS_PER_MOVIE'] ) ? intval($_ENV['ACTORS_PER_MOVIE']) : 5;
+	$movies_for_actors = array();
 	for ( $i = 1; $i <= $pages ; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
@@ -102,6 +104,7 @@ function addMovies( $dom, $repository, $slugify ) {
 			echo 'Adding ' . $movie->getTitle() . PHP_EOL;
 			$credits    = $repository->getCredits( $movie->getId() );
 			$castNumber = 0;
+			$movies_for_actors[ $movie->getId() ] = $movie->getTitle();
 			foreach ( $credits->getCast() as $person ) {
 				if ( $castNumber < $actors_per_movie ) {
 					$category = $dom->createElement( 'category' );
@@ -119,7 +122,10 @@ function addMovies( $dom, $repository, $slugify ) {
 			}
 		}
 	}
-	return $dom;
+	return array(
+		'dom'    => $dom,
+		'movies' => $movies_for_actors,
+	);
 }
 /**
  * Add actors to the XML.
@@ -130,33 +136,30 @@ function addMovies( $dom, $repository, $slugify ) {
  * @return array with two keys, one for the DOMDocument with the actors added and the other for the array of actors.
  */
 
-function addActors( $dom, $repository, $slugify ) {
+function addActors( $dom, $repository, $slugify, $movies_for_actors ) {
 	for ( $i = 1; $i <= 1; $i++ ) {
 		$dotenv = Dotenv::createImmutable(  __DIR__ . '/../..' );
 		$dotenv->load();
-		$movies = $repository->getPopular( array( 'page' => $i ) );
 		$actors = array();
-		$pages = isset($_ENV['MOVIE_PAGES'] ) ? intval($_ENV['MOVIE_PAGES']) : 1;
 		$actors_per_movie = isset($_ENV['ACTORS_PER_MOVIE'] ) ? intval($_ENV['ACTORS_PER_MOVIE']) : 5;
-		for ( $i = 1; $i <= $pages ; $i++ ) {
-			foreach ( $movies as $movie ) {
-				$credits    = $repository->getCredits( $movie->getId() );
-				$castNumber = 0;
-				foreach ( $credits->getCast() as $person ) {
-					if ( $castNumber < $actors_per_movie ) {
-						if ( ! array_key_exists( $person->getId(), $actors ) ) {
-							echo 'Adding ' . $person->getName() . PHP_EOL;
-							$item_attachment = addItemAttachment( $person, $dom, $slugify, 'actor' );
-							$item            = addItem( $person, $dom, $slugify, 'actor' );
-							$channel         = $dom->getElementsByTagName( 'channel' )->item( 0 );
-							$channel->appendChild( $item );
-							if ( $item_attachment ) {
-								$channel->appendChild( $item_attachment );
-							}
-							$castNumber++;
+		foreach ( $movies_for_actors as $movieId => $movie_title ) {
+			$credits    = $repository->getCredits( $movieId );
+			$castNumber = 0;
+			echo 'Doing '. $movie_title . PHP_EOL;
+			foreach ( $credits->getCast() as $person ) {
+				if ( $castNumber < $actors_per_movie ) {
+					if ( ! array_key_exists( $person->getId(), $actors ) ) {
+						echo 'Adding ' . $person->getName() . PHP_EOL;
+						$item_attachment = addItemAttachment( $person, $dom, $slugify, 'actor' );
+						$item            = addItem( $person, $dom, $slugify, 'actor' );
+						$channel         = $dom->getElementsByTagName( 'channel' )->item( 0 );
+						$channel->appendChild( $item );
+						if ( $item_attachment ) {
+							$channel->appendChild( $item_attachment );
 						}
-						$actors[ $person->getId() ][] = $movie->getTitle();
+						$castNumber++;
 					}
+					$actors[ $person->getId() ][] = $movie_title;
 				}
 			}
 		}

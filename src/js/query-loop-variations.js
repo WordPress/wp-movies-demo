@@ -63,9 +63,6 @@ wp.blocks.registerBlockVariation('core/query', {
 		query: {
 			...commonQueryProps,
 			postType: 'movies',
-			taxQuery: {
-				actors_tax: [21],
-			},
 		},
 		...commonAttributes,
 	},
@@ -81,9 +78,6 @@ wp.blocks.registerBlockVariation('core/query', {
 		query: {
 			...commonQueryProps,
 			postType: 'actors',
-			taxQuery: {
-				movies_tax: [43],
-			},
 		},
 		...commonAttributes,
 	},

@@ -25,12 +25,21 @@ function wpmovies_update_demo_query($pre_render, $parsed_block)
 function wpmovies_build_cast_query($query)
 {
     global $post;
-    $taxonomy = $query['tax_query'][0]['taxonomy'];
-    $wp_term = get_term_by('slug', $post->post_name, $taxonomy);
+    $taxonomy_type = null;
+    if ($post->post_type === 'movies') {
+        $taxonomy_type = 'movies_tax';
+    }
+    if ($post->post_type === 'actors') {
+        $taxonomy_type = 'actors_tax';
+    }
+    if ($taxonomy_type === null) {
+        return $query;
+    }
+    $wp_term = get_term_by('slug', $post->post_name, $taxonomy_type);
     if (!$wp_term) {
         return $query;
     }
-    $cast_query = array('taxonomy' => $taxonomy, 'terms' => array($wp_term->term_id), 'include_children' => false);
+    $cast_query = array('taxonomy' => $taxonomy_type, 'terms' => array($wp_term->term_id), 'include_children' => false);
     $new_query = array_replace($query, array('tax_query' => array($cast_query)));
     return $new_query;
 }

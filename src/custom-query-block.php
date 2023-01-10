@@ -3,7 +3,7 @@
 function wpmovies_is_demo_variation($parsed_block)
 {
     return isset($parsed_block['attrs']['namespace'])
-        && substr($parsed_block['attrs']['namespace'], 0, 3) === 'bhe';
+        && substr($parsed_block['attrs']['namespace'], 0, 8) === 'wpmovies';
 }
 
 function wpmovies_update_demo_query($pre_render, $parsed_block)
@@ -27,6 +27,9 @@ function wpmovies_build_cast_query($query)
     global $post;
     $taxonomy = $query['tax_query'][0]['taxonomy'];
     $wp_term = get_term_by('slug', $post->post_name, $taxonomy);
+    if (!$wp_term) {
+        return $query;
+    }
     $cast_query = array('taxonomy' => $taxonomy, 'terms' => array($wp_term->term_id), 'include_children' => false);
     $new_query = array_replace($query, array('tax_query' => array($cast_query)));
     return $new_query;
@@ -38,8 +41,8 @@ function wpmovies_add_query_loop_variations()
 {
     wp_enqueue_script(
         'query-loop-variations',
-        plugin_dir_url(__FILE__) . 'build/index.js',
+        plugin_dir_url(__FILE__) . '../build/index.js',
         array('wp-blocks')
     );
 }
-add_action('admin_enqueu_scripts', 'wpmovies_add_query_loop_variations');
+add_action('admin_enqueue_scripts', 'wpmovies_add_query_loop_variations');

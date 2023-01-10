@@ -5,7 +5,8 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "webpack --mode=production --config iapi.webpack.config.js",
+		"build": "wp-scripts build src/js/index.js && npm run build:i-api",
+		"build:i-api": "webpack --mode=production --config iapi.webpack.config.js",
 		"start": "webpack --mode=development --watch",
 		"dev": "npm start",
 		"format:php": "wp-env run composer run-script format",

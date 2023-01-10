@@ -31,5 +31,6 @@ if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 require_once __DIR__ . '/lib/interactivity-api/init.php';
 require_once __DIR__ . '/src/custom-post-types.php';
 require_once __DIR__ . '/src/custom-taxonomies.php';
+require_once __DIR__ . '/src/custom-query-block.php';
 
 

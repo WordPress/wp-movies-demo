@@ -13,23 +13,23 @@ use Tmdb\Token\Api\ApiToken;
 
 /**
  * Setup the client needed to work with TMDB API.
- * 
+ *
  * @return Client
  */
 function setup_client() {
-	$dotenv = Dotenv::createImmutable(  __DIR__ . '/../..' );
+	$dotenv = Dotenv::createImmutable( __DIR__ . '/../..' );
 	$dotenv->load();
-	
+
 	$api_key = $_ENV['TMDB_API_KEY'];
 	if ( $api_key === false || $api_key === '' ) {
 		echo 'No API key provided, please update your .env file, exiting.' . PHP_EOL;
 		exit( 1 );
 	}
-	
+
 	$token = new ApiToken( $api_key );
-	
+
 	$ed = new Symfony\Component\EventDispatcher\EventDispatcher();
-	
+
 	$client = new Client(
 		array(
 			/** @var ApiToken */
@@ -47,25 +47,25 @@ function setup_client() {
 			),
 		)
 	);
-	
+
 	/**
 	 * Required event listeners and events to be registered with the PSR-14 Event Dispatcher.
 	 */
 	$requestListener = new RequestListener( $client->getHttpClient(), $ed );
 	$ed->addListener( RequestEvent::class, $requestListener );
-	
+
 	$apiTokenListener = new ApiTokenRequestListener( $client->getToken() );
 	$ed->addListener( BeforeRequestEvent::class, $apiTokenListener );
-	
+
 	$acceptJsonListener = new AcceptJsonRequestListener();
 	$ed->addListener( BeforeRequestEvent::class, $acceptJsonListener );
-	
+
 	$jsonContentTypeListener = new ContentTypeJsonRequestListener();
 	$ed->addListener( BeforeRequestEvent::class, $jsonContentTypeListener );
-	
+
 	$userAgentListener = new UserAgentRequestListener();
 	$ed->addListener( BeforeRequestEvent::class, $userAgentListener );
-	
+
 	return $client;
 }
 

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Add the WP Directives Menu Item on options side.
+ */
 function wp_directives_register_menu() {
 	add_options_page(
 		'WP Directives',
@@ -11,6 +14,9 @@ function wp_directives_register_menu() {
 }
 add_action( 'admin_menu', 'wp_directives_register_menu' );
 
+/**
+ * Render the Admin Page.
+ */
 function wp_directives_render_admin_page() {    ?>
 	<div class="wrap">
 	  <h2>WP Directives</h2>
@@ -25,6 +31,9 @@ function wp_directives_render_admin_page() {    ?>
 	<?php
 }
 
+/**
+ * Register the client side transition settings.
+ */
 function wp_directives_register_settings() {
 	register_setting(
 		'wp_directives_plugin_settings',
@@ -55,6 +64,13 @@ function wp_directives_register_settings() {
 }
 add_action( 'admin_init', 'wp_directives_register_settings' );
 
+/**
+ * Validate the settings.
+ *
+ * @param array $input The input from the settings page.
+ *
+ * @return bool Is client side transitions enabled.
+ */
 function wp_directives_validate_settings( $input ) {
 	$output                            = get_option( 'wp_directives_plugin_settings' );
 	$output['client_side_transitions'] =
@@ -62,6 +78,9 @@ function wp_directives_validate_settings( $input ) {
 	return $output;
 }
 
+/**
+ * Render the client side transitions option input.
+ */
 function wp_directives_client_side_transitions_input() {
 	$options = get_option( 'wp_directives_plugin_settings' );
 	?>

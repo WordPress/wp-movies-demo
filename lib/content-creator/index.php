@@ -5,8 +5,8 @@ use Dotenv\Dotenv;
 use Tmdb\Repository\MovieRepository;
 
 
-require_once( dirname(__FILE__) . '/../../vendor/autoload.php' );
-require_once( dirname(__FILE__) . '/setup-client.php' );
+require_once( dirname( __FILE__ ) . '/../../vendor/autoload.php' );
+require_once( dirname( __FILE__ ) . '/setup-client.php' );
 
 /**
  * Create the XML ready to be imported into a WordPress site.
@@ -17,8 +17,8 @@ function createXML() {
 	$moviesDom  = createDom();
 	$actorsDom  = createDom();
 	$repository = new MovieRepository( $client );
-	$movies  	= addMovies( $moviesDom, $repository, $slugify );
-	$moviesDom = $movies['dom'];
+	$movies     = addMovies( $moviesDom, $repository, $slugify );
+	$moviesDom  = $movies['dom'];
 	$moviesDom->save( 'wp_sampledata_movies.xml' );
 	echo PHP_EOL . 'Movies xml file created 🍿🎬' . PHP_EOL;
 	$cast      = addActors( $actorsDom, $repository, $slugify, $movies['movies'] );
@@ -29,7 +29,7 @@ function createXML() {
 
 /**
  * Create a DOMDocument with the basic structure for a XML import in a WordPress site.
- * 
+ *
  * @return DOMDocument
  */
 function createDom() {
@@ -84,26 +84,26 @@ function createDom() {
 
 /**
  * Add movies to the XML.
- * 
- * @param DOMDocument $dom
+ *
+ * @param DOMDocument     $dom
  * @param MovieRepository $repository - of movies created by the TMDb API PHP library.
- * @param Slugify $slugify - library to convert any string into a slug.
+ * @param Slugify         $slugify - library to convert any string into a slug.
  * @return DOMDocument with the movies added.
  */
 function addMovies( $dom, $repository, $slugify ) {
-	$dotenv = Dotenv::createImmutable(  __DIR__ . '/../..' );
+	$dotenv = Dotenv::createImmutable( __DIR__ . '/../..' );
 	$dotenv->load();
-	$pages = isset($_ENV['MOVIE_PAGES'] ) ? intval($_ENV['MOVIE_PAGES']) : 1;
-	$actors_per_movie = isset($_ENV['ACTORS_PER_MOVIE'] ) ? intval($_ENV['ACTORS_PER_MOVIE']) : 5;
+	$pages             = isset( $_ENV['MOVIE_PAGES'] ) ? intval( $_ENV['MOVIE_PAGES'] ) : 1;
+	$actors_per_movie  = isset( $_ENV['ACTORS_PER_MOVIE'] ) ? intval( $_ENV['ACTORS_PER_MOVIE'] ) : 5;
 	$movies_for_actors = array();
-	for ( $i = 1; $i <= $pages ; $i++ ) {
+	for ( $i = 1; $i <= $pages; $i++ ) {
 		$movies = $repository->getPopular( array( 'page' => $i ) );
 		foreach ( $movies as $movie ) {
 			$item_attachment = addItemAttachment( $movie, $dom, $slugify );
-			$item            = addItem( $movie, $dom, $slugify);
+			$item            = addItem( $movie, $dom, $slugify );
 			echo 'Adding ' . $movie->getTitle() . PHP_EOL;
-			$credits    = $repository->getCredits( $movie->getId() );
-			$castNumber = 0;
+			$credits                              = $repository->getCredits( $movie->getId() );
+			$castNumber                           = 0;
 			$movies_for_actors[ $movie->getId() ] = $movie->getTitle();
 			foreach ( $credits->getCast() as $person ) {
 				if ( $castNumber < $actors_per_movie ) {
@@ -129,23 +129,23 @@ function addMovies( $dom, $repository, $slugify ) {
 }
 /**
  * Add actors to the XML.
- * 
- * @param DOMDocument $dom
+ *
+ * @param DOMDocument     $dom
  * @param MovieRepository $repository - of movies created by the TMDb API PHP library.
- * @param Slugify $slugify - library to convert any string into a slug.
+ * @param Slugify         $slugify - library to convert any string into a slug.
  * @return array with two keys, one for the DOMDocument with the actors added and the other for the array of actors.
  */
 
 function addActors( $dom, $repository, $slugify, $movies_for_actors ) {
 	for ( $i = 1; $i <= 1; $i++ ) {
-		$dotenv = Dotenv::createImmutable(  __DIR__ . '/../..' );
+		$dotenv = Dotenv::createImmutable( __DIR__ . '/../..' );
 		$dotenv->load();
-		$actors = array();
-		$actors_per_movie = isset($_ENV['ACTORS_PER_MOVIE'] ) ? intval($_ENV['ACTORS_PER_MOVIE']) : 5;
+		$actors           = array();
+		$actors_per_movie = isset( $_ENV['ACTORS_PER_MOVIE'] ) ? intval( $_ENV['ACTORS_PER_MOVIE'] ) : 5;
 		foreach ( $movies_for_actors as $movieId => $movie_title ) {
 			$credits    = $repository->getCredits( $movieId );
 			$castNumber = 0;
-			echo 'Doing '. $movie_title . PHP_EOL;
+			echo 'Doing ' . $movie_title . PHP_EOL;
 			foreach ( $credits->getCast() as $person ) {
 				if ( $castNumber < $actors_per_movie ) {
 					if ( ! array_key_exists( $person->getId(), $actors ) ) {
@@ -172,17 +172,17 @@ function addActors( $dom, $repository, $slugify, $movies_for_actors ) {
 
 /**
  * Update the actors with the extra movies they have been in.
- * 
+ *
  * @param DOMDocument $dom
- * @param array $actors - array of actors with the movies they have been in.
- * @param Slugify $slugify - library to convert any string into a slug.
+ * @param array       $actors - array of actors with the movies they have been in.
+ * @param Slugify     $slugify - library to convert any string into a slug.
  * @return DOMDocument with the actors updated.
  */
 
 function updateActors( $dom, $actors, $slugify ) {
 	echo 'Updating Actors with extra films...' . PHP_EOL;
 	foreach ( $actors as $actorId => $movies ) {
-		$items   = $dom->getElementsByTagName( 'item' );
+		$items = $dom->getElementsByTagName( 'item' );
 		foreach ( $items as $item ) {
 			$guid = $item->getElementsByTagName( 'guid' )->item( 0 );
 			if ( $guid && $guid->nodeValue == $actorId ) {
@@ -201,11 +201,11 @@ function updateActors( $dom, $actors, $slugify ) {
 
 /**
  * Add WordPress post meta tags to the XML.
- * 
- * @param string $key - the key of the post meta.
- * @param string $value - the value of the post meta.
+ *
+ * @param string      $key - the key of the post meta.
+ * @param string      $value - the value of the post meta.
  * @param DOMDocument $dom
- * @param boolean $cdata - whether to wrap the value in CDATA tags.
+ * @param boolean     $cdata - whether to wrap the value in CDATA tags.
  */
 
 function addPostMeta( $key, $value, $dom, $cdata = false ) {
@@ -225,20 +225,20 @@ function addPostMeta( $key, $value, $dom, $cdata = false ) {
 
 /**
  * Add a post type to the XML. Can be a movie or an actor.
- * 
- * @param Movie $item - the movie or actor.
+ *
+ * @param Movie       $item - the movie or actor.
  * @param DOMDocument $dom
- * @param string $type - the type of item, either 'movie' or 'actor'.
- * @param Slugify $slugify - library to convert any string into a slug.
+ * @param string      $type - the type of item, either 'movie' or 'actor'.
+ * @param Slugify     $slugify - library to convert any string into a slug.
  * @return DOMElement with the attachment.
  */
 
 function addItem( $item, $dom, $slugify, $type = 'movie' ) {
 	if ( $dom ) {
-		$is_actor = $type === 'actor';
+		$is_actor   = $type === 'actor';
 		$item_title = htmlspecialchars( $is_actor ? $item->getName() : $item->getTitle() );
-		$dom_item        = $dom->createElement( 'item' );
-		$guid        = $dom->createElement( 'guid', $item->getId() );
+		$dom_item   = $dom->createElement( 'item' );
+		$guid       = $dom->createElement( 'guid', $item->getId() );
 		$guid->setAttribute( 'isPermaLink', 'false' );
 		$dom_item->appendChild( $guid );
 		$title = $dom->createElement( 'title', $item_title );
@@ -279,17 +279,17 @@ function addItem( $item, $dom, $slugify, $type = 'movie' ) {
 
 /**
  * Add a post type attachment to the XML. Can be a movie or an actor.
- * 
- * @param Movie $item - the movie or actor.
+ *
+ * @param Movie       $item - the movie or actor.
  * @param DOMDocument $dom
- * @param string $type - the type of item, either 'movie' or 'actor'.
- * @param Slugify $slugify - library to convert any string into a slug.
+ * @param string      $type - the type of item, either 'movie' or 'actor'.
+ * @param Slugify     $slugify - library to convert any string into a slug.
  * @return DOMElement with the attachment.
  */
 
 function addItemAttachment( $item, $dom, $slugify, $type = 'movie' ) {
 	if ( $dom ) {
-		$is_actor = $type === 'actor';
+		$is_actor   = $type === 'actor';
 		$item_title = htmlspecialchars( $is_actor ? $item->getName() : $item->getTitle() );
 		if ( $is_actor ) {
 			if ( $item->getProfileImage()->getFilePath() ) {
@@ -300,8 +300,8 @@ function addItemAttachment( $item, $dom, $slugify, $type = 'movie' ) {
 		} else {
 			$poster_path = 'https://image.tmdb.org/t/p/w500' . $item->getPosterPath();
 		}
-		$dom_item  = $dom->createElement( 'item' );
-		$title = $dom->createElement( 'title', $item_title );
+		$dom_item = $dom->createElement( 'item' );
+		$title    = $dom->createElement( 'title', $item_title );
 		$dom_item->appendChild( $title );
 		$link = $dom->createElement( 'link', $poster_path );
 		$dom_item->appendChild( $link );

@@ -75,7 +75,7 @@ add_action( 'pre_render_block', 'wpmovies_update_demo_query', 10, 2 );
 function wpmovies_add_query_loop_variations() {
 	wp_enqueue_script(
 		'query-loop-variations',
-		plugin_dir_url( __FILE__ ) . '../build/index.js',
+		plugin_dir_url( __FILE__ ) . '../build/query-loop-variations.js',
 		array( 'wp-blocks' )
 	);
 }

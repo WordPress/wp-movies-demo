@@ -248,7 +248,10 @@ function addItem( $item, $dom, $slugify, $type = 'movie' ) {
 			$dom_item->appendChild( $content_encoded );
 			$release_date = addPostMeta( '_wpmovies_release_date', $item->getReleaseDate()->format('Y-M-d'), $dom );
 			$dom_item->appendChild( $release_date );
-			
+			$backdrop_path = addPostMeta( '_wpmovies_backdrop_path', $item->getBackdropPath(), $dom );
+			$dom_item->appendChild( $backdrop_path );
+			$vote_average = addPostMeta( '_wpmovies_vote_average', $item->getVoteAverage(), $dom );
+			$dom_item->appendChild( $vote_average );
 		}
 		if ( ! $is_actor && $item->getTagline() ) {
 			$excerpt_encoded = $dom->createElement( 'excerpt:encoded', $item->getTagline() );

@@ -1,6 +1,5 @@
 import wpx from '../../../lib/interactivity-api/runtime/wpx.js';
 
-console.log('wpx', wpx.state.favorites);
 wpx({
 	state: {
 		favorites: {

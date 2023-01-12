@@ -38,6 +38,7 @@ if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 add_action('init', function () {
 	register_block_type(__DIR__ . '/build/blocks/post-favorite');
 	register_block_type(__DIR__ . '/build/blocks/favorites-number');
+	register_block_type(__DIR__ . '/build/blocks/movie-data');
 });
 
 

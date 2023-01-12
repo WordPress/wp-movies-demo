@@ -246,6 +246,9 @@ function addItem( $item, $dom, $slugify, $type = 'movie' ) {
 		if ( ! $is_actor ) {
 			$content_encoded = $dom->createElement( 'content:encoded', $item->getOverview() );
 			$dom_item->appendChild( $content_encoded );
+			$release_date = addPostMeta( '_wpmovies_release_date', $item->getReleaseDate()->format('Y-M-d'), $dom );
+			$dom_item->appendChild( $release_date );
+			
 		}
 		if ( ! $is_actor && $item->getTagline() ) {
 			$excerpt_encoded = $dom->createElement( 'excerpt:encoded', $item->getTagline() );

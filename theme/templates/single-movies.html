@@ -13,13 +13,19 @@
 <h2 class="wp-block-heading">Storyline</h2>
 <!-- /wp:heading -->
 
+<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group"></div>
+<!-- /wp:group -->
+
 <!-- wp:post-excerpt {"fontSize":"medium"} /-->
 
-<!-- wp:group {"layout":{"type":"constrained","justifyContent":"left"}} -->
-<div class="wp-block-group"><!-- wp:wpmovies/post-favorite /-->
+<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group"><!-- wp:wpmovies/movie-reviews /--></div>
+<!-- /wp:group -->
 
-<!-- wp:wpmovies/movie-data /--></div>
-<!-- /wp:group --></div>
+<!-- wp:wpmovies/movie-data {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50","right":"0","bottom":"var:preset|spacing|50","left":"0"}}}} /-->
+
+<!-- wp:wpmovies/post-favorite /--></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
 
@@ -31,7 +37,7 @@
 <div class="wp-block-query alignwide"><!-- wp:post-template -->
 <!-- wp:post-featured-image {"isLink":true} /-->
 
-<!-- wp:post-title {"level":3,"isLink":true,"fontSize":"large"} /-->
+<!-- wp:post-title {"level":3,"isLink":true,"fontSize":"medium"} /-->
 <!-- /wp:post-template -->
 
 <!-- wp:query-pagination -->

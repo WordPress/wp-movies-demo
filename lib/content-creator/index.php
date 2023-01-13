@@ -252,6 +252,8 @@ function addItem( $item, $dom, $slugify, $type = 'movie' ) {
 			$dom_item->appendChild( $backdrop_path );
 			$vote_average = addPostMeta( '_wpmovies_vote_average', $item->getVoteAverage(), $dom );
 			$dom_item->appendChild( $vote_average );
+			$vote_count = addPostMeta( '_wpmovies_vote_count', $item->getVoteCount(), $dom );
+			$dom_item->appendChild( $vote_count );
 		}
 		if ( ! $is_actor && $item->getTagline() ) {
 			$excerpt_encoded = $dom->createElement( 'excerpt:encoded', $item->getTagline() );

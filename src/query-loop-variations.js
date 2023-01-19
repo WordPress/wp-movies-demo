@@ -69,7 +69,7 @@ wp.blocks.registerBlockVariation('core/query', {
 	innerBlocks: innerBlocks,
 });
 
-// Register Movies Query Loop
+// Register Cast Query Loop
 wp.blocks.registerBlockVariation('core/query', {
 	name: castQueryLoop,
 	title: 'Cast Query Loop',

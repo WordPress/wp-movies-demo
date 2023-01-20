@@ -54,11 +54,6 @@ function wp_directives_register_scripts() {
 	// conditionally enqueue directives later.
 	wp_enqueue_script( 'wp-directive-runtime' );
 
-	wp_register_style(
-		'transition-styles',
-		plugin_dir_url( __DIR__ ) . '../transition-styles.css'
-	);
-	wp_enqueue_style( 'transition-styles' );
 }
 add_action( 'wp_enqueue_scripts', 'wp_directives_register_scripts' );
 

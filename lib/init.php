@@ -37,14 +37,14 @@ register_uninstall_hook( __FILE__, 'wp_directives_uninstall' );
 function wp_directives_register_scripts() {
 	wp_register_script(
 		'wp-directive-vendors',
-		plugins_url( '../build/vendors.js', __DIR__ ),
+		plugins_url( 'build/vendors.js', __DIR__ ),
 		array(),
 		'1.0.0',
 		true
 	);
 	wp_register_script(
 		'wp-directive-runtime',
-		plugins_url( '../build/runtime.js', __DIR__ ),
+		plugins_url( 'build/runtime.js', __DIR__ ),
 		array( 'wp-directive-vendors' ),
 		'1.0.0',
 		true

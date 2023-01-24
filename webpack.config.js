@@ -6,8 +6,8 @@ module.exports = [
 	{
 		...defaultConfig,
 		entry: {
-			runtime: './lib/interactivity-api/runtime',
-			'query-loop-variations': './src/query-loop-variations',
+			runtime: './lib/runtime',
+			'query-loop-variations': './lib/query-loop-variations',
 			'blocks/favorites-number/view':
 				'./src/blocks/favorites-number/view',
 		},

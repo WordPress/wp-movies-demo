@@ -11,18 +11,18 @@
  * Text Domain:       wp-movies-demo
  */
 
-require_once __DIR__ . '/lib/interactivity-api/init.php';
-require_once __DIR__ . '/src/custom-post-types.php';
-require_once __DIR__ . '/src/custom-taxonomies.php';
-require_once __DIR__ . '/src/custom-query-block.php';
+require_once __DIR__ . '/lib/init.php';
+require_once __DIR__ . '/lib/custom-post-types.php';
+require_once __DIR__ . '/lib/custom-taxonomies.php';
+require_once __DIR__ . '/lib/custom-query-block.php';
 
 
- // Check if Gutenberg plugin is active
+// Check if Gutenberg plugin is active.
 if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
 if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
-	// Show an error message
+	// Show an error message.
 	add_action(
 		'admin_notices',
 		function() {
@@ -30,23 +30,29 @@ if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 		}
 	);
 
-	// Deactivate the plugin
+	// Deactivate the plugin.
 	deactivate_plugins( plugin_basename( __FILE__ ) );
 	return;
 }
 
-add_action('init', function () {
-	register_block_type(__DIR__ . '/build/blocks/post-favorite');
-	register_block_type(__DIR__ . '/build/blocks/favorites-number');
-	register_block_type(__DIR__ . '/build/blocks/movie-data');
-	register_block_type(__DIR__ . '/build/blocks/movie-reviews');
-});
+add_action(
+	'init',
+	function () {
+		register_block_type( __DIR__ . '/build/blocks/post-favorite' );
+		register_block_type( __DIR__ . '/build/blocks/favorites-number' );
+		register_block_type( __DIR__ . '/build/blocks/movie-data' );
+		register_block_type( __DIR__ . '/build/blocks/movie-reviews' );
+	}
+);
 
 
-add_filter('render_block_wpmovies/favorites-number', function ($content) {
-	wp_enqueue_script(
-		'wpmovies/favorites-number',
-		plugin_dir_url(__FILE__) . 'build/blocks/favorites-number/view.js'
-	);
-	return $content;
-});
+add_filter(
+	'render_block_wpmovies/favorites-number',
+	function ( $content ) {
+		wp_enqueue_script(
+			'wpmovies/favorites-number',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/favorites-number/view.js'
+		);
+		return $content;
+	}
+);

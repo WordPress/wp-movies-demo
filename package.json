@@ -12,7 +12,6 @@
 		"dev": "npm start",
 		"format:php": "wp-env run composer run-script format",
 		"lint:php": "wp-env run composer run-script lint",
-		"create-xml": "wp-env run composer install && wp-env run composer run-script create-xml",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"wp-env": "wp-env"
 	},

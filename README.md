@@ -7,6 +7,13 @@ This is a demo plugin which shows the features of the Interactivity API for Word
 It can be installed as a WordPress plugin that creates a site similar to `insert
 URL when have a production site`.
 
+The plugin is split into `src/blocks` and `lib` folders:
+
+- `src/blocks` - The blocks that use the Interactivity API and show how to use
+  it build interactive blocks.
+- `/lib` - The code that contains the runtime of the Interactivity API (which
+  will eventually be part of Gutenberg) and the configuration needed to run the demo.
+
 ## Prerequisites
 
 - [Docker](https://www.docker.com/)

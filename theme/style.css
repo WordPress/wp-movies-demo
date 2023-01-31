@@ -14,3 +14,13 @@ Template:
 Text Domain: wpmovies
 Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, featured-images, full-site-editing, rtl-language-support, theme-options, threaded-comments, translation-ready, wide-blocks
 */
+.wp-block-group.movie-image-container {
+  position: relative;
+}
+
+.wp-block-group.movie-image-container .wp-block-wpmovies-post-favorite {
+  position: absolute;
+  top: 0px;
+  left: 15px;
+  margin-top: 0.5rem;
+}

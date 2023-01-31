@@ -43,5 +43,6 @@
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
 		"lint": "phpcs --standard=phpcs.xml.dist",
+		"create-xml": "php ./lib/content-creator/index.php"
 	}
 }

@@ -4,7 +4,7 @@
  * Version:           0.1.0
  * Requires at least: 6.0
  * Requires PHP:      5.6
- * Description:       Plugin to demonstrate a WordPress site with the Interactivity API.
+ * Description:       Plugin that demoes the usage of the Interactivity API.
  * Author:            WordPress Team
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html

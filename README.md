@@ -49,9 +49,13 @@ your projects at your own risk.
    npx wp-env start
    ```
    
-4. Activate the WP Movies plugin in the WordPress admin.
-5. Activate the WP Movies theme.
-6. Import the Movie data into the WordPress database:
+4. Activate the WP Movies plugin and the WP Movies theme by running:
+    ```
+    npx wp-env run cli "wp theme activate wp-movies-theme"
+    npx wp-env run cli "wp plugin activate wp-movies"
+    ```
+
+5. Go to the admin (user: `admin`, password: `password`) and import the Movie data into the WordPress:
     1. Go to **Tools > Import > WordPress** and click on _Run Importer_.
     2. Select the `wp_sampledata_movies.xml` file.
     3. Select the `Download and import file attachments` and click on the
@@ -61,9 +65,9 @@ your projects at your own risk.
     This process will also download the images for all the movies. If you run into any 
     problems you can run `npx wp-env clean all` and start this step over again.
     
-7. You should set the permalinks to use the `Post name` in **Settings > Permalinks**.
-8. Change settings to show `8` posts/RSS items per page in **Settings > Reading**
-9. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
+6. You should set the permalinks to use the `Post name` in **Settings > Permalinks**.
+7. Change settings to show `8` posts/RSS items per page in **Settings > Reading**
+8. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
 
 ## Things to try
 

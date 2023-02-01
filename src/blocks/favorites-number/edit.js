@@ -7,7 +7,7 @@ const Edit = () => {
 			<img
 				draggable="false"
 				role="img"
-				class="emoji"
+				className="emoji"
 				alt=":heart:"
 				src="https://s.w.org/images/core/emoji/14.0.0/svg/2764.svg"
 			/>

@@ -2,16 +2,16 @@
 
 ## What is this?
 
-This is a demo plugin which shows the features of the Interactivity API for WordPress (`link to the blog post in Make Core`).
+This is a demo plugin which shows the features of the Interactivity API for
+WordPress (TODO: `link to the blog post in Make Core`).
 
-It can be installed as a WordPress plugin that creates a site similar to `insert
-URL when have a production site`.
+It can be installed as a WordPress plugin that creates a site similar to (TODO: `insert URL when have a production site`)
 
 The plugin is split into `src/blocks` and `lib` folders:
 
-- `src/blocks` - The blocks that use the Interactivity API and show how to use
-  it build interactive blocks.
-- `/lib` - The code that contains the runtime of the Interactivity API (which
+- `src/blocks` - The blocks that use the Interactivity API in interactive
+  blocks. This is the part that you should start with 
+- `/lib` - The code that contains the runtime and internals of the Interactivity API (which
   will eventually be part of Gutenberg) and the configuration needed to run the demo.
 
 ## When will I be able to use this?
@@ -31,12 +31,13 @@ your projects at your own risk.
 
 1. Install the dependencies
 
-    ```
+    ```sh
     npm install && composer install
     ```
+
 2. Build the plugin
 
-    ```
+    ```sh
     npm start
     ```
 
@@ -45,12 +46,13 @@ your projects at your own risk.
    (recommended). This will require you to have
    [Docker](https://www.docker.com/) running.
 
-   ```
+   ```sh
    npx wp-env start
    ```
-   
+
 4. Activate the WP Movies plugin and the WP Movies theme by running:
-    ```
+
+    ```sh
     npx wp-env run cli "wp theme activate wp-movies-theme"
     npx wp-env run cli "wp plugin activate wp-movies"
     ```
@@ -61,27 +63,36 @@ your projects at your own risk.
     3. Select the `Download and import file attachments` and click on the
        `Upload file and import`.
     4. Repeat the process for the `wp_sampledata_actors.xml` file.
-    
-    This process will also download the images for all the movies. If you run into any 
+
+    This process will also download the images for all the movies. If you run into any
     problems you can run `npx wp-env clean all` and start this step over again.
-    
+
 6. You should set the permalinks to use the `Post name` in **Settings > Permalinks**.
 7. Change settings to show `8` posts/RSS items per page in **Settings > Reading**
 8. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
 
 ## Things to try
 
-#### Client-side Navigations
+### Client-side Navigations
 
 When enabled, the lists of movies and actors will paginate without doing a full
 page refresh. You can enable this behavior in your WordPress admin page in
 **Settings > WP Directives**.
 
-#### Add to favourites
-You can add a movie to favourites and notice how the numbers of movie likes is
+### Add to favourites
+
+You can add a movie to favourites and notice how the number of movie likes is
 preserved when using client-side navigations.
 
-#### Instant search
+### Pagination
+
+Once you [enable the client-side navigations](#client-side-navigations), click around to the next/previous
+page of the movies or actors. You the list is loaded without a delay. This is
+because the HTML for that page is prefetched ahead of time, and only the
+nodes that are different between the current page and the next page are updated.
+
+### Instant search
+
 Try searching for movies or actors. The search results are rendered dynamically
 on the server!
 

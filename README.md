@@ -14,6 +14,13 @@ The plugin is split into `src/blocks` and `lib` folders:
 - `/lib` - The code that contains the runtime of the Interactivity API (which
   will eventually be part of Gutenberg) and the configuration needed to run the demo.
 
+## When will I be able to use this?
+
+The Interactivity API is an **experimental feature** and not ready for adoption yet.
+It is under active development and its final public API is **very likely going to change before an official release**
+For now, we recommend experimenting with the Interactivity API via this demo. Use this in
+your projects at your own risk.
+
 ## Prerequisites
 
 - [Docker](https://www.docker.com/)

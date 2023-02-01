@@ -10,7 +10,8 @@ It can be installed as a WordPress plugin that creates a site similar to (TODO: 
 The plugin is split into `src/blocks` and `lib` folders:
 
 - `src/blocks` - The blocks that use the Interactivity API in interactive
-  blocks. This is the part that you should start with 
+  blocks. **This is the part that you should start with** in order to understand
+  how to build interactive blocks with the Interactivity API.
 - `/lib` - The code that contains the runtime and internals of the Interactivity API (which
   will eventually be part of Gutenberg) and the configuration needed to run the demo.
 
@@ -67,29 +68,27 @@ your projects at your own risk.
     This process will also download the images for all the movies. If you run into any
     problems you can run `npx wp-env clean all` and start this step over again.
 
-6. You should set the permalinks to use the `Post name` in **Settings > Permalinks**.
+6. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
 7. Change settings to show `8` posts/RSS items per page in **Settings > Reading**
 8. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
 
 ## Things to try
 
-### Client-side Navigations
+### Client-side Navigations and pagination
 
 When enabled, the lists of movies and actors will paginate without doing a full
 page refresh. You can enable this behavior in your WordPress admin page in
-**Settings > WP Directives**.
-
-### Add to favourites
-
-You can add a movie to favourites and notice how the number of movie likes is
-preserved when using client-side navigations.
-
-### Pagination
-
-Once you [enable the client-side navigations](#client-side-navigations), click around to the next/previous
+**Settings > WP Directives**. Click around to the next/previous
 page of the movies or actors. You the list is loaded without a delay. This is
 because the HTML for that page is prefetched ahead of time, and only the
 nodes that are different between the current page and the next page are updated.
+
+### Add to favourites
+
+When you add a movie to favourites notice how the number of movie likes is
+preserved when navigating to another page. In addition to client-side
+navigations, the Interactivity API uses a smart DOM diffing algorithm. This
+allows the interactive state of blocks on the current page to be preserved!
 
 ### Instant search
 

@@ -37,14 +37,14 @@ register_uninstall_hook( __FILE__, 'wp_directives_uninstall' );
 function wp_directives_register_scripts() {
 	wp_register_script(
 		'wp-directive-vendors',
-		plugins_url( '../build/vendors.js', __DIR__ ),
+		plugins_url( 'build/vendors.js', __DIR__ ),
 		array(),
 		'1.0.0',
 		true
 	);
 	wp_register_script(
 		'wp-directive-runtime',
-		plugins_url( '../build/runtime.js', __DIR__ ),
+		plugins_url( 'build/runtime.js', __DIR__ ),
 		array( 'wp-directive-vendors' ),
 		'1.0.0',
 		true
@@ -54,11 +54,6 @@ function wp_directives_register_scripts() {
 	// conditionally enqueue directives later.
 	wp_enqueue_script( 'wp-directive-runtime' );
 
-	wp_register_style(
-		'transition-styles',
-		plugin_dir_url( __DIR__ ) . '../transition-styles.css'
-	);
-	wp_enqueue_style( 'transition-styles' );
 }
 add_action( 'wp_enqueue_scripts', 'wp_directives_register_scripts' );
 

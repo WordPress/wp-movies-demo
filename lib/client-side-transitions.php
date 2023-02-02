@@ -3,7 +3,7 @@
 /**
  * Add the directive on the link tag to prefetch and run the client side transition.
  *
- * @param $block_content The content of the block.
+ * @param string $block_content The content of the block.
  */
 function wp_directives_add_wp_link_attribute( $block_content ) {
 	$site_url = parse_url( get_site_url() );
@@ -55,8 +55,9 @@ function wp_directives_client_site_transitions_meta_tag() {
 }
 add_action( 'wp_head', 'wp_directives_client_site_transitions_meta_tag', 10, 0 );
 
-/*
+/**
  * Return if client side transitions are enabled.
+ *
  * @return bool True if the client side transitions are enabled.
  */
 function wp_directives_client_site_transitions_option() {

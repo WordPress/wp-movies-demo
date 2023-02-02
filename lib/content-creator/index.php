@@ -3,7 +3,7 @@
 use Cocur\Slugify\Slugify;
 use Dotenv\Dotenv;
 use Tmdb\Repository\MovieRepository;
-
+use Tmdb\Repository\PeopleRepository;
 
 require_once( dirname( __FILE__ ) . '/../../vendor/autoload.php' );
 require_once( dirname( __FILE__ ) . '/setup-client.php' );
@@ -12,16 +12,17 @@ require_once( dirname( __FILE__ ) . '/setup-client.php' );
  * Create the XML ready to be imported into a WordPress site.
  */
 function createXML() {
-	$client     = setup_client();
-	$slugify    = new Slugify();
-	$moviesDom  = createDom();
-	$actorsDom  = createDom();
-	$repository = new MovieRepository( $client );
-	$movies     = addMovies( $moviesDom, $repository, $slugify );
-	$moviesDom  = $movies['dom'];
+	$client      = setup_client();
+	$slugify     = new Slugify();
+	$moviesDom   = createDom();
+	$actorsDom   = createDom();
+	$repository  = new MovieRepository( $client );
+	$people_repo = new PeopleRepository( $client );
+	$movies      = addMovies( $moviesDom, $repository, $slugify );
+	$moviesDom   = $movies['dom'];
 	$moviesDom->save( 'wp_sampledata_movies.xml' );
 	echo PHP_EOL . 'Movies xml file created 🍿🎬' . PHP_EOL;
-	$cast      = addActors( $actorsDom, $repository, $slugify, $movies['movies'] );
+	$cast      = addActors( $actorsDom, $repository, $people_repo, $slugify, $movies['movies'] );
 	$actorsDom = updateActors( $cast['dom'], $cast['actors'], $slugify );
 	$actorsDom->save( 'wp_sampledata_actors.xml' );
 	echo PHP_EOL . 'Actors xml file created 🍿🧍' . PHP_EOL;
@@ -136,7 +137,7 @@ function addMovies( $dom, $repository, $slugify ) {
  * @return array with two keys, one for the DOMDocument with the actors added and the other for the array of actors.
  */
 
-function addActors( $dom, $repository, $slugify, $movies_for_actors ) {
+function addActors( $dom, $repository, $people_repo, $slugify, $movies_for_actors ) {
 	for ( $i = 1; $i <= 1; $i++ ) {
 		$dotenv = Dotenv::createImmutable( __DIR__ . '/../..' );
 		$dotenv->load();
@@ -149,6 +150,7 @@ function addActors( $dom, $repository, $slugify, $movies_for_actors ) {
 			foreach ( $credits->getCast() as $person ) {
 				if ( $castNumber < $actors_per_movie ) {
 					if ( ! array_key_exists( $person->getId(), $actors ) ) {
+						$person = $people_repo->load( $person->getId() );
 						echo 'Adding ' . $person->getName() . PHP_EOL;
 						$item_attachment = addItemAttachment( $person, $dom, $slugify, 'actor' );
 						$item            = addItem( $person, $dom, $slugify, 'actor' );
@@ -243,10 +245,10 @@ function addItem( $item, $dom, $slugify, $type = 'movie' ) {
 		$dom_item->appendChild( $guid );
 		$title = $dom->createElement( 'title', $item_title );
 		$dom_item->appendChild( $title );
+		$content_encoded = $dom->createElement( 'content:encoded', $is_actor ? htmlspecialchars( $item->getBiography() ) : $item->getOverview() );
+		$dom_item->appendChild( $content_encoded );
 		if ( ! $is_actor ) {
-			$content_encoded = $dom->createElement( 'content:encoded', $item->getOverview() );
-			$dom_item->appendChild( $content_encoded );
-			$release_date = addPostMeta( '_wpmovies_release_date', $item->getReleaseDate()->format('Y-M-d'), $dom );
+			$release_date = addPostMeta( '_wpmovies_release_date', $item->getReleaseDate()->format( 'Y-M-d' ), $dom );
 			$dom_item->appendChild( $release_date );
 			$backdrop_path = addPostMeta( '_wpmovies_backdrop_path', $item->getBackdropPath(), $dom );
 			$dom_item->appendChild( $backdrop_path );

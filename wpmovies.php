@@ -5,26 +5,26 @@
  * Version:           0.1.0
  * Requires at least: 6.0
  * Requires PHP:      5.6
- * Description:       Plugin to demonstrate a WordPress site with the Interactivity API.
+ * Description:       Plugin that demoes the usage of the Interactivity API.
  * Author:            WordPress Team
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       wp-movies-demo
  */
 
-require_once __DIR__ . '/lib/interactivity-api/init.php';
+require_once __DIR__ . '/lib/init.php';
+require_once __DIR__ . '/lib/custom-post-types.php';
+require_once __DIR__ . '/lib/custom-taxonomies.php';
+require_once __DIR__ . '/lib/custom-query-block.php';
 require_once __DIR__ . '/lib/db-update/index.php';
-require_once __DIR__ . '/src/custom-post-types.php';
-require_once __DIR__ . '/src/custom-taxonomies.php';
-require_once __DIR__ . '/src/custom-query-block.php';
 
 
-// Check if Gutenberg plugin is active
+// Check if Gutenberg plugin is active.
 if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
 if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
-	// Show an error message
+	// Show an error message.
 	add_action(
 		'admin_notices',
 		function () {
@@ -32,7 +32,7 @@ if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 		}
 	);
 
-	// Deactivate the plugin
+	// Deactivate the plugin.
 	deactivate_plugins( plugin_basename( __FILE__ ) );
 	return;
 }

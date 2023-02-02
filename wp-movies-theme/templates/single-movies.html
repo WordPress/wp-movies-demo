@@ -1,7 +1,11 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"layout":{"type":"constrained","contentSize":"1200px"}} -->
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained","contentSize":"1200px"}} -->
+<main class="wp-block-group"><!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
 <div class="wp-block-group"><!-- wp:post-title {"level":1,"fontSize":"large"} /-->
+
+<!-- wp:wpmovies/post-favorite /--></div>
+<!-- /wp:group -->
 
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column {"width":"400px"} -->
@@ -20,12 +24,10 @@
 <!-- wp:post-excerpt {"fontSize":"medium"} /-->
 
 <!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-<div class="wp-block-group"><!-- wp:wpmovies/movie-reviews /--></div>
-<!-- /wp:group -->
+<div class="wp-block-group"><!-- wp:wpmovies/movie-reviews /-->
 
-<!-- wp:wpmovies/movie-data {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50","right":"0","bottom":"var:preset|spacing|50","left":"0"}}}} /-->
-
-<!-- wp:wpmovies/post-favorite /--></div>
+<!-- wp:wpmovies/movie-data {"style":{"spacing":{"margin":{"top":"var:preset|spacing|50","right":"0","bottom":"var:preset|spacing|50","left":"0"}}}} /--></div>
+<!-- /wp:group --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
 
@@ -53,7 +55,7 @@
 <p></p>
 <!-- /wp:paragraph -->
 <!-- /wp:query-no-results --></div>
-<!-- /wp:query --></div>
+<!-- /wp:query --></main>
 <!-- /wp:group -->
 
 <!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

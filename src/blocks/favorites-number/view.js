@@ -1,4 +1,4 @@
-import wpx from '../../../lib/runtime/wpx.js';
+import { wpx } from '../../../lib/runtime/wpx.js';
 
 wpx({
 	state: {

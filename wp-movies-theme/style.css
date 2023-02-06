@@ -24,3 +24,7 @@ Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, feature
   left: 15px;
   margin-top: 0.5rem;
 }
+
+.search-result-row:hover {
+  background-color: #252525;
+}

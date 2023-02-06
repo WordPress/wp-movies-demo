@@ -1,0 +1,16 @@
+.wp-block-wpmovies-movie-search > input {
+  background-color: #252525;
+  width: 10rem;
+  height: 40px;
+  border: none;
+  color: rgb(215, 215, 215);
+  position: relative;
+  padding: 7px;
+}
+
+.wp-block-wpmovies-movie-search > input:focus-visible {
+  background-color: #2e2e2e;
+  border:none;
+  padding: 7px;
+  outline: none;
+}

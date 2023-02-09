@@ -1,14 +1,6 @@
 import { wpx } from '../../../lib/runtime/wpx.js';
 import { navigate } from '../../../lib/runtime/router.js';
 
-const debounce = (func, delay) => {
-	let timerId;
-	return (...args) => {
-		clearTimeout(timerId);
-		timerId = setTimeout(() => func(...args), delay);
-	};
-};
-
 const updateURL = async (value) => {
 	const url = new URL(window.location);
 	url.searchParams.set('post_type', 'movies');
@@ -29,8 +21,16 @@ wpx({
 			update: async ({ state, event }) => {
 				// Update the state.
 				const { value } = event.target;
-				if (value === state.search.value) return;
+				if (value === state.search.value) {
+					return;
+				}
 				state.search.value = value;
+
+				// If the search is empty, navigate to the home page.
+				if (value === '') {
+					await navigate('/');
+					return;
+				}
 
 				// Update the URL.
 				await updateURL(value);
@@ -39,14 +39,6 @@ wpx({
 				document
 					.querySelector('.wp-block-wpmovies-movie-search > input')
 					.focus();
-			},
-			focusout: ({ state, event }) => {
-				if (
-					event.target.value === '' &&
-					window.location.search !== ''
-				) {
-					navigate('/');
-				}
 			},
 		},
 	},

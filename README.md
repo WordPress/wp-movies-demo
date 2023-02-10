@@ -70,11 +70,11 @@ your projects at your own risk.
 
 6. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
 7. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
-8. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
+8. Enable the **Client Side Navigation** in the **Settings > WP Directives**.
 
 ## Things to try
 
-### Client-side Navigations and pagination
+### Client-side Navigation and pagination
 
 When enabled, the lists of movies and actors will paginate without doing a full
 page refresh. You can enable this behavior in your WordPress admin page in
@@ -87,7 +87,7 @@ nodes that are different between the current page and the next page are updated.
 
 When you add a movie to favourites notice how the number of movie likes is
 preserved when navigating to another page. In addition to client-side
-navigations, the Interactivity API uses a smart DOM diffing algorithm. This
+, the Interactivity API uses a smart DOM diffing algorithm. This
 allows the interactive state of blocks on the current page to be preserved!
 
 ### Instant search

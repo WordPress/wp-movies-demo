@@ -1,4 +1,4 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
+import { store } from '../../../lib/runtime/store.js';
 import { navigate } from '../../../lib/runtime/router.js';
 
 const updateURL = async (value) => {
@@ -10,7 +10,7 @@ const updateURL = async (value) => {
 	await navigate(`/${url.search}${url.hash}`);
 };
 
-wpx({
+store({
 	state: {
 		search: {
 			value: '',

@@ -11,5 +11,8 @@
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php",
 	"editorStyle": "file:./style.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"supports": {
+		"interactivity": true
+	}
 }

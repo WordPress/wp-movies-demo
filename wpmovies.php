@@ -68,3 +68,14 @@ add_filter(
 		return $content;
 	}
 );
+
+add_filter(
+	'render_block_wpmovies/post-favorite',
+	function ( $content ) {
+		wp_enqueue_script(
+			'wpmovies/post-favorite',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/post-favorite/view.js'
+		);
+		return $content;
+	}
+);

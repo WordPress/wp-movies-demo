@@ -34,11 +34,6 @@ wpx({
 
 				// Update the URL.
 				await updateURL(value);
-
-				// Focus the input.
-				document
-					.querySelector('.wp-block-wpmovies-movie-search > input')
-					.focus();
 			},
 		},
 	},

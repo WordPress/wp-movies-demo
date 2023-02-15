@@ -1,7 +1,6 @@
 <?php
 $post = get_post();
 $score = get_post_meta($post->ID, '_wpmovies_vote_average', true);
-$reviews_count = '' !== get_post_meta($post->ID, '_wpmovies_vote_count', true) ? get_post_meta($post->ID, '_wpmovies_vote_count', true) : '0';
 $score_color = '#21d07a'; // Green
 if ($score < 7 && $score >= 3) {
    $score_color = '#fad900'; // Yellow
@@ -31,4 +30,3 @@ $wrapper_attributes = get_block_wrapper_attributes(
       </div>
    </div>
 </div>
-<p><?= sprintf(__('%s Reviews', 'wp-movies'), $reviews_count)  ?></p>

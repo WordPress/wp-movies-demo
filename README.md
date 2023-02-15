@@ -7,13 +7,24 @@ WordPress (TODO: `link to the blog post in Make Core`).
 
 It can be installed as a WordPress plugin that creates a site similar to (TODO: `insert URL when have a production site`)
 
-The plugin is split into `src/blocks` and `lib` folders:
+The plugin is split into:
 
-- `src/blocks` - The blocks that use the Interactivity API in interactive
-  blocks. **This is the part that you should start with** in order to understand
-  how to build interactive blocks with the Interactivity API.
-- `/lib` - The code that contains the runtime and internals of the Interactivity API (which
-  will eventually be part of Gutenberg) and the configuration needed to run the demo.
+- `/src/blocks` - **Start here to understand how to build interactive blocks with the
+  Interactivity API**. The folder contains all the custom blocks used in the
+  demo. The interactive blocks that use the Interactivity API are:
+
+  - [`/src/blocks/favorites-number`](/src/blocks/favorites-number) - Displays
+    the number of movies liked.
+  - [`/src/blocks/movie-search`](/src/blocks/movie-search) - An interactive movie search block.
+  - [`/src/blocks/post-favorite`](/src/blocks/post-favorite) - A block that
+    allows the users to like a movie.
+  
+- `/lib` - The code that contains the runtime and internals of the Interactivity
+  API and the configuration needed to run the demo.
+
+- `/wp-movies-theme` - The custom theme used in the demo. Contains some custom
+  styling and the templates for the header & footer as well as the movie &
+  actors pages.
 
 ## When will I be able to use this?
 
@@ -39,6 +50,10 @@ your projects at your own risk.
 2. Build the plugin
 
     ```sh
+    npm run build
+
+    # If you plan on tinkering with the frontend code you start the webpack
+    # server which automatically rebuild the files when you make any changes.
     npm start
     ```
 

@@ -21,7 +21,7 @@ function attach_image_to_post( $url, $post_id, $image_data ) {
 	$attachment_id = get_post_id_from_guid( $image_data['guid'] );
 	if ( $attachment_id == null ) {
 		$file             = array();
-		$file['name']     = $url;
+		$file['name']     = basename($url);
 		$file['tmp_name'] = download_url( $url );
 		$attachment_id    = media_handle_sideload( $file, $post_id, null, $image_data );
 	}
@@ -122,7 +122,7 @@ function wpmovies_add_movies() {
 			$movie_poster_path = $movie_data->getPosterPath();
 			$movie_poster_url  = 'https://image.tmdb.org/t/p/w1280' . $movie_poster_path;
 			// Movies backdrop Image
-			$movie_backdrop_img_path = $movie_data->getPosterPath();
+			$movie_backdrop_img_path = $movie_data->getBackdropPath();
 			$movie_backdrop_img_url  = 'https://image.tmdb.org/t/p/w1280' . $movie_backdrop_img_path;
 			// All images. Array of images
 			$movie_images = $movie_data->getImages();

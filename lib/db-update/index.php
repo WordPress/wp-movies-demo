@@ -111,8 +111,9 @@ function wpmovies_add_movies() {
 			$movie_vote_average = $movie_data->getVoteAverage(); // In scale x/10
 			$movie_vote_count   = $movie_data->getVoteCount();
 			$movie_status       = $movie_data->getStatus();
-			$movie_runtime       = $movie_data->getRuntime();
+			$movie_runtime      = $movie_data->getRuntime();
 			$movie_homepage     = $movie_data->getHomepage();
+			$movie_language     = $movie_data->getOriginalLanguage();
 			if ( $movie_data->getReleaseDate() ) {
 				$movie_release_date = $movie_data->getReleaseDate()->format( 'Y-m-d' );
 			};
@@ -164,6 +165,7 @@ function wpmovies_add_movies() {
 					'_wpmovies_revenue'      => $movie_revenue,
 					'_wpmovies_budget'       => $movie_budget,
 					'_wpmovies_runtime'      => $movie_runtime,
+					'_wpmovies_language'     => $movie_language
 				),
 			);
 

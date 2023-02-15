@@ -12,7 +12,7 @@ $degrees_css = $score * 180 / 10;
 $wrapper_attributes = get_block_wrapper_attributes(
    [
       'class' => 'wpmovies-score-wrap',
-      'style' => 'style="background-color: ' . $score_color . '55"',
+      'style' => 'background-color: ' . $score_color . '22',
    ]
 );
 ?>

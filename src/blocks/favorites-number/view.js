@@ -3,7 +3,8 @@ import { wpx } from '../../../lib/runtime/wpx.js';
 wpx({
 	state: {
 		favorites: {
-			posts: [],
+			// state.favorites.posts is defined in `favorites-number/view.js`.
+			// The state is shared between all blocks!
 			count: ({ state }) => state.favorites.posts.length,
 		},
 	},

@@ -28,13 +28,6 @@ function attach_image_to_post( $url, $post_id, $image_data ) {
 	return $attachment_id;
 }
 
-function add_tag_if_not_null( $key, $value, $array ) {
-	if ( $value != null ) {
-		$array[ $key ] = $value;
-	}
-	return;
-}
-
 function add_actor( $actor_info, $movie_id, $movie_term_data ) {
 	// 1. Insert actor post in the DB
 	$actor_guid            = get_site_url() . '?tmdb_actor_id=' . $actor_info['id'];

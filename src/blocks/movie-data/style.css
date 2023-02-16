@@ -1,0 +1,28 @@
+.wpmovies-data-list {
+	list-style: none;
+	padding: 0px;
+}
+
+.wpmovies-data-list li {
+	display: flex;
+	padding: 0.2rem 0;
+}
+
+.wpmovies-data-list-key {
+	flex: 1;
+	max-width: 90px;
+	margin-right: 1.5rem;
+}
+
+.wpmovies-data-list-value {
+	flex: 2;
+}
+
+.wpmovies-category-link {
+	text-decoration: none;
+	background-color: #081c22;
+	opacity: 0.8;
+	border-radius: 4px;
+	padding: 4px;
+	margin-right: 4px;
+}

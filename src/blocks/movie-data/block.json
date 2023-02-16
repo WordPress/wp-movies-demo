@@ -10,25 +10,5 @@
 	"textdomain": "wpmovies",
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php",
-	"supports": {
-		"color": {
-			"background": true,
-			"text": true,
-			"link": false
-		},
-		"typography": {
-			"fontSize": true,
-			"lineHeight": true,
-			"fontStyle": true,
-			"fontWeight": true,
-			"textTransform": true,
-			"textDecoration": true,
-			"letterSpacing": true
-		},
-		"html": false,
-		"spacing": {
-			"padding": true,
-			"margin": true
-		}
-	}
+	"style": "file:./style-index.css"
 }

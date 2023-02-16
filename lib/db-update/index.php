@@ -236,7 +236,7 @@ function wpmovies_add_movies() {
 				$video_id    = $video->getId();
 				$video_url   = str_replace( '%s', $video->getKey(), $video->getUrlFormat() );
 				$video_type  = $video->getType();
-				$video_title = $video->getName();
+				$video_title = str_replace('"', '\"', $video->getName());
 
 				$videos_array[] = array(
 					'id'   => $video_id,

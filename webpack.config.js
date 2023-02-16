@@ -10,6 +10,8 @@ module.exports = [
 			'query-loop-variations': './lib/query-loop-variations',
 			'blocks/favorites-number/view':
 				'./src/blocks/favorites-number/view',
+			'blocks/post-favorite/view': './src/blocks/post-favorite/view',
+			'blocks/movie-search/view': './src/blocks/movie-search/view',
 		},
 		output: {
 			filename: '[name].js',

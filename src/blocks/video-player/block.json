@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wpmovies/movie-trailer",
+	"name": "wpmovies/video-player",
 	"version": "0.1.0",
-	"title": "WP Movies - Movie Trailer",
+	"title": "WP Movies - Video Player",
 	"category": "text",
 	"icon": "camera",
 	"description": "",

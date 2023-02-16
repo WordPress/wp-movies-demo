@@ -1,0 +1,16 @@
+.wpmovies-video-player {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+
+.wpmovies-video-wrapper {
+	position: relative;
+}
+
+.wpmovies-video-wrapper span {
+	cursor: pointer;
+	position: absolute;
+	right: 4px;
+	top: -20px;
+}

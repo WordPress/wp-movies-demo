@@ -12,8 +12,6 @@ module.exports = [
 				'./src/blocks/favorites-number/view',
 			'blocks/post-favorite/view': './src/blocks/post-favorite/view',
 			'blocks/movie-search/view': './src/blocks/movie-search/view',
-			'blocks/movie-trailer-button/view':
-				'./src/blocks/movie-trailer-button/view',
 			'blocks/video-player/view': './src/blocks/video-player/view',
 		},
 		output: {

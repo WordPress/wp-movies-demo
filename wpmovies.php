@@ -97,17 +97,6 @@ add_filter(
 	}
 );
 
-add_filter(
-	'render_block_wpmovies/movie-trailer-button',
-	function ( $content ) {
-		wp_enqueue_script(
-			'wpmovies/movie-trailer-button',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-trailer-button/view.js'
-		);
-		return $content;
-	}
-);
-
 // ADD CRON EVENTS TO IMPORT MOVIES DAILY
 // Create the necessary hook
 add_action( 'cron_wpmovies_add_movies', 'wpmovies_add_movies' );

@@ -21,7 +21,7 @@ function attach_image_to_post( $url, $post_id, $image_data ) {
 	$attachment_id = get_post_id_from_guid( $image_data['guid'] );
 	if ( $attachment_id == null ) {
 		$file             = array();
-		$file['name']     = $url;
+		$file['name']     = basename($url);
 		$file['tmp_name'] = download_url( $url );
 		$attachment_id    = media_handle_sideload( $file, $post_id, null, $image_data );
 	}
@@ -111,7 +111,9 @@ function wpmovies_add_movies() {
 			$movie_vote_average = $movie_data->getVoteAverage(); // In scale x/10
 			$movie_vote_count   = $movie_data->getVoteCount();
 			$movie_status       = $movie_data->getStatus();
+			$movie_runtime      = $movie_data->getRuntime();
 			$movie_homepage     = $movie_data->getHomepage();
+			$movie_language     = $movie_data->getOriginalLanguage();
 			if ( $movie_data->getReleaseDate() ) {
 				$movie_release_date = $movie_data->getReleaseDate()->format( 'Y-m-d' );
 			};
@@ -122,7 +124,7 @@ function wpmovies_add_movies() {
 			$movie_poster_path = $movie_data->getPosterPath();
 			$movie_poster_url  = 'https://image.tmdb.org/t/p/w1280' . $movie_poster_path;
 			// Movies backdrop Image
-			$movie_backdrop_img_path = $movie_data->getPosterPath();
+			$movie_backdrop_img_path = $movie_data->getBackdropPath();
 			$movie_backdrop_img_url  = 'https://image.tmdb.org/t/p/w1280' . $movie_backdrop_img_path;
 			// All images. Array of images
 			$movie_images = $movie_data->getImages();
@@ -162,6 +164,8 @@ function wpmovies_add_movies() {
 					'_wpmovies_release_date' => $movie_release_date,
 					'_wpmovies_revenue'      => $movie_revenue,
 					'_wpmovies_budget'       => $movie_budget,
+					'_wpmovies_runtime'      => $movie_runtime,
+					'_wpmovies_language'     => $movie_language
 				),
 			);
 

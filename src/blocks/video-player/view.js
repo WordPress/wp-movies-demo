@@ -11,6 +11,7 @@ wpx({
 		wpmovies: {
 			closeVideo: ({ state }) => {
 				state.wpmovies.isPlaying = false;
+				state.wpmovies.currentVideo = '';
 			},
 		},
 	},

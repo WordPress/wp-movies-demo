@@ -44,6 +44,7 @@ add_action(
 		register_block_type( __DIR__ . '/build/blocks/favorites-number' );
 		register_block_type( __DIR__ . '/build/blocks/movie-data' );
 		register_block_type( __DIR__ . '/build/blocks/movie-reviews' );
+		register_block_type( __DIR__ . '/build/blocks/movie-search' );
 	}
 );
 
@@ -54,6 +55,28 @@ add_filter(
 		wp_enqueue_script(
 			'wpmovies/favorites-number',
 			plugin_dir_url( __FILE__ ) . 'build/blocks/favorites-number/view.js'
+		);
+		return $content;
+	}
+);
+
+add_filter(
+	'render_block_wpmovies/movie-search',
+	function ( $content ) {
+		wp_enqueue_script(
+			'wpmovies/movie-search',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-search/view.js'
+		);
+		return $content;
+	}
+);
+
+add_filter(
+	'render_block_wpmovies/post-favorite',
+	function ( $content ) {
+		wp_enqueue_script(
+			'wpmovies/post-favorite',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/post-favorite/view.js'
 		);
 		return $content;
 	}

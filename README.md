@@ -29,8 +29,8 @@ The plugin is split into:
 ## When will I be able to use this?
 
 The Interactivity API is an **experimental feature** and not ready for adoption yet.
-It is under active development and its final public API is **very likely going to change before an official release**
-For now, we recommend experimenting with the Interactivity API via this demo. Use this in
+It is under active development and its final public API is **very likely going to change before an official release**.
+For now, it's recommended to experiment with the Interactivity API via this demo. Use this in
 your projects at your own risk.
 
 ## Prerequisites
@@ -84,7 +84,7 @@ your projects at your own risk.
     problems you can run `npx wp-env clean all` and start this step over again.
 
 6. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
-7. Change settings to show `8` posts/RSS items per page in **Settings > Reading**
+7. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
 8. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
 
 ## Things to try

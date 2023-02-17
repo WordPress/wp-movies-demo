@@ -49,6 +49,7 @@ add_action(
 		register_block_type( __DIR__ . '/build/blocks/movie-search' );
 		register_block_type( __DIR__ . '/build/blocks/movie-trailer-button' );
 		register_block_type( __DIR__ . '/build/blocks/video-player' );
+		register_block_type( __DIR__ . '/build/blocks/movie-tabs' );
 	}
 );
 
@@ -92,6 +93,17 @@ add_filter(
 		wp_enqueue_script(
 			'wpmovies/video-player',
 			plugin_dir_url( __FILE__ ) . 'build/blocks/video-player/view.js'
+		);
+		return $content;
+	}
+);
+
+add_filter(
+	'render_block_wpmovies/movie-tabs',
+	function ( $content ) {
+		wp_enqueue_script(
+			'wpmovies/movie-tabs',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-tabs/view.js'
 		);
 		return $content;
 	}

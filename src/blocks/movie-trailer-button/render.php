@@ -13,9 +13,11 @@ if (!function_exists('get_trailers')) {
    }
 }
 $trailers = array_filter(json_decode($videos, true), "get_trailers");
-$trailer_url = reset($trailers)["url"];
-$trailer_id = substr($trailer_url, strpos($trailer_url, "?v=") + 3);
-if (count($trailers) != 0) { ?>
+
+if (count($trailers) != 0) {
+   $trailer_url = reset($trailers)["url"];
+   $trailer_id = substr($trailer_url, strpos($trailer_url, "?v=") + 3);
+?>
 
    <div <?php echo $wrapper_attributes; ?>>
       <a wp-on:click="actions.wpmovies.setVideo" data-wpmovies-video-id=<? echo $trailer_id ?>>Play Trailer</a>

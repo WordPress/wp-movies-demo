@@ -96,9 +96,9 @@ function wpmovies_add_movies() {
 	$movie_pages      = isset( $_ENV['MOVIE_PAGES'] ) ? intval( $_ENV['MOVIE_PAGES'] ) : 1; // 20 movies per page
 	$actors_per_movie = isset( $_ENV['ACTORS_PER_MOVIE'] ) ? intval( $_ENV['ACTORS_PER_MOVIE'] ) : 5;
 
-	for ( $i = 1; $i <= $movie_pages; $i++ ) {
+	for ( $i = $movie_pages; $i >=1 ; $i-- ) {
 		$movies = $moviesRepository->getPopular( array( 'page' => $i ) );
-		foreach ( $movies as $movie ) {
+		foreach ( array_reverse($movies->toArray()) as $movie ) {
 			// 0. GET DATA
 			// From TMDB API
 			$movie_id = $movie->getId();
@@ -153,6 +153,7 @@ function wpmovies_add_movies() {
 				'post_content' => $movie_overview,
 				'post_excerpt' => $movie_tagline,
 				'post_status'  => 'publish',
+				'post_date'    => current_time('mysql'),
 				'post_author'  => 1,
 				'guid'         => $movie_guid,
 				'post_type'    => 'movies',

@@ -4,17 +4,19 @@ wpx({
 	state: {
 		wpmovies: {
 			currentVideo: '',
-			isPlaying: false,
+		},
+	},
+	selectors: {
+		wpmovies: {
+			isPlaying: ({ state }) => !(state.wpmovies.currentVideo === ''),
 		},
 	},
 	actions: {
 		wpmovies: {
 			closeVideo: ({ state }) => {
-				state.wpmovies.isPlaying = false;
 				state.wpmovies.currentVideo = '';
 			},
 			setVideo: ({ state, event }) => {
-				state.wpmovies.isPlaying = true;
 				state.wpmovies.currentVideo =
 					'https://www.youtube.com/embed/' +
 					event.target.dataset.wpmoviesVideoId +

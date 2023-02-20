@@ -91,8 +91,6 @@ register_activation_hook( __FILE__, 'movies_demo_plugin_activation' );
 function movies_demo_plugin_activation() {
 	if ( ! wp_next_scheduled( 'cron_wpmovies_add_movies' ) ) {
 		wp_schedule_event( time(), 'daily', 'cron_wpmovies_add_movies' );
-		wpmovies_register_taxes();
-		wpmovies_add_movies();
 	}
 }
 

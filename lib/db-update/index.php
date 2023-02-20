@@ -153,6 +153,7 @@ function wpmovies_add_movies() {
 				'post_content' => $movie_overview,
 				'post_excerpt' => $movie_tagline,
 				'post_status'  => 'publish',
+				'post_date'    => current_time('mysql'),
 				'post_author'  => 1,
 				'guid'         => $movie_guid,
 				'post_type'    => 'movies',

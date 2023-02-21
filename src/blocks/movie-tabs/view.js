@@ -1,15 +1,19 @@
 import { wpx } from '../../../lib/runtime/wpx.js';
 
 wpx({
+	selectors: {
+		wpmovies: {
+			isImagesTab: ({ context }) => context.tab === 'images',
+			isVideosTab: ({ context }) => context.tab === 'videos',
+		},
+	},
 	actions: {
 		wpmovies: {
 			showImagesTab: ({ context }) => {
-				context.isImagesTab = true;
-				context.isVideosTab = false;
+				context.tab = 'images';
 			},
 			showVideosTab: ({ context }) => {
-				context.isVideosTab = true;
-				context.isImagesTab = false;
+				context.tab = 'videos';
 			},
 		},
 	},

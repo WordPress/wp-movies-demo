@@ -30,8 +30,12 @@ a:where(:not(.wp-element-button)) {
   margin-top: 0.5rem;
 }
 
-.home .wp-block-post-featured-image:hover {
+.home .wp-block-post-featured-image {
   filter: brightness(0.9);
+}
+
+.home .wp-block-post-featured-image:hover {
+  filter: brightness(1);
   transition: filter 0.1s ease-in-out;
 }
 

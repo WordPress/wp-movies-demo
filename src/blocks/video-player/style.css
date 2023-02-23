@@ -14,3 +14,7 @@
 	right: 4px;
 	top: -20px;
 }
+
+.wpmovies-video-wrapper iframe { 
+	border: none;
+}

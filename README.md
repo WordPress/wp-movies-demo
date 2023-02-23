@@ -18,6 +18,10 @@ The plugin is split into:
   - [`/src/blocks/movie-search`](/src/blocks/movie-search) - An interactive movie search block.
   - [`/src/blocks/post-favorite`](/src/blocks/post-favorite) - A block that
     allows the users to like a movie.
+  - [`/src/blocks/video-player`](/src/blocks/video-player) - A video player
+    block that plays the movie trailers using Picture-in-Picture (PiP).
+  - [`/src/blocks/movie-tabs`](/src/blocks/movie-tabs) - A "tabs" block which
+    allows the user to switch between different kinds of info about the movie.
   
 - `/lib` - The code that contains the runtime and internals of the Interactivity
   API and the configuration needed to run the demo.

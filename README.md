@@ -66,12 +66,13 @@ your projects at your own risk.
    npx wp-env start
    ```
 
-4. Activate the WP Movies plugin and the WP Movies theme by running:
+4. Activate the WP Movies theme by running:
 
     ```sh
     npx wp-env run cli "wp theme activate wp-movies-theme"
-    npx wp-env run cli "wp plugin activate wp-movies-demo"
     ```
+
+    Or you can also just activate the theme manually in **Appearance > Themes**.
 
 5. Go to the admin (user: `admin`, password: `password`) and import the Movie data into the WordPress:
     1. Go to **Tools > Import > WordPress** and click on _Run Importer_.

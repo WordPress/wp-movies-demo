@@ -86,7 +86,7 @@ add_filter(
 // Create the necessary hook
 add_action( 'cron_wpmovies_add_movies', 'wpmovies_add_movies' );
 
-// Start cron when plugin is deactivate
+// Start cron when plugin is activated
 register_activation_hook( __FILE__, 'movies_demo_plugin_activation' );
 function movies_demo_plugin_activation() {
 	if ( ! wp_next_scheduled( 'cron_wpmovies_add_movies' ) ) {

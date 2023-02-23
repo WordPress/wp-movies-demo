@@ -66,7 +66,7 @@ your projects at your own risk.
    npx wp-env start
    ```
 
-4. Activate the WP Movies theme by running:
+4. Activate the WP Movies theme:
 
     ```sh
     npx wp-env run cli "wp theme activate wp-movies-theme"

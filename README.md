@@ -80,9 +80,9 @@ your projects at your own risk.
     3. Select the `Download and import file attachments` and click on the
        `Upload file and import`.
     4. Repeat the process for the `wp_sampledata_actors.xml` file.
+    5. Repeat the process for the `wp_sampledata_media.xml` file. This one can take up to five minutes.
 
-    This process will also download the images for all the movies. If you run into any
-    problems you can run `npx wp-env clean all` and start this step over again.
+    If you run into any problems you can run `npx wp-env clean all` and start this step over again.
 
 6. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
 7. Change settings to show `8` posts and RSS items per page in **Settings > Reading**

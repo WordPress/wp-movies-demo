@@ -3,7 +3,7 @@
 }
 
 .wp-block-wpmovies-movie-search > input {
-	background-color: #252525;
+	background-color: #2e2e2e;
 	width: calc(min(300px, 30vw));
 	height: 40px;
 	border: none;
@@ -13,7 +13,7 @@
 }
 
 .wp-block-wpmovies-movie-search > input:focus-visible {
-	background-color: #2e2e2e;
+	background-color: #373737;
 	border: none;
 	padding: 7px;
 	outline: none;

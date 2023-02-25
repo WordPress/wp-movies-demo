@@ -21,7 +21,7 @@ function attach_image_to_post( $url, $post_id, $image_data ) {
 	$attachment_id = get_post_id_from_guid( $image_data['guid'] );
 	if ( $attachment_id == null ) {
 		$file             = array();
-		$file['name']     = basename($url);
+		$file['name']     = basename( $url );
 		$file['tmp_name'] = download_url( $url );
 		$attachment_id    = media_handle_sideload( $file, $post_id, null, $image_data );
 	}
@@ -93,12 +93,17 @@ function wpmovies_add_movies() {
 	$client           = setup_client();
 	$moviesRepository = new MovieRepository( $client );
 	$peopleRepository = new PeopleRepository( $client );
-	$movie_pages      = isset( $_ENV['MOVIE_PAGES'] ) ? intval( $_ENV['MOVIE_PAGES'] ) : 1; // 20 movies per page
-	$actors_per_movie = isset( $_ENV['ACTORS_PER_MOVIE'] ) ? intval( $_ENV['ACTORS_PER_MOVIE'] ) : 5;
 
-	for ( $i = $movie_pages; $i >=1 ; $i-- ) {
+	if ( ! isset( $_ENV['MOVIE_PAGES'] ) || ! isset( $_ENV['ACTORS_PER_MOVIE'] ) ) {
+		return;
+	}
+
+	$movie_pages      = intval( $_ENV['MOVIE_PAGES'] );
+	$actors_per_movie = intval( $_ENV['ACTORS_PER_MOVIE'] );
+
+	for ( $i = $movie_pages; $i >= 1; $i-- ) {
 		$movies = $moviesRepository->getPopular( array( 'page' => $i ) );
-		foreach ( array_reverse($movies->toArray()) as $movie ) {
+		foreach ( array_reverse( $movies->toArray() ) as $movie ) {
 			// 0. GET DATA
 			// From TMDB API
 			$movie_id = $movie->getId();
@@ -153,7 +158,7 @@ function wpmovies_add_movies() {
 				'post_content' => $movie_overview,
 				'post_excerpt' => $movie_tagline,
 				'post_status'  => 'publish',
-				'post_date'    => current_time('mysql'),
+				'post_date'    => current_time( 'mysql' ),
 				'post_author'  => 1,
 				'guid'         => $movie_guid,
 				'post_type'    => 'movies',
@@ -166,7 +171,7 @@ function wpmovies_add_movies() {
 					'_wpmovies_revenue'      => $movie_revenue,
 					'_wpmovies_budget'       => $movie_budget,
 					'_wpmovies_runtime'      => $movie_runtime,
-					'_wpmovies_language'     => $movie_language
+					'_wpmovies_language'     => $movie_language,
 				),
 			);
 
@@ -237,7 +242,7 @@ function wpmovies_add_movies() {
 				$video_id    = $video->getId();
 				$video_url   = str_replace( '%s', $video->getKey(), $video->getUrlFormat() );
 				$video_type  = $video->getType();
-				$video_title = str_replace('"', '\"', $video->getName());
+				$video_title = str_replace( '"', '\"', $video->getName() );
 
 				$videos_array[] = array(
 					'id'   => $video_id,

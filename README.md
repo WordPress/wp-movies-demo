@@ -41,6 +41,11 @@ your projects at your own risk.
 
 ## Setup
 
+______
+##### user: `admin`
+##### password: `password`
+______
+
 1. Install the dependencies
 
     ```sh
@@ -66,24 +71,36 @@ your projects at your own risk.
    npx wp-env start
    ```
 
-4. Activate the WP Movies plugin and the WP Movies theme by running:
+4. Activate the WP Movies theme
 
     ```sh
     npx wp-env run cli "wp theme activate wp-movies-theme"
-    npx wp-env run cli "wp plugin activate wp-movies-demo"
     ```
 
-5. Go to the admin (user: `admin`, password: `password`) and import the Movie data into the WordPress:
+5. Add the movie and actor data to the WordPress database
+
+    ```sh
+    npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_movies.xml --authors=create"
+    npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_media.xml  --authors=create"
+    npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_actors.xml --authors=create"
+    ```
+
+   You can also import the data manually (user: `admin`, password: `password`):
     1. Go to **Tools > Import > WordPress** and click on _Run Importer_.
     2. Select the `wp_sampledata_movies.xml` file.
     3. Select the `Download and import file attachments` and click on the
        `Upload file and import`.
     4. Repeat the process for the `wp_sampledata_actors.xml` file.
+    5. Repeat the process for the `wp_sampledata_media.xml` file. This one can take up to five minutes.
 
-    This process will also download the images for all the movies. If you run into any
-    problems you can run `npx wp-env clean all` and start this step over again.
+    If you run into any problems you can run `npx wp-env clean all` and start this step over again.
 
 6. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
+
+    ```sh
+    npx wp-env run cli "wp rewrite structure '/%postname%/'"
+    ````
+
 7. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
 8. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
 

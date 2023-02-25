@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:       WP Movies
  * Version:           0.1.0
@@ -15,6 +16,7 @@ require_once __DIR__ . '/lib/init.php';
 require_once __DIR__ . '/lib/custom-post-types.php';
 require_once __DIR__ . '/lib/custom-taxonomies.php';
 require_once __DIR__ . '/lib/custom-query-block.php';
+require_once __DIR__ . '/lib/db-update/index.php';
 
 
 // Check if Gutenberg plugin is active.
@@ -25,7 +27,7 @@ if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 	// Show an error message.
 	add_action(
 		'admin_notices',
-		function() {
+		function () {
 			echo sprintf( '<div class="error"><p>%s</p></div>', __( 'This plugin requires the Gutenberg plugin to be installed and activated.', 'wp-movies-demo' ) );
 		}
 	);
@@ -79,3 +81,22 @@ add_filter(
 		return $content;
 	}
 );
+
+// ADD CRON EVENTS TO IMPORT MOVIES DAILY
+// Create the necessary hook
+add_action( 'cron_wpmovies_add_movies', 'wpmovies_add_movies' );
+
+// Start cron when plugin is activated
+register_activation_hook( __FILE__, 'movies_demo_plugin_activation' );
+function movies_demo_plugin_activation() {
+	if ( ! wp_next_scheduled( 'cron_wpmovies_add_movies' ) ) {
+		wp_schedule_event( time(), 'daily', 'cron_wpmovies_add_movies' );
+	}
+}
+
+// Remove cron events when plugin is deactivated
+register_deactivation_hook( __FILE__, 'movies_demo_plugin_deactivation' );
+function movies_demo_plugin_deactivation() {
+	$timestamp = wp_next_scheduled( 'cron_wpmovies_add_movies' );
+	wp_unschedule_event( $timestamp, 'cron_wpmovies_add_movies' );
+}

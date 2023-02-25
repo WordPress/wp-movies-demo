@@ -6,7 +6,7 @@
 	"homepage": "https://wordpress.github.io/gutenberg/",
 	"keywords": [
 		"block-hydration-experiments",
-        "wordpress-movies-demo",
+		"wordpress-movies-demo",
 		"wordpress",
 		"wp",
 		"react",
@@ -38,11 +38,11 @@
 		"php-tmdb/api": "^4",
 		"cocur/slugify": "^4.3",
 		"vlucas/phpdotenv": "^5.5"
-
 	},
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
 		"lint": "phpcs --standard=phpcs.xml.dist",
-		"create-xml": "php ./lib/content-creator/index.php"
+		"create-xml": "php ./lib/content-creator/index.php",
+		"update-xml": "php ./lib/content-creator/update-xml.php"
 	}
 }

@@ -71,4 +71,5 @@ function wpmovies_register_taxes() {
 	);
 	register_taxonomy( 'movies_tax', array( 'actors' ), $args );
 }
-add_action( 'init', 'wpmovies_register_taxes' );
+
+add_action('init', 'wpmovies_register_taxes', 0);

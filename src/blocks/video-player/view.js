@@ -8,7 +8,7 @@ wpx({
 	},
 	selectors: {
 		wpmovies: {
-			isPlaying: ({ state }) => !(state.wpmovies.currentVideo === ''),
+			isPlaying: ({ state }) => state.wpmovies.currentVideo !== '',
 		},
 	},
 	actions: {

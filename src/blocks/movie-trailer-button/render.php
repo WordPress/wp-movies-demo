@@ -19,8 +19,8 @@ if (count($trailers) != 0) {
    $trailer_id = substr($trailer_url, strpos($trailer_url, "?v=") + 3);
 ?>
 
-   <div <?php echo $wrapper_attributes; ?>>
-      <a wp-on:click="actions.wpmovies.setVideo" data-wpmovies-video-id=<? echo $trailer_id ?>>Play Trailer</a>
+   <div <?php echo $wrapper_attributes; ?> wp-context='{ "videoId": "<?php echo $trailer_id; ?>" }'>
+      <a wp-on:click="actions.wpmovies.setVideo">Play Trailer</a>
    </div>
 
 <?php

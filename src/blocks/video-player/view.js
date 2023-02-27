@@ -16,10 +16,10 @@ wpx({
 			closeVideo: ({ state }) => {
 				state.wpmovies.currentVideo = '';
 			},
-			setVideo: ({ state, event }) => {
+			setVideo: ({ state, context }) => {
 				state.wpmovies.currentVideo =
 					'https://www.youtube.com/embed/' +
-					event.currentTarget.dataset.wpmoviesVideoId +
+					context.videoId +
 					'?autoplay=1';
 			},
 		},

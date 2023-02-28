@@ -114,6 +114,21 @@ allows the interactive state of blocks on the current page to be preserved!
 Try searching for movies or actors. The search results are rendered dynamically
 on the server!
 
+### Remove the Search template
+
+Try opening the site editor and removing the "Search" template. You'll notice
+that the Search experience keeps working but that now the Search results look
+different. That's because in the absence of the Search template, the Archive
+template is being used. The Interactivity API is designed to work with the 
+server-rendered markup and Full-site editing.
+
+### Play the movie trailers
+
+When you navigate to the page for a movie, you can play its trailer. If you
+have the client-side navigations
+[enabled](#client-side-navigations-and-pagination), you'll notice that the
+trailer will keep playing as you keep navigating around the site!
+
 ## Credits
 
 Powered by [WordPress](https://wordpress.org/) and [TMDb](https://www.themoviedb.org/).

@@ -18,6 +18,10 @@ The plugin is split into:
   - [`/src/blocks/movie-search`](/src/blocks/movie-search) - An interactive movie search block.
   - [`/src/blocks/post-favorite`](/src/blocks/post-favorite) - A block that
     allows the users to like a movie.
+  - [`/src/blocks/video-player`](/src/blocks/video-player) - A video player
+    block that plays the movie trailers using Picture-in-Picture (PiP).
+  - [`/src/blocks/movie-tabs`](/src/blocks/movie-tabs) - A "tabs" block which
+    allows the user to switch between different kinds of info about the movie.
   
 - `/lib` - The code that contains the runtime and internals of the Interactivity
   API and the configuration needed to run the demo.
@@ -126,6 +130,21 @@ allows the interactive state of blocks on the current page to be preserved!
 
 Try searching for movies or actors. The search results are rendered dynamically
 on the server!
+
+### Remove the Search template
+
+Try opening the site editor and removing the "Search" template. You'll notice
+that the Search experience keeps working but that now the Search results look
+different. That's because in the absence of the Search template, the Archive
+template is being used. The Interactivity API is designed to work with the 
+server-rendered markup and Full-site editing.
+
+### Play the movie trailers
+
+When you navigate to the page for a movie, you can play its trailer. If you
+have the client-side navigations
+[enabled](#client-side-navigations-and-pagination), you'll notice that the
+trailer will keep playing as you keep navigating around the site!
 
 ## Credits
 

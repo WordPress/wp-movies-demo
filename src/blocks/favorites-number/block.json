@@ -8,6 +8,9 @@
 	"icon": "heart",
 	"description": "",
 	"textdomain": "wpmovies",
+	"supports": {
+		"interactivity": true
+	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./style.css",
 	"style": "file:./style-index.css",

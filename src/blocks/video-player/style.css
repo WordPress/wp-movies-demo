@@ -1,0 +1,37 @@
+.wpmovies-video-player {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+
+.wpmovies-video-wrapper {
+	position: relative;
+}
+
+.wpmovies-video-close {
+	cursor: pointer;
+	position: absolute;
+	right: 0;
+	top: -35px;
+}
+
+.wpmovies-video-close .close-button {
+	background: #000000;
+	color: #f3f3f3;
+	display: block;
+	font-size: 15px;
+	height: 30px;
+	padding: 7px 7px 10px;
+	text-align: center;
+	border-radius: 0px;
+	border: none;
+	cursor: pointer;
+}
+
+.wpmovies-video-close .close-button:hover {
+	background: #202020;
+}
+
+.wpmovies-video-wrapper iframe { 
+	border: none;
+}

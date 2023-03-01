@@ -1,8 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import Edit from './edit';
-import './style.css';
 
-registerBlockType('wpmovies/movie-data', {
+registerBlockType('wpmovies/movie-score', {
 	edit: Edit,
 	save: () => null,
 });

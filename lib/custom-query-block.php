@@ -26,7 +26,7 @@ function wpmovies_update_demo_query( $pre_render, $parsed_block ) {
 	if ( wpmovies_is_demo_variation( $parsed_block ) ) {
 		add_filter(
 			'query_loop_block_query_vars',
-			'wpmovies_build_cast_query',
+			'wpmovies_build_query',
 			10,
 			1
 		);
@@ -41,28 +41,36 @@ function wpmovies_update_demo_query( $pre_render, $parsed_block ) {
  * @return $query Array with the new query, a movies or an actors one.
  */
 
-function wpmovies_build_cast_query( $query ) {
-	global $post;
+function wpmovies_build_query( $query ) {
 	$taxonomy_type = null;
-	if ( $post->post_type === 'movies' ) {
-		$taxonomy_type = 'movies_tax';
+	if ( is_category() ) {
+		$taxonomy_type = 'category';
+		$category = get_category( get_query_var( 'cat' ) );
+		$cat_id = $category->cat_ID;
+		$wp_term = get_term_by( 'id', $cat_id, 'category' );
+	} else {
+		global $post;
+		if ( $post->post_type === 'movies' ) {
+			$taxonomy_type = 'movies_tax';
+		}
+		if ( $post->post_type === 'actors' ) {
+			$taxonomy_type = 'actors_tax';
+		}
+		if ( $taxonomy_type === null ) {
+			return $query;
+		}
+		$wp_term = get_term_by( 'slug', $post->post_name, $taxonomy_type );
 	}
-	if ( $post->post_type === 'actors' ) {
-		$taxonomy_type = 'actors_tax';
-	}
-	if ( $taxonomy_type === null ) {
-		return $query;
-	}
-	$wp_term = get_term_by( 'slug', $post->post_name, $taxonomy_type );
 	if ( ! $wp_term ) { // Check this, could exist the case that we did not import the actor of the movie.
 		return $query;
 	}
-	$cast_query = array(
+	$replace_query = array(
 		'taxonomy'         => $taxonomy_type,
 		'terms'            => array( $wp_term->term_id ),
 		'include_children' => false,
 	);
-	$new_query  = array_replace( $query, array( 'tax_query' => array( $cast_query ) ) );
+
+	$new_query  = array_replace( $query, array( 'tax_query' => array( $replace_query ) ) );
 	return $new_query;
 }
 

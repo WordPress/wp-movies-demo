@@ -12,6 +12,8 @@ module.exports = [
 				'./src/blocks/favorites-number/view',
 			'blocks/post-favorite/view': './src/blocks/post-favorite/view',
 			'blocks/movie-search/view': './src/blocks/movie-search/view',
+			'blocks/video-player/view': './src/blocks/video-player/view',
+			'blocks/movie-tabs/view': './src/blocks/movie-tabs/view',
 		},
 		output: {
 			filename: '[name].js',

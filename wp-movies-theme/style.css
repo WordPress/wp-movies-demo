@@ -16,30 +16,39 @@ Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, feature
 */
 
 a:where(:not(.wp-element-button)) {
-  text-decoration: none;
+	text-decoration: none;
+}
+
+.wp-block-query-pagination-numbers a,
+footer a {
+	text-decoration: underline;
 }
 
 .wp-block-group.movie-image-container {
-  position: relative;
+	position: relative;
 }
 
 .wp-block-group.movie-image-container .wp-block-wpmovies-post-favorite {
-  position: absolute;
-  top: 0px;
-  left: 15px;
-  margin-top: 0.5rem;
+	position: absolute;
+	top: 0px;
+	left: 15px;
+	margin-top: 0.5rem;
+}
+
+.home .wp-block-post-featured-image {
+	filter: brightness(0.9);
 }
 
 .home .wp-block-post-featured-image:hover {
-  filter: brightness(0.9);
-  transition: filter 0.1s ease-in-out;
+	filter: brightness(1);
+	transition: filter 0.1s ease-in-out;
 }
 
 /* Search page styles */
 .search .wp-block-post.type-movies:hover {
-  background-color: #252525;
+	background-color: #252525;
 }
 
 .search .wp-block-post.type-movies .wp-block-columns {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }

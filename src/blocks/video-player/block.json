@@ -1,13 +1,16 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wpmovies/movie-data",
+	"name": "wpmovies/video-player",
 	"version": "0.1.0",
-	"title": "WP Movies - Movie Data",
+	"title": "WP Movies - Video Player",
 	"category": "text",
 	"icon": "camera",
 	"description": "",
 	"textdomain": "wpmovies",
+	"supports": {
+		"interactivity": true
+	},
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php",
 	"style": "file:./style-index.css"

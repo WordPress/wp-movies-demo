@@ -8,6 +8,9 @@
 	"icon": "menu",
 	"description": "",
 	"textdomain": "wpmovies",
+	"supports": {
+		"interactivity": true
+	},
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php",
 	"style": "file:./style-index.css"

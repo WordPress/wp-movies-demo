@@ -8,6 +8,9 @@
 	"icon": "search",
 	"description": "",
 	"textdomain": "wpmovies",
+	"supports": {
+		"interactivity": true
+	},
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php",
 	"editorStyle": "file:./style.css",

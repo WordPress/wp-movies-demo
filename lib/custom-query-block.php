@@ -30,18 +30,6 @@ function wpmovies_update_demo_query( $pre_render, $parsed_block ) {
 			10,
 			1
 		);
-
-		// Order by popularity
-		add_filter(
-			'query_loop_block_query_vars',
-			function( $query, $block ) {
-			  $query['orderby'] = '_wpmovies_popularity__order_by';
-			  $query['order'] = 'DESC';
-			  return $query;
-			},
-			10,
-			2
-		);
 	}
 };
 
@@ -54,12 +42,30 @@ function wpmovies_update_demo_query( $pre_render, $parsed_block ) {
  */
 
 function wpmovies_build_query( $query ) {
+	// Order by popularity
+	$popularity_metafield = '';
+	if ( $query['post_type'] === 'movies' ) {
+		$popularity_metafield = '_wpmovies_popularity';
+	} elseif ( $query['post_type'] === 'actors' ) {
+		$popularity_metafield = '_wpmovies_actors_popularity';
+	};
+	$query['meta_query'] = array(
+		'_wpmovies_popularity__order_by' => array(
+			'key'     => $popularity_metafield,
+			'type'    => 'NUMERIC',
+			'compare' => 'NUMERIC',
+		),
+	);
+	$query['orderby']    = '_wpmovies_popularity__order_by';
+	$query['order']      = 'DESC';
+
+	// Get correct taxonomy
 	$taxonomy_type = null;
 	if ( is_category() ) {
 		$taxonomy_type = 'category';
-		$category = get_category( get_query_var( 'cat' ) );
-		$cat_id = $category->cat_ID;
-		$wp_term = get_term_by( 'id', $cat_id, 'category' );
+		$category      = get_category( get_query_var( 'cat' ) );
+		$cat_id        = $category->cat_ID;
+		$wp_term       = get_term_by( 'id', $cat_id, 'category' );
 	} else {
 		global $post;
 		if ( $post->post_type === 'movies' ) {
@@ -80,16 +86,16 @@ function wpmovies_build_query( $query ) {
 		'taxonomy'         => $taxonomy_type,
 		'terms'            => array( $wp_term->term_id ),
 		'include_children' => false,
-		'meta_query' => array( 
+		'meta_query'       => array(
 			'_wpmovies_popularity__order_by' => array(
-				'key' => '_wpmovies_popularity',
-				'type' => 'NUMERIC',
+				'key'     => '_wpmovies_popularity',
+				'type'    => 'NUMERIC',
 				'compare' => 'NUMERIC',
-			)
+			),
 		),
 	);
 
-	$new_query  = array_replace( $query, array( 'tax_query' => array( $replace_query ) ) );
+	$new_query = array_replace( $query, array( 'tax_query' => array( $replace_query ) ) );
 	return $new_query;
 }
 

@@ -48,6 +48,7 @@ function add_actor( $actor_info, $movie_id, $movie_term_data ) {
 		'meta_input'   => array(
 			'_wpmovies_actors_homepage'              => $actor_info['homepage'],
 			'_wpmovies_actors_birthday'              => $actor_info['birthday'],
+			'_wpmovies_actors_popularity'            => $actor_info['popularity'],
 			'_wpmovies_actors_place_of_birth'        => $actor_info['place_of_birth'],
 			'_wpmovies_actor_character_' . $movie_id => $actor_info['character'],
 		),
@@ -115,6 +116,7 @@ function wpmovies_add_movies() {
 			$movie_tagline      = $movie_data->getTagline(); // Post Excerpt
 			$movie_vote_average = $movie_data->getVoteAverage(); // In scale x/10
 			$movie_vote_count   = $movie_data->getVoteCount();
+			$movie_popularity   = $movie_data->getPopularity();
 			$movie_status       = $movie_data->getStatus();
 			$movie_runtime      = $movie_data->getRuntime();
 			$movie_homepage     = $movie_data->getHomepage();
@@ -165,6 +167,7 @@ function wpmovies_add_movies() {
 				'meta_input'   => array(
 					'_wpmovies_vote_count'   => $movie_vote_count,
 					'_wpmovies_vote_average' => $movie_vote_average,
+					'_wpmovies_popularity'   => $movie_popularity,
 					'_wpmovies_status'       => $movie_status,
 					'_wpmovies_homepage'     => $movie_homepage,
 					'_wpmovies_release_date' => $movie_release_date,
@@ -307,6 +310,7 @@ function wpmovies_add_movies() {
 						'name'             => $actor_data->getName(),
 						'biography'        => $actor_data->getBiography(),
 						'homepage'         => $actor_data->getHomepage(),
+						'popularity'       => $actor_data->getPopularity(),
 						'birthday'         => $actor_birthday,
 						'place_of_birth'   => $actor_data->getPlaceOfBirth(),
 						'profile_img_path' => $actor_data->getProfilePath(),

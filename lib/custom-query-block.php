@@ -30,6 +30,18 @@ function wpmovies_update_demo_query( $pre_render, $parsed_block ) {
 			10,
 			1
 		);
+
+		// Order by popularity
+		add_filter(
+			'query_loop_block_query_vars',
+			function( $query, $block ) {
+			  $query['orderby'] = '_wpmovies_popularity__order_by';
+			  $query['order'] = 'DESC';
+			  return $query;
+			},
+			10,
+			2
+		);
 	}
 };
 
@@ -68,6 +80,13 @@ function wpmovies_build_query( $query ) {
 		'taxonomy'         => $taxonomy_type,
 		'terms'            => array( $wp_term->term_id ),
 		'include_children' => false,
+		'meta_query' => array( 
+			'_wpmovies_popularity__order_by' => array(
+				'key' => '_wpmovies_popularity',
+				'type' => 'NUMERIC',
+				'compare' => 'NUMERIC',
+			)
+		),
 	);
 
 	$new_query  = array_replace( $query, array( 'tax_query' => array( $replace_query ) ) );

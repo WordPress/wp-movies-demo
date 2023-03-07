@@ -1,6 +1,6 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
+import { store } from '../../../../block-hydration-experiments/src/runtime/store.js';
 
-wpx({
+store({
 	state: {
 		favorites: {
 			posts: [],

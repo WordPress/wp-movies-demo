@@ -1,5 +1,5 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
-import { navigate } from '../../../lib/runtime/router.js';
+import { store } from '../../../../block-hydration-experiments/src/runtime/store.js';
+import { navigate } from '../../../../block-hydration-experiments/src/runtime/router.js';
 
 const updateURL = async (value) => {
 	const url = new URL(window.location);
@@ -10,7 +10,7 @@ const updateURL = async (value) => {
 	await navigate(`/${url.search}${url.hash}`);
 };
 
-wpx({
+store({
 	state: {
 		search: {
 			value: '',

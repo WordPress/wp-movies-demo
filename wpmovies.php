@@ -23,12 +23,12 @@ require_once __DIR__ . '/lib/db-update/index.php';
 if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
-if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
+if ( ! is_plugin_active( 'block-hydration-experiments/wp-directives.php' ) ) {
 	// Show an error message.
 	add_action(
 		'admin_notices',
 		function () {
-			echo sprintf( '<div class="error"><p>%s</p></div>', __( 'This plugin requires the Gutenberg plugin to be installed and activated.', 'wp-movies-demo' ) );
+			echo sprintf( '<div class="error"><p>%s</p></div>', __( 'This plugin requires the WP Directives plugin to be installed and activated.', 'wp-movies-demo' ) );
 		}
 	);
 

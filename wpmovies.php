@@ -53,13 +53,19 @@ add_action(
 );
 
 
+// We need these filters to ensure the view.js files can access the window.wp.interactivity
+// Once the bundling is solved and we stop using window.wp.interactivity we can remove them.
 add_filter(
 	'render_block_wpmovies/favorites-number',
 	function ( $content ) {
-		wp_enqueue_script(
+		wp_register_script(
 			'wpmovies/favorites-number',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/favorites-number/view.js'
+			plugin_dir_url( __FILE__ ) . 'build/blocks/favorites-number/view.js',
+			array( 'wp-directive-runtime' ),
+			'1.0.0',
+			true
 		);
+		wp_enqueue_script( 'wpmovies/favorites-number' );
 		return $content;
 	}
 );
@@ -67,10 +73,14 @@ add_filter(
 add_filter(
 	'render_block_wpmovies/movie-search',
 	function ( $content ) {
-		wp_enqueue_script(
+		wp_register_script(
 			'wpmovies/movie-search',
 			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-search/view.js'
+			array( 'wp-directive-runtime' ),
+			'1.0.0',
+			true
 		);
+		wp_enqueue_script( 'wpmovies/movie-search' );
 		return $content;
 	}
 );
@@ -78,10 +88,14 @@ add_filter(
 add_filter(
 	'render_block_wpmovies/post-favorite',
 	function ( $content ) {
-		wp_enqueue_script(
+		wp_register_script(
 			'wpmovies/post-favorite',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/post-favorite/view.js'
+			plugin_dir_url( __FILE__ ) . 'build/blocks/post-favorite/view.js',
+			array( 'wp-directive-runtime' ),
+			'1.0.0',
+			true
 		);
+		wp_enqueue_script( 'wpmovies/post-favorite' );
 		return $content;
 	}
 );
@@ -89,10 +103,14 @@ add_filter(
 add_filter(
 	'render_block_wpmovies/video-player',
 	function ( $content ) {
-		wp_enqueue_script(
+		wp_register_script(
 			'wpmovies/video-player',
 			plugin_dir_url( __FILE__ ) . 'build/blocks/video-player/view.js'
+			array( 'wp-directive-runtime' ),
+			'1.0.0',
+			true
 		);
+		wp_enqueue_script( 'wpmovies/video-player' );
 		return $content;
 	}
 );
@@ -100,10 +118,14 @@ add_filter(
 add_filter(
 	'render_block_wpmovies/movie-tabs',
 	function ( $content ) {
-		wp_enqueue_script(
+		wp_register_script(
 			'wpmovies/movie-tabs',
 			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-tabs/view.js'
+			array( 'wp-directive-runtime' ),
+			'1.0.0',
+			true
 		);
+		wp_enqueue_script( 'wpmovies/movie-tabs' );
 		return $content;
 	}
 );

@@ -3,7 +3,7 @@ name: Build Plugin ZIP
 on:
     push:
         branches:
-            - release-action
+            - main
 
 jobs:
     bump-version:
@@ -15,8 +15,6 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-              with:
-                  ref: release-action
 
             - name: Compute old and new version
               id: get_version
@@ -54,8 +52,6 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-              with:
-                  ref: release-action
 
             - name: Install Composer dependencies
               run: composer install --no-dev

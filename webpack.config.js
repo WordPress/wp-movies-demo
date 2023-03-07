@@ -6,7 +6,6 @@ module.exports = [
 	{
 		...defaultConfig,
 		entry: {
-			runtime: './lib/runtime',
 			'query-loop-variations': './lib/query-loop-variations',
 			'blocks/favorites-number/view':
 				'./src/blocks/favorites-number/view',

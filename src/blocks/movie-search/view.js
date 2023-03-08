@@ -1,6 +1,4 @@
-const { store } = window.__experimentalInteractivity;
-// Change to global once available
-import { navigate } from '../../../../block-hydration-experiments/src/runtime/router.js';
+const { store, navigate } = window.__experimentalInteractivity;
 
 const updateURL = async (value) => {
 	const url = new URL(window.location);

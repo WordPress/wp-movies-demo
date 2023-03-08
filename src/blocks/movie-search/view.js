@@ -1,4 +1,5 @@
-import { store } from '../../../../block-hydration-experiments/src/runtime/store.js';
+const { store } = window.__experimentalInteractivity;
+// Change to global once available
 import { navigate } from '../../../../block-hydration-experiments/src/runtime/router.js';
 
 const updateURL = async (value) => {

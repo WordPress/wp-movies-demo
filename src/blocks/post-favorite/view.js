@@ -1,5 +1,4 @@
-// import { store } from '../../../../block-hydration-experiments/src/runtime/store.js';
-const { store } = window.wp.interactivity;
+const { store } = window.__experimentalInteractivity;
 
 store({
 	selectors: {

@@ -75,7 +75,7 @@ add_filter(
 	function ( $content ) {
 		wp_register_script(
 			'wpmovies/movie-search',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-search/view.js'
+			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-search/view.js',
 			array( 'wp-directive-runtime' ),
 			'1.0.0',
 			true
@@ -105,7 +105,7 @@ add_filter(
 	function ( $content ) {
 		wp_register_script(
 			'wpmovies/video-player',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/video-player/view.js'
+			plugin_dir_url( __FILE__ ) . 'build/blocks/video-player/view.js',
 			array( 'wp-directive-runtime' ),
 			'1.0.0',
 			true
@@ -120,7 +120,7 @@ add_filter(
 	function ( $content ) {
 		wp_register_script(
 			'wpmovies/movie-tabs',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-tabs/view.js'
+			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-tabs/view.js',
 			array( 'wp-directive-runtime' ),
 			'1.0.0',
 			true

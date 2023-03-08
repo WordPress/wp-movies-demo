@@ -1,4 +1,4 @@
-const { store } = window.wp.interactivity;
+const { store } = window.__experimentalInteractivity;
 
 store({
 	selectors: {

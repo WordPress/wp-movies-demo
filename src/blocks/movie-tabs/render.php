@@ -6,17 +6,17 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		'wp-context' => '{ "tab": "images" }',
 	)
 );
-$images             = get_post_meta($post->ID, '_wpmovies_images', true);
-$videos             = get_post_meta($post->ID, '_wpmovies_videos', true);
+$images             = get_post_meta( $post->ID, '_wpmovies_images', true );
+$videos             = get_post_meta( $post->ID, '_wpmovies_videos', true );
 
 store(
 	array(
 		'selectors' => array(
 			'wpmovies' => array(
 				'isImagesTab' => true,
-				'isVideosTab' => false
+				'isVideosTab' => false,
 			),
-		)
+		),
 	)
 )
 ?>
@@ -28,31 +28,31 @@ store(
 	</ul>
 	<wp-show when="selectors.wpmovies.isImagesTab">
 		<div class="wpmovies-media-scroller wpmovies-images-tab">
-			<?
-			foreach (json_decode($images, true) as $image_id) {
-				$image_url = wp_get_attachment_image_url($image_id, '');
-			?>
-				<img src="<? echo $image_url ?>">
-			<?
+			<?php
+			foreach ( json_decode( $images, true ) as $image_id ) {
+				$image_url = wp_get_attachment_image_url( $image_id, '' );
+				?>
+				<img src="<?php phpecho $image_url; ?>">
+				<?php
 			}
 			?>
 		</div>
 	</wp-show>
 	<wp-show when="selectors.wpmovies.isVideosTab">
 		<div class="wpmovies-media-scroller wpmovies-videos-tab">
-			<?
-			foreach (json_decode($videos, true) as $video) {
-				$video_id = substr($video["url"], strpos($video["url"], "?v=") + 3);
-			?>
+			<?php
+			foreach ( json_decode( $videos, true ) as $video ) {
+				$video_id = substr( $video['url'], strpos( $video['url'], '?v=' ) + 3 );
+				?>
 				<div class="wpmovies-tabs-video-wrapper" wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>
 					<div wp-on:click="actions.wpmovies.setVideo">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" class="play-icon">
 							<path d="M3 22v-20l18 10-18 10z" />
 						</svg>
 					</div>
-					<img src="<? echo 'https://img.youtube.com/vi/' . $video_id . '/0.jpg' ?>">
+					<img src="<?php phpecho 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
 				</div>
-			<?
+				<?php
 			}
 			?>
 		</div>

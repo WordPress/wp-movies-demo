@@ -7,7 +7,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 
 store(
 	array(
-		'state' => array(
+		'state'     => array(
 			'wpmovies' => array(
 				'currentVideo' => '',
 			),

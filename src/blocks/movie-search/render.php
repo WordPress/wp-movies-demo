@@ -10,9 +10,9 @@ store(
 	array(
 		'state' => array(
 			'wpmovies' => array(
-				'searchValue' => ''
+				'searchValue' => '',
 			),
-		)
+		),
 	)
 )
 ?>

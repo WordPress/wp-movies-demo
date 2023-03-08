@@ -6,19 +6,19 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		'wp-context' => '{ "tab": "images" }',
 	)
 );
-$images             = get_post_meta( $post->ID, '_wpmovies_images', true );
-$videos             = get_post_meta( $post->ID, '_wpmovies_videos', true );
+$images             = get_post_meta($post->ID, '_wpmovies_images', true);
+$videos             = get_post_meta($post->ID, '_wpmovies_videos', true);
 
-// Once available, we may want to initialize the selectors in SSR:
-//
-// store([
-// ['selectors' => [
-// 'wpmovies' => [
-// 'isImagesTab' => true,
-// 'isVideosTab' => false
-// ]
-// ]]
-// ]);
+store(
+	array(
+		'selectors' => array(
+			'wpmovies' => array(
+				'isImagesTab' => true,
+				'isVideosTab' => false
+			),
+		)
+	)
+)
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>

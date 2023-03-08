@@ -1,11 +1,6 @@
 const { store } = window.__experimentalInteractivity;
 
 store({
-	state: {
-		wpmovies: {
-			currentVideo: '',
-		},
-	},
 	selectors: {
 		wpmovies: {
 			isPlaying: ({ state }) => state.wpmovies.currentVideo !== '',

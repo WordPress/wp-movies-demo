@@ -12,20 +12,15 @@ const updateURL = async (value) => {
 };
 
 store({
-	state: {
-		search: {
-			value: '',
-		},
-	},
 	actions: {
-		search: {
-			update: async ({ state, event }) => {
+		wpmovies: {
+			updateSearch: async ({ state, event }) => {
 				// Update the state.
 				const { value } = event.target;
-				if (value === state.search.value) {
+				if (value === state.wpmovies.searchValue) {
 					return;
 				}
-				state.search.value = value;
+				state.wpmovies.searchValue = value;
 
 				// If the search is empty, navigate to the home page.
 				if (value === '') {

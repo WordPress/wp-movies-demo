@@ -26,19 +26,19 @@ store(
 		<li wp-on:click="actions.wpmovies.showImagesTab" wp-class:wpmovies-active-tab="selectors.wpmovies.isImagesTab" class="wpmovies-tabs-title">Images</li>
 		<li wp-on:click="actions.wpmovies.showVideosTab" wp-class:wpmovies-active-tab="selectors.wpmovies.isVideosTab" class=" wpmovies-tabs-title">Videos</li>
 	</ul>
-	<wp-show when="selectors.wpmovies.isImagesTab">
+	<div wp-show="selectors.wpmovies.isImagesTab">
 		<div class="wpmovies-media-scroller wpmovies-images-tab">
 			<?php
 			foreach ( json_decode( $images, true ) as $image_id ) {
 				$image_url = wp_get_attachment_image_url( $image_id, '' );
 				?>
-				<img src="<?php $image_url; ?>">
+				<img src="<?php echo $image_url; ?>">
 				<?php
 			}
 			?>
 		</div>
-	</wp-show>
-	<wp-show when="selectors.wpmovies.isVideosTab">
+	</div>
+	<div wp-show="selectors.wpmovies.isVideosTab">
 		<div class="wpmovies-media-scroller wpmovies-videos-tab">
 			<?php
 			foreach ( json_decode( $videos, true ) as $video ) {
@@ -50,11 +50,11 @@ store(
 							<path d="M3 22v-20l18 10-18 10z" />
 						</svg>
 					</div>
-					<img src="<?php 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
+					<img src="<?php echo 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
 				</div>
 				<?php
 			}
 			?>
 		</div>
-	</wp-show>
+	</div>
 </div>

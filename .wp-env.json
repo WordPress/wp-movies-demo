@@ -2,7 +2,6 @@
 	"plugins": [
 		"https://downloads.wordpress.org/plugin/gutenberg.latest-stable.zip",
 		"https://downloads.wordpress.org/plugin/wordpress-importer.latest-stable.zip",
-		"WordPress/block-hydration-experiments#build-to-globals",
 		"."
 	],
 	"themes": ["./wp-movies-theme"],

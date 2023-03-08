@@ -32,7 +32,7 @@ store(
 			foreach ( json_decode( $images, true ) as $image_id ) {
 				$image_url = wp_get_attachment_image_url( $image_id, '' );
 				?>
-				<img src="<?php phpecho $image_url; ?>">
+				<img src="<?php $image_url; ?>">
 				<?php
 			}
 			?>
@@ -50,7 +50,7 @@ store(
 							<path d="M3 22v-20l18 10-18 10z" />
 						</svg>
 					</div>
-					<img src="<?php phpecho 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
+					<img src="<?php 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
 				</div>
 				<?php
 			}

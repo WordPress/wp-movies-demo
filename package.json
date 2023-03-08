@@ -41,10 +41,6 @@
 		"prettier": "^2.7.1"
 	},
 	"dependencies": {
-		"@preact/signals": "^1.1.2",
-		"@wordpress/i18n": "^4.24.0",
-		"deepsignal": "^1.0.0",
-		"hpq": "^1.3.0",
-		"preact": "^10.10.6"
+		"@wordpress/i18n": "^4.24.0"
 	}
 }

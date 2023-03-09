@@ -6,14 +6,18 @@ module.exports = [
 	{
 		...defaultConfig,
 		entry: {
-			runtime: './lib/runtime',
-			'query-loop-variations': './lib/query-loop-variations',
 			'blocks/favorites-number/view':
 				'./src/blocks/favorites-number/view',
 			'blocks/post-favorite/view': './src/blocks/post-favorite/view',
 			'blocks/movie-search/view': './src/blocks/movie-search/view',
 			'blocks/video-player/view': './src/blocks/video-player/view',
 			'blocks/movie-tabs/view': './src/blocks/movie-tabs/view',
+		},
+	},
+	{
+		...defaultConfig,
+		entry: {
+			'query-loop-variations': './lib/query-loop-variations',
 		},
 		output: {
 			filename: '[name].js',

@@ -1,11 +1,6 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
+const { store } = window.__experimentalInteractivity;
 
-wpx({
-	state: {
-		wpmovies: {
-			currentVideo: '',
-		},
-	},
+store({
 	selectors: {
 		wpmovies: {
 			isPlaying: ({ state }) => state.wpmovies.currentVideo !== '',

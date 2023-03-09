@@ -1,6 +1,6 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
+const { store } = window.__experimentalInteractivity;
 
-wpx({
+store({
 	selectors: {
 		wpmovies: {
 			isImagesTab: ({ context }) => context.tab === 'images',

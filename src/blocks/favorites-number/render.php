@@ -16,5 +16,5 @@ store(
 
 <div <?php echo $wrapper_attributes; ?>>
 	<img class="emoji" alt=":heart:" wp-bind:src="selectors.wpmovies.isFavoriteMoviesEmpty" />
-	<span wp-bind:children="selectors.wpmovies.favCount"></span>
+	<span wp-text="selectors.wpmovies.favCount"></span>
 </div>

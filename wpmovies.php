@@ -22,7 +22,7 @@ require_once __DIR__ . '/lib/db-update/index.php';
 if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
-if ( ! is_plugin_active( 'block-hydration-experiments/wp-directives.php' ) ) {
+if ( ! is_plugin_active( 'block-interactivity-experiments/wp-directives.php' ) ) {
 	// Show an error message.
 	add_action(
 		'admin_notices',

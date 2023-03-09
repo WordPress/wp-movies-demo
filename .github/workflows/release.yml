@@ -73,5 +73,5 @@ jobs:
               with:
                   tag_name: ${{ needs.bump-version.outputs.new_version }}
                   files: |
-                      wpmovies-plugin.zip
-                      wpmovies-theme.zip
+                      wp-movies-plugin.zip
+                      wp-movies-theme.zip

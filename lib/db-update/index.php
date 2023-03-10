@@ -110,6 +110,23 @@ function wpmovies_add_movies() {
 			$movie_id = $movie->getId();
 			// Movie Data: https://github.com/php-tmdb/api/blob/master/lib/Tmdb/Repository/MovieRepository.php#L58-L81
 			$movie_data = $moviesRepository->load( $movie_id );
+			// Filter adult movies
+			$movie_adult = $movie_data->getAdult();
+			if ( $movie_adult === true ) {
+				break;
+			}
+			$movie_keywords = $movie_data->getKeywords();
+			$skip_movie     = false;
+			foreach ( $movie_keywords as $keyword ) {
+				$keyword_name = $keyword->getName();
+				if ( str_contains( $keyword_name, 'softcore' ) || str_contains( $keyword_name, 'adult' ) || str_contains( $keyword_name, 'porn' ) || str_contains( $keyword_name, 'masturbation' ) || str_contains( $keyword_name, 'prostitution' ) || str_contains( $keyword_name, 'hardcore' ) || str_contains( $keyword_name, 'sex' ) || str_contains( $keyword_name, 'erotic' ) ) {
+					$skip_movie = true;
+				}
+			}
+			if ( $skip_movie === true ) {
+				break;
+			}
+
 			// Movie Fields
 			$movie_title        = $movie_data->getTitle();
 			$movie_overview     = $movie_data->getOverview(); // Post Content

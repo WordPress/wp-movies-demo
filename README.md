@@ -43,8 +43,6 @@ In order to be able to test this demo, you just need to:
 
 1. Install the required plugins
 
-    You need to install three plugins:
-
     - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
 
     - [Block Interactivity Experiments](https://github.com/WordPress/block-hydration-experiments/releases/latest/download/block-interactivity-experiments.zip). This one requires Gutenberg to work.
@@ -71,7 +69,10 @@ In order to be able to test this demo, you just need to:
 
 2. Install the theme
 
-    You need to install and activate the [Movies Demo Theme](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-theme.zip). Again, if you are using `wp-env`, it is installed by default and you just have to activate it. You can run:
+    You need to install and activate the [Movies Demo
+    Theme](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-theme.zip).
+    Again, if you are using `wp-env`, it is already installed by default and you
+    just have to activate it. You can run:
 
     ```sh
       npx wp-env run cli "wp theme activate wp-movies-theme"

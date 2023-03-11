@@ -51,7 +51,7 @@ In order to be able to test this demo, you just need to:
 
     - [Movies Demo Plugin](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip). This one requires the Block Interactivity Experiments to work.
 
-    Note that, if you are using `wp-env` to run your site locally, these plugins will installed by default after running `wp-env` start. Before that, don't forget to:
+    Note that, if you are using `wp-env` to run your site locally, these plugins will be installed by default after running `wp-env` start. Before that, don't forget to:
 
     - Install the dependencies:
 

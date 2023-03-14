@@ -1,28 +1,19 @@
-.wpmovies-data-list {
+.wp-block-wpmovies-movie-data > ul {
 	list-style: none;
 	padding: 0px;
 }
 
-.wpmovies-data-list li {
+.wp-block-wpmovies-movie-data > ul > li {
 	display: flex;
 	padding: 0.2rem 0;
 }
 
-.wpmovies-data-list-key {
+.wp-block-wpmovies-movie-data > ul > li > div.wpmovies-data-list-key {
 	flex: 1;
 	max-width: 90px;
 	margin-right: 1.5rem;
 }
 
-.wpmovies-data-list-value {
+.wp-block-wpmovies-movie-data > ul > li > div.wpmovies-data-list-value {
 	flex: 2;
-}
-
-.wpmovies-category-link {
-	text-decoration: none;
-	background-color: #081c22;
-	opacity: 0.8;
-	border-radius: 4px;
-	padding: 4px;
-	margin-right: 4px;
 }

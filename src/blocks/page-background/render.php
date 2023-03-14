@@ -14,7 +14,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		$background_image_url = wp_get_attachment_image_url( $background_image_id, '' );
 		?>
 		<div class="wpmovies-movie-background">
-			<img src=<?php phpecho $background_image_url; ?> />
+			<img src=<?php echo $background_image_url; ?> />
 			<div class="wpmovies-movie-background-shadow"></div>
 		</div>
 

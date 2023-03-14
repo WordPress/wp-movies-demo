@@ -3,6 +3,11 @@ $wrapper_attributes = get_block_wrapper_attributes();
 
 store(
 	array(
+		'state'     => array(
+			'wpmovies' => array(
+				'favoriteMovies' => array(),
+			),
+		),
 		'selectors' => array(
 			'wpmovies' => array(
 				'favCount'              => 0,

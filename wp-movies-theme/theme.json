@@ -27,7 +27,7 @@
 	},
 	"styles": {
 		"color": {
-			"background": "#222121",
+			"background": "#000000",
 			"text": "var:preset|color|white"
 		},
 		"elements": {

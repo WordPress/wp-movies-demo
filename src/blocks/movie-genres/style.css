@@ -1,5 +1,6 @@
 .wp-block-wpmovies-movie-genres > a {
 	text-decoration: none;
+	color: var(--wp--preset--color--light-gray);
 	background-color: #333333;
 	border-radius: 6px;
 	padding: 6px;

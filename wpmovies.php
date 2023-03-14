@@ -48,6 +48,8 @@ add_action(
 		register_block_type( __DIR__ . '/build/blocks/video-player' );
 		register_block_type( __DIR__ . '/build/blocks/movie-tabs' );
 		register_block_type( __DIR__ . '/build/blocks/page-background' );
+		register_block_type( __DIR__ . '/build/blocks/movie-release-date' );
+		register_block_type( __DIR__ . '/build/blocks/movie-runtime' );
 	}
 );
 

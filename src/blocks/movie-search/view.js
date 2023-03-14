@@ -1,3 +1,4 @@
+// Disclaimer: Importing the `store` using a global is just a temporary solution.
 const { store, navigate } = window.__experimentalInteractivity;
 
 const updateURL = async (value) => {

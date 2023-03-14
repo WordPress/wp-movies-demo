@@ -52,3 +52,7 @@ footer a {
 .search .wp-block-post.type-movies .wp-block-columns {
 	margin-bottom: 0;
 }
+
+header > div.wp-block-group {
+	backdrop-filter: blur(10px);
+}

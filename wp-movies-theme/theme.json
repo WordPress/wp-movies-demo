@@ -89,6 +89,13 @@
 					"lineHeight": "76px",
 					"fontWeight": "600"
 				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--medium)",
+					"lineHeight": "26px",
+					"fontWeight": "600"
+				}
 			}
 		},
 		"typography": {

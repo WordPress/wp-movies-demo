@@ -52,6 +52,8 @@ add_action(
 		register_block_type( __DIR__ . '/build/blocks/movie-release-date' );
 		register_block_type( __DIR__ . '/build/blocks/movie-runtime' );
 		register_block_type( __DIR__ . '/build/blocks/movie-genres' );
+		register_block_type( __DIR__ . '/build/blocks/actor-birthday' );
+		register_block_type( __DIR__ . '/build/blocks/actor-birth-place' );
 	}
 );
 

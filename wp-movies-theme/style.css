@@ -54,7 +54,8 @@ footer a {
 }
 
 header > div.wp-block-group {
-	backdrop-filter: blur(10px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(25px);
 }
 
 .wpmovies-page-button-parent {

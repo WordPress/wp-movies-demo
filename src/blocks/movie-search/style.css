@@ -1,0 +1,26 @@
+.wp-block-wpmovies-movie-search {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	border-radius: 3px;
+}
+
+.wp-block-wpmovies-movie-search > input {
+	background: transparent;
+	color: var(--wp--preset--color--white);
+	border: none;
+	width: calc(min(500px, 50vw));
+	height: 43px;
+	position: relative;
+	padding: 12px;
+}
+
+.wp-block-wpmovies-movie-search > input::placeholder {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.wp-block-wpmovies-movie-search > input:focus-visible {
+	background-color: #343333;
+	border: none;
+	padding: 12px;
+	outline: none;
+}

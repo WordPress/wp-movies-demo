@@ -1,18 +1,18 @@
 <?php
 $post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes();
-$language           = get_post_meta($post->ID, '_wpmovies_language', true);
-$budget = intval(get_post_meta($post->ID, '_wpmovies_budget', true));
-if ($budget == 0) {
+$language           = get_post_meta( $post->ID, '_wpmovies_language', true );
+$budget             = intval( get_post_meta( $post->ID, '_wpmovies_budget', true ) );
+if ( $budget == 0 ) {
 	$budget = '-';
 } else {
-	$budget = '$' . strval(number_format($budget));
+	$budget = '$' . strval( number_format( $budget ) );
 }
-$revenue = intval(get_post_meta($post->ID, '_wpmovies_revenue', true));
-if ($revenue == 0) {
+$revenue = intval( get_post_meta( $post->ID, '_wpmovies_revenue', true ) );
+if ( $revenue == 0 ) {
 	$revenue = '-';
 } else {
-	$revenue = '$' . strval(number_format($revenue));
+	$revenue = '$' . strval( number_format( $revenue ) );
 }
 ?>
 
@@ -20,7 +20,7 @@ if ($revenue == 0) {
 	<ul class="wpmovies-data-list">
 		<li class="wpmovies-data-list-item">
 			<div class="wpmovies-data-list-key">Language</div>
-			<div class="wpmovies-data-list-value"><?php echo ucfirst($language); ?></div>
+			<div class="wpmovies-data-list-value"><?php echo ucfirst( $language ); ?></div>
 		</li>
 		<li class="wpmovies-data-list-item">
 			<div class="wpmovies-data-list-key">Budget</div>

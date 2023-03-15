@@ -1,20 +1,30 @@
 <?php
-
 $wrapper_attributes = get_block_wrapper_attributes(
+	array( 'class' => 'movie-search' )
+);
+
+store(
 	array(
-		'class' => 'movie-search',
+		'state' => array(
+			'wpmovies' => array(
+				'searchValue' => '',
+			),
+		),
 	)
 );
 ?>
 
-<div <?php echo $wrapper_attributes; ?> >
-	<input
-	  type="search" 
-	  name="s" 
-		inputmode="search"
-	  placeholder="Search for a movie..." 
-	  required=""
-		wp-bind:value="state.search.value"
-		wp-on:input="actions.search.update"
+<div 
+	<?php echo $wrapper_attributes; ?>
+	wp-effect="effects.wpmovies.populateSearchValue"
+>
+	<input 
+		type="search" 
+		name="s" 
+		inputmode="search" 
+		placeholder="Search for a movie..." 
+		required="" 
+		wp-bind:value="state.wpmovies.searchValue" 
+		wp-on:input="actions.wpmovies.updateSearch"
 	>
 </div>

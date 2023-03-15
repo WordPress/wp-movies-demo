@@ -37,4 +37,13 @@ wpx({
 			},
 		},
 	},
+	effects: {
+		wpmovies: {
+			populateSearchValue: ({ state }) => {
+				const url = new URL(window.location);
+				const value = url.searchParams.get('s');
+				state.wpmovies.searchValue = value;
+			},
+		},
+	},
 });

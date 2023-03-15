@@ -9,26 +9,26 @@ It can be installed as a WordPress plugin that creates a site similar to (TODO: 
 
 The plugin is split into:
 
-- `/src/blocks` - **Start here to understand how to build interactive blocks with the
-  Interactivity API**. The folder contains all the custom blocks used in the
-  demo. The interactive blocks that use the Interactivity API are:
+-   `/src/blocks` - **Start here to understand how to build interactive blocks with the
+    Interactivity API**. The folder contains all the custom blocks used in the
+    demo. The interactive blocks that use the Interactivity API are:
 
-  - [`/src/blocks/favorites-number`](/src/blocks/favorites-number) - Displays
-    the number of movies liked.
-  - [`/src/blocks/movie-search`](/src/blocks/movie-search) - An interactive movie search block.
-  - [`/src/blocks/post-favorite`](/src/blocks/post-favorite) - A block that
-    allows the users to like a movie.
-  - [`/src/blocks/video-player`](/src/blocks/video-player) - A video player
-    block that plays the movie trailers using Picture-in-Picture (PiP).
-  - [`/src/blocks/movie-tabs`](/src/blocks/movie-tabs) - A "tabs" block which
-    allows the user to switch between different kinds of info about the movie.
-  
-- `/lib` - The code that contains the runtime and internals of the Interactivity
-  API and the configuration needed to run the demo.
+    -   [`/src/blocks/favorites-number`](/src/blocks/favorites-number) - Displays
+        the number of movies liked.
+    -   [`/src/blocks/movie-search`](/src/blocks/movie-search) - An interactive movie search block.
+    -   [`/src/blocks/post-favorite`](/src/blocks/post-favorite) - A block that
+        allows the users to like a movie.
+    -   [`/src/blocks/video-player`](/src/blocks/video-player) - A video player
+        block that plays the movie trailers using Picture-in-Picture (PiP).
+    -   [`/src/blocks/movie-tabs`](/src/blocks/movie-tabs) - A "tabs" block which
+        allows the user to switch between different kinds of info about the movie.
 
-- `/wp-movies-theme` - The custom theme used in the demo. Contains some custom
-  styling and the templates for the header & footer as well as the movie &
-  actors pages.
+-   `/lib` - The code that contains the runtime and internals of the Interactivity
+    API and the configuration needed to run the demo.
+
+-   `/wp-movies-theme` - The custom theme used in the demo. Contains some custom
+    styling and the templates for the header & footer as well as the movie &
+    actors pages.
 
 ## When will I be able to use this?
 
@@ -37,26 +37,27 @@ It is under active development and its final public API is **very likely going t
 For now, it's recommended to experiment with the Interactivity API via this demo. Use this in
 your projects at your own risk.
 
-## Prerequisites
-
-- [Docker](https://www.docker.com/)
-- node.js
-- composer
-
 ## Setup
 
-______
-##### user: `admin`
-##### password: `password`
-______
+In order to be able to test this demo, you just need to:
 
-1. Install the dependencies
+1. Install the required plugins
+
+    - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
+
+    - [Block Interactivity Experiments](https://github.com/WordPress/block-hydration-experiments/releases/latest/download/block-interactivity-experiments.zip). This one requires Gutenberg to work.
+
+    - [Movies Demo Plugin](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip). This one requires the Block Interactivity Experiments to work.
+
+    Note that, if you are using `wp-env` to run your site locally, these plugins will be installed by default after running `wp-env` start. Before that, don't forget to:
+
+    - Install the dependencies:
 
     ```sh
     npm install && composer install
     ```
 
-2. Build the plugin
+    - Build the plugin:
 
     ```sh
     npm run build
@@ -66,30 +67,21 @@ ______
     npm start
     ```
 
-3. Run the preconfigured local WordPress environment using
-   [`wp-env`](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)
-   (recommended). This will require you to have
-   [Docker](https://www.docker.com/) running.
+2. Install the theme
 
-   ```sh
-   npx wp-env start
-   ```
-
-4. Activate the WP Movies theme
+    You need to install and activate the [Movies Demo
+    Theme](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-theme.zip).
+    Again, if you are using `wp-env`, it is already installed by default and you
+    just have to activate it. You can run:
 
     ```sh
-    npx wp-env run cli "wp theme activate wp-movies-theme"
+      npx wp-env run cli "wp theme activate wp-movies-theme"
     ```
 
-5. Add the movie and actor data to the WordPress database
+3. Add the movie and actor data to the WordPress database
 
-    ```sh
-    npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_movies.xml --authors=create"
-    npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_media.xml  --authors=create"
-    npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_actors.xml --authors=create"
-    ```
+    You can import the data manually:
 
-   You can also import the data manually (user: `admin`, password: `password`):
     1. Go to **Tools > Import > WordPress** and click on _Run Importer_.
     2. Select the `wp_sampledata_movies.xml` file.
     3. Select the `Download and import file attachments` and click on the
@@ -97,16 +89,26 @@ ______
     4. Repeat the process for the `wp_sampledata_actors.xml` file.
     5. Repeat the process for the `wp_sampledata_media.xml` file. This one can take up to five minutes.
 
+    If you are using `wp-env`, you can run the following commands:
+
+    ```sh
+      npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_movies.xml --authors=create"
+      npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_media.xml  --authors=create"
+      npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_actors.xml --authors=create"
+    ```
+
     If you run into any problems you can run `npx wp-env clean all` and start this step over again.
 
-6. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
+4. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
+
+    If you are using `wp-env` you can just run this command:
 
     ```sh
     npx wp-env run cli "wp rewrite structure '/%postname%/'"
-    ````
+    ```
 
-7. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
-8. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
+5. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
+6. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
 
 ## Things to try
 
@@ -136,7 +138,7 @@ on the server!
 Try opening the site editor and removing the "Search" template. You'll notice
 that the Search experience keeps working but that now the Search results look
 different. That's because in the absence of the Search template, the Archive
-template is being used. The Interactivity API is designed to work with the 
+template is being used. The Interactivity API is designed to work with the
 server-rendered markup and Full-site editing.
 
 ### Play the movie trailers

@@ -12,7 +12,8 @@
 		"dev": "npm start",
 		"format:php": "wp-env run composer run-script format",
 		"lint:php": "wp-env run composer run-script lint",
-		"plugin-zip": "wp-scripts plugin-zip",
+		"plugin-zip": "node .github/scripts/build-plugin.js",
+		"theme-zip": "node .github/scripts/build-theme.js",
 		"wp-env": "wp-env"
 	},
 	"prettier": {
@@ -32,10 +33,11 @@
 		"@babel/preset-env": "^7.17.10",
 		"@prettier/plugin-php": "^0.18.9",
 		"@types/jest": "^27.5.1",
-		"@wordpress/env": "^5.9.0",
-		"@wordpress/scripts": "^24.3.0",
 		"@wordpress/blocks": "^11.7.0",
 		"@wordpress/element": "^4.3.0",
+		"@wordpress/env": "^5.9.0",
+		"@wordpress/scripts": "^24.3.0",
+		"archiver": "^5.3.1",
 		"babel-jest": "^28.1.0",
 		"jest": "^28.1.0",
 		"prettier": "^2.7.1"

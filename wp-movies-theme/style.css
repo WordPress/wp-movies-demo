@@ -56,3 +56,28 @@ footer a {
 header > div.wp-block-group {
 	backdrop-filter: blur(10px);
 }
+
+.wpmovies-page-button-parent {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	margin: auto;
+	width: 240px;
+	height: 48px;
+	border-radius: 3px;
+	color: var(--wp--preset--color--black);
+	background: var(--wp--preset--color--white);
+	font-size: var(--wp--preset--font-size--medium);
+	line-height: 24px;
+	font-weight: 600;
+}
+
+.wpmovies-page-button-child {
+	margin: auto;
+	display: flex;
+	align-items: center;
+}
+
+.wpmovies-page-button-child svg {
+	margin-right: 14px;
+}

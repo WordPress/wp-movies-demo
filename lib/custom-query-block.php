@@ -101,6 +101,28 @@ function wpmovies_build_query( $query ) {
 
 add_action( 'pre_render_block', 'wpmovies_update_demo_query', 10, 2 );
 
+/**
+ * Add a unique key attribute to each Query Loop item.
+ * 
+ * TODO: Replace with `data-wp-key` once this is fixed:
+ * https://github.com/WordPress/block-interactivity-experiments/issues/180
+ *
+ * @param $content The block content.
+ * @return $content The block content with the added key attributes.
+ */
+
+function wpmovies_add_key_to_query ( $content ) {
+	$p = new WP_HTML_Tag_Processor( $content );
+	while( $p->next_tag( array( 'tag_name' => 'li' ) ) ) {
+		$class = $p->get_attribute( 'class' );
+		if ( preg_match( '/\bpost-(\d+)\b/', $class, $matches ) ) {
+			$p->set_attribute( 'key', $matches[ 1 ] );
+		}
+	};
+	return ( string ) $p;
+}
+
+add_filter( 'render_block_core/query', 'wpmovies_add_key_to_query', 10, 1 );
 
 /**
  * Add the movie and the cast variations to the Query Loop block.

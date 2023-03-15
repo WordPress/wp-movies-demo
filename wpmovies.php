@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:       WP Movies
  * Version:           0.1.0
@@ -57,98 +56,37 @@ add_action(
 	}
 );
 
+// We need these filters to ensure the view.js files can access the window.__experimentalInteractivity
+// Once the bundling is solved and we stop using
+// window.__experimentalInteractivity we can remove them.
+enqueue_interactive_blocks_scripts( 'likes-number' );
+enqueue_interactive_blocks_scripts( 'movie-search' );
+enqueue_interactive_blocks_scripts( 'video-player' );
+enqueue_interactive_blocks_scripts( 'movie-tabs' );
+enqueue_interactive_blocks_scripts( 'movie-like-button' );
+enqueue_interactive_blocks_scripts( 'movie-like-icon' );
 
-// We need these filters to ensure the view.js files can access the window.wp.interactivity
-// Once the bundling is solved and we stop using window.wp.interactivity we can remove them.
-add_filter(
-	'render_block_wpmovies/likes-number',
-	function ( $content ) {
+/**
+ * A helper function that enqueues scripts for the interactive blocks.
+ *
+ * @param string $block - The block name.
+ * @return void
+ */
+function enqueue_interactive_blocks_scripts( $block ) {
+	$interactive_block_filter = function ( $content ) use ( $block ) {
 		wp_register_script(
-			'wpmovies/likes-number',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/likes-number/view.js',
+			'wpmovies/' . $block,
+			plugin_dir_url( __FILE__ ) . 'build/blocks/' . $block . '/view.js',
 			array( 'wp-directive-runtime' ),
 			'1.0.0',
 			true
 		);
-		wp_enqueue_script( 'wpmovies/likes-number' );
+		wp_enqueue_script( 'wpmovies/' . $block );
 		return $content;
-	}
-);
+	};
+	add_filter( 'render_block_wpmovies/' . $block, $interactive_block_filter );
+}
 
-add_filter(
-	'render_block_wpmovies/movie-search',
-	function ( $content ) {
-		wp_register_script(
-			'wpmovies/movie-search',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-search/view.js',
-			array( 'wp-directive-runtime' ),
-			'1.0.0',
-			true
-		);
-		wp_enqueue_script( 'wpmovies/movie-search' );
-		return $content;
-	}
-);
-
-add_filter(
-	'render_block_wpmovies/movie-like-icon',
-	function ( $content ) {
-		wp_register_script(
-			'wpmovies/movie-like-icon',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-like-icon/view.js',
-			array( 'wp-directive-runtime' ),
-			'1.0.0',
-			true
-		);
-		wp_enqueue_script( 'wpmovies/movie-like-icon' );
-		return $content;
-	}
-);
-
-add_filter(
-	'render_block_wpmovies/movie-like-button',
-	function ( $content ) {
-		wp_register_script(
-			'wpmovies/movie-like-button',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-like-button/view.js',
-			array( 'wp-directive-runtime' ),
-			'1.0.0',
-			true
-		);
-		wp_enqueue_script( 'wpmovies/movie-like-button' );
-		return $content;
-	}
-);
-
-add_filter(
-	'render_block_wpmovies/video-player',
-	function ( $content ) {
-		wp_register_script(
-			'wpmovies/video-player',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/video-player/view.js',
-			array( 'wp-directive-runtime' ),
-			'1.0.0',
-			true
-		);
-		wp_enqueue_script( 'wpmovies/video-player' );
-		return $content;
-	}
-);
-
-add_filter(
-	'render_block_wpmovies/movie-tabs',
-	function ( $content ) {
-		wp_register_script(
-			'wpmovies/movie-tabs',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-tabs/view.js',
-			array( 'wp-directive-runtime' ),
-			'1.0.0',
-			true
-		);
-		wp_enqueue_script( 'wpmovies/movie-tabs' );
-		return $content;
-	}
-);
 
 // ADD CRON EVENTS TO IMPORT MOVIES DAILY
 // Create the necessary hook
@@ -168,3 +106,9 @@ function movies_demo_plugin_deactivation() {
 	$timestamp = wp_next_scheduled( 'cron_wpmovies_add_movies' );
 	wp_unschedule_event( $timestamp, 'cron_wpmovies_add_movies' );
 }
+
+// Avoid sending any JavaScript not related to the Interactivity API.
+function dequeue_twemoji() {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 ); // Emojis
+}
+add_action( 'wp_enqueue_scripts', 'dequeue_twemoji' );

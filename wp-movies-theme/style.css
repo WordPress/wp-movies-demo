@@ -39,7 +39,8 @@ footer a {
 	filter: brightness(1);
 }
 
-.wp-block-query .wp-block-post-featured-image:hover {
+.wp-block-query .wp-block-post-featured-image:hover,
+.wpmovies-page-button-parent:hover {
 	filter: brightness(0.9);
 	transition: filter 0.1s ease-in-out;
 }

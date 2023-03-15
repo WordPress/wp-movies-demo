@@ -9,6 +9,9 @@
 	"description": "",
 	"textdomain": "wpmovies",
 	"supports": {
+		"spacing": {
+			"margin": true
+		},
 		"interactivity": true
 	},
 	"editorScript": "file:./index.js",

@@ -1,8 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import Edit from './edit';
-import './style.scss';
 
-registerBlockType('wpmovies/favorites-number', {
+registerBlockType('wpmovies/movie-like-button', {
 	edit: Edit,
 	save: () => null,
 });

@@ -28,7 +28,7 @@ footer a {
 	position: relative;
 }
 
-.wp-block-group.movie-image-container .wp-block-wpmovies-post-favorite {
+.wp-block-group.movie-image-container .wp-block-wpmovies-movie-like-icon {
 	position: absolute;
 	top: 0px;
 	left: 15px;
@@ -80,4 +80,12 @@ header > div.wp-block-group {
 
 .wpmovies-page-button-child svg {
 	margin-right: 14px;
+}
+
+.wpmovies-liked svg {
+	fill: #dc3e3e;
+}
+
+.wpmovies-liked svg > path {
+	stroke-width: 0;
 }

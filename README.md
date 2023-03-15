@@ -13,10 +13,10 @@ The plugin is split into:
   Interactivity API**. The folder contains all the custom blocks used in the
   demo. The interactive blocks that use the Interactivity API are:
 
-  - [`/src/blocks/favorites-number`](/src/blocks/favorites-number) - Displays
+  - [`/src/blocks/likes-number`](/src/blocks/likes-number) - Displays
     the number of movies liked.
   - [`/src/blocks/movie-search`](/src/blocks/movie-search) - An interactive movie search block.
-  - [`/src/blocks/post-favorite`](/src/blocks/post-favorite) - A block that
+  - [`/src/blocks/movie-like-icon`](/src/blocks/movie-like-icon) - A block that
     allows the users to like a movie.
   - [`/src/blocks/video-player`](/src/blocks/video-player) - A video player
     block that plays the movie trailers using Picture-in-Picture (PiP).

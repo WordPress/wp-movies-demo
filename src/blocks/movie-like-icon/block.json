@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "wpmovies/post-favorite",
+	"name": "wpmovies/movie-like-icon",
 	"version": "0.1.0",
-	"title": "WP Movies - Post Favorite",
+	"title": "WP Movies - Movie Like Icon",
 	"category": "text",
 	"icon": "heart",
 	"description": "",

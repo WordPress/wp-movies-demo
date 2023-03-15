@@ -39,12 +39,13 @@ if ( ! is_plugin_active( 'block-interactivity-experiments/wp-directives.php' ) )
 add_action(
 	'init',
 	function () {
-		register_block_type( __DIR__ . '/build/blocks/post-favorite' );
-		register_block_type( __DIR__ . '/build/blocks/favorites-number' );
+		register_block_type( __DIR__ . '/build/blocks/movie-like-icon' );
+		register_block_type( __DIR__ . '/build/blocks/likes-number' );
 		register_block_type( __DIR__ . '/build/blocks/movie-data' );
 		register_block_type( __DIR__ . '/build/blocks/movie-score' );
 		register_block_type( __DIR__ . '/build/blocks/movie-search' );
 		register_block_type( __DIR__ . '/build/blocks/movie-trailer-button' );
+		register_block_type( __DIR__ . '/build/blocks/movie-like-button' );
 		register_block_type( __DIR__ . '/build/blocks/video-player' );
 		register_block_type( __DIR__ . '/build/blocks/movie-tabs' );
 		register_block_type( __DIR__ . '/build/blocks/page-background' );
@@ -58,16 +59,16 @@ add_action(
 // We need these filters to ensure the view.js files can access the window.wp.interactivity
 // Once the bundling is solved and we stop using window.wp.interactivity we can remove them.
 add_filter(
-	'render_block_wpmovies/favorites-number',
+	'render_block_wpmovies/likes-number',
 	function ( $content ) {
 		wp_register_script(
-			'wpmovies/favorites-number',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/favorites-number/view.js',
+			'wpmovies/likes-number',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/likes-number/view.js',
 			array( 'wp-directive-runtime' ),
 			'1.0.0',
 			true
 		);
-		wp_enqueue_script( 'wpmovies/favorites-number' );
+		wp_enqueue_script( 'wpmovies/likes-number' );
 		return $content;
 	}
 );
@@ -88,16 +89,31 @@ add_filter(
 );
 
 add_filter(
-	'render_block_wpmovies/post-favorite',
+	'render_block_wpmovies/movie-like-icon',
 	function ( $content ) {
 		wp_register_script(
-			'wpmovies/post-favorite',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/post-favorite/view.js',
+			'wpmovies/movie-like-icon',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-like-icon/view.js',
 			array( 'wp-directive-runtime' ),
 			'1.0.0',
 			true
 		);
-		wp_enqueue_script( 'wpmovies/post-favorite' );
+		wp_enqueue_script( 'wpmovies/movie-like-icon' );
+		return $content;
+	}
+);
+
+add_filter(
+	'render_block_wpmovies/movie-like-button',
+	function ( $content ) {
+		wp_register_script(
+			'wpmovies/movie-like-button',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-like-button/view.js',
+			array( 'wp-directive-runtime' ),
+			'1.0.0',
+			true
+		);
+		wp_enqueue_script( 'wpmovies/movie-like-button' );
 		return $content;
 	}
 );

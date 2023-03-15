@@ -6,12 +6,13 @@ module.exports = [
 	{
 		...defaultConfig,
 		entry: {
-			'blocks/favorites-number/view':
-				'./src/blocks/favorites-number/view',
-			'blocks/post-favorite/view': './src/blocks/post-favorite/view',
+			'blocks/likes-number/view': './src/blocks/likes-number/view',
+			'blocks/movie-like-icon/view': './src/blocks/movie-like-icon/view',
 			'blocks/movie-search/view': './src/blocks/movie-search/view',
 			'blocks/video-player/view': './src/blocks/video-player/view',
 			'blocks/movie-tabs/view': './src/blocks/movie-tabs/view',
+			'blocks/movie-like-button/view':
+				'./src/blocks/movie-like-button/view',
 		},
 	},
 	{

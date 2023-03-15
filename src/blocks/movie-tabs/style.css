@@ -59,3 +59,7 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
+.wpmovies-active-tab {
+	color: var(--wp--preset--color--white);
+}

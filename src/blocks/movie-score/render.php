@@ -1,7 +1,7 @@
 <?php
 $post        = get_post();
 $score       = get_post_meta( $post->ID, '_wpmovies_vote_average', true );
-$score_color = '#21d07a'; // Green
+$score_color = '#5EFD26'; // Green
 if ( $score < 7 && $score >= 3 ) {
 	$score_color = '#fad900'; // Yellow
 } elseif ( $score < 3 ) {

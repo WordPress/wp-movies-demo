@@ -23,6 +23,8 @@
 }
 
 .wpmovies-score-wrap .wpmovies-score-inside-circle {
+	display: flex;
+	align-items: center;
 	position: absolute;
 	text-align: center;
 	width: 52px;
@@ -34,5 +36,9 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
+	margin: auto;
+}
+
+.wpmovies-score-wrap .wpmovies-score-inside-circle > span {
 	margin: auto;
 }

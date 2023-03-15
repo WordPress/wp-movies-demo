@@ -26,7 +26,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 		 <div class="wpmovies-score-fill" <?php echo 'style="background-color: ' . $score_color . ';transform: rotate(' . $degrees_css . 'deg)"'; ?>></div>
 	  </div>
 	  <div class="wpmovies-score-inside-circle">
-		 <p><?php echo round( $score * 10 ) . '%'; ?></p>
+		 <span><?php echo round( $score * 10 ) . '%'; ?></span>
 	  </div>
    </div>
 </div>

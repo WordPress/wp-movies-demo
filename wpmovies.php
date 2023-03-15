@@ -127,3 +127,9 @@ function movies_demo_plugin_deactivation() {
 	$timestamp = wp_next_scheduled( 'cron_wpmovies_add_movies' );
 	wp_unschedule_event( $timestamp, 'cron_wpmovies_add_movies' );
 }
+
+// Avoid sending any JavaScript not related to the Interactivity API.
+function dequeue_twemoji() {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 ); // Emojis
+}
+add_action( 'wp_enqueue_scripts', 'dequeue_twemoji' );

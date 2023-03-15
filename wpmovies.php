@@ -50,6 +50,15 @@ add_action(
 	}
 );
 
+// We need these filters to ensure the view.js files can access the window.__experimentalInteractivity
+// Once the bundling is solved and we stop using
+// window.__experimentalInteractivity we can remove them.
+enqueue_interactive_blocks_scripts( 'post-favorite' );
+enqueue_interactive_blocks_scripts( 'favorites-number' );
+enqueue_interactive_blocks_scripts( 'movie-search' );
+enqueue_interactive_blocks_scripts( 'video-player' );
+enqueue_interactive_blocks_scripts( 'movie-tabs' );
+
 /**
  * A helper function that euqueues scripts for the interactive blocks.
  *
@@ -70,15 +79,6 @@ function enqueue_interactive_blocks_scripts( $block ) {
 	};
 	add_filter( 'render_block_wpmovies/' . $block, $interactive_block_filter );
 }
-
-// We need these filters to ensure the view.js files can access the window.__experimentalInteractivity
-// Once the bundling is solved and we stop using
-// window.__experimentalInteractivity we can remove them.
-enqueue_interactive_blocks_scripts( 'post-favorite' );
-enqueue_interactive_blocks_scripts( 'favorites-number' );
-enqueue_interactive_blocks_scripts( 'movie-search' );
-enqueue_interactive_blocks_scripts( 'video-player' );
-enqueue_interactive_blocks_scripts( 'movie-tabs' );
 
 
 // ADD CRON EVENTS TO IMPORT MOVIES DAILY

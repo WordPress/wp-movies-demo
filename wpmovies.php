@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name:       WP Movies
  * Version:           0.1.0
@@ -12,7 +11,6 @@
  * Text Domain:       wp-movies-demo
  */
 
-require_once __DIR__ . '/lib/init.php';
 require_once __DIR__ . '/lib/custom-post-types.php';
 require_once __DIR__ . '/lib/custom-taxonomies.php';
 require_once __DIR__ . '/lib/custom-query-block.php';
@@ -23,12 +21,12 @@ require_once __DIR__ . '/lib/db-update/index.php';
 if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
-if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
+if ( ! is_plugin_active( 'block-interactivity-experiments/wp-directives.php' ) ) {
 	// Show an error message.
 	add_action(
 		'admin_notices',
 		function () {
-			echo sprintf( '<div class="error"><p>%s</p></div>', __( 'This plugin requires the Gutenberg plugin to be installed and activated.', 'wp-movies-demo' ) );
+			echo sprintf( '<div class="error"><p>%s</p></div>', __( 'This plugin requires the WP Directives plugin to be installed and activated.', 'wp-movies-demo' ) );
 		}
 	);
 
@@ -43,7 +41,6 @@ add_action(
 		register_block_type( __DIR__ . '/build/blocks/post-favorite' );
 		register_block_type( __DIR__ . '/build/blocks/favorites-number' );
 		register_block_type( __DIR__ . '/build/blocks/movie-data' );
-		register_block_type( __DIR__ . '/build/blocks/movie-reviews' );
 		register_block_type( __DIR__ . '/build/blocks/movie-score' );
 		register_block_type( __DIR__ . '/build/blocks/movie-background' );
 		register_block_type( __DIR__ . '/build/blocks/movie-search' );
@@ -53,61 +50,36 @@ add_action(
 	}
 );
 
+// We need these filters to ensure the view.js files can access the window.__experimentalInteractivity
+// Once the bundling is solved and we stop using
+// window.__experimentalInteractivity we can remove them.
+enqueue_interactive_blocks_scripts( 'post-favorite' );
+enqueue_interactive_blocks_scripts( 'favorites-number' );
+enqueue_interactive_blocks_scripts( 'movie-search' );
+enqueue_interactive_blocks_scripts( 'video-player' );
+enqueue_interactive_blocks_scripts( 'movie-tabs' );
 
-add_filter(
-	'render_block_wpmovies/favorites-number',
-	function ( $content ) {
-		wp_enqueue_script(
-			'wpmovies/favorites-number',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/favorites-number/view.js'
+/**
+ * A helper function that euqueues scripts for the interactive blocks.
+ *
+ * @param string $block - The block name.
+ * @return void
+ */
+function enqueue_interactive_blocks_scripts( $block ) {
+	$interactive_block_filter = function ( $content ) use ( $block ) {
+		wp_register_script(
+			'wpmovies/' . $block,
+			plugin_dir_url( __FILE__ ) . 'build/blocks/' . $block . '/view.js',
+			array( 'wp-directive-runtime' ),
+			'1.0.0',
+			true
 		);
+		wp_enqueue_script( 'wpmovies/' . $block );
 		return $content;
-	}
-);
+	};
+	add_filter( 'render_block_wpmovies/' . $block, $interactive_block_filter );
+}
 
-add_filter(
-	'render_block_wpmovies/movie-search',
-	function ( $content ) {
-		wp_enqueue_script(
-			'wpmovies/movie-search',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-search/view.js'
-		);
-		return $content;
-	}
-);
-
-add_filter(
-	'render_block_wpmovies/post-favorite',
-	function ( $content ) {
-		wp_enqueue_script(
-			'wpmovies/post-favorite',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/post-favorite/view.js'
-		);
-		return $content;
-	}
-);
-
-add_filter(
-	'render_block_wpmovies/video-player',
-	function ( $content ) {
-		wp_enqueue_script(
-			'wpmovies/video-player',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/video-player/view.js'
-		);
-		return $content;
-	}
-);
-
-add_filter(
-	'render_block_wpmovies/movie-tabs',
-	function ( $content ) {
-		wp_enqueue_script(
-			'wpmovies/movie-tabs',
-			plugin_dir_url( __FILE__ ) . 'build/blocks/movie-tabs/view.js'
-		);
-		return $content;
-	}
-);
 
 // ADD CRON EVENTS TO IMPORT MOVIES DAILY
 // Create the necessary hook

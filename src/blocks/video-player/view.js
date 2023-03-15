@@ -1,11 +1,7 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
+// Disclaimer: Importing the `store` using a global is just a temporary solution.
+const { store } = window.__experimentalInteractivity;
 
-wpx({
-	state: {
-		wpmovies: {
-			currentVideo: '',
-		},
-	},
+store({
 	selectors: {
 		wpmovies: {
 			isPlaying: ({ state }) => state.wpmovies.currentVideo !== '',

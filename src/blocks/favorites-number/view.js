@@ -1,18 +1,15 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
+// Disclaimer: Importing the `store` using a global is just a temporary solution.
+const { store } = window.__experimentalInteractivity;
 
-wpx({
-	state: {
-		favorites: {
-			// state.favorites.posts is defined in `favorites-number/view.js`.
-			// The state is shared between all blocks!
-			count: ({ state }) => state.favorites.posts.length,
-		},
-	},
+store({
 	selectors: {
-		favorites: {
-			isFavoritePostsEmpty: ({ state }) =>
+		wpmovies: {
+			favCount: ({ state }) => state.wpmovies.favoriteMovies.length,
+			isFavoriteMoviesEmpty: ({ state }) =>
 				`https://s.w.org/images/core/emoji/14.0.0/svg/${
-					state.favorites.posts.length !== 0 ? '2764' : '1f90d'
+					state.wpmovies.favoriteMovies.length !== 0
+						? '2764'
+						: '1f90d'
 				}.svg`,
 		},
 	},

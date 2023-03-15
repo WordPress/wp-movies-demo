@@ -1,5 +1,5 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
-import { navigate } from '../../../lib/runtime/router.js';
+// Disclaimer: Importing the `store` using a global is just a temporary solution.
+const { store, navigate } = window.__experimentalInteractivity;
 
 const updateURL = async (value) => {
 	const url = new URL(window.location);
@@ -10,21 +10,16 @@ const updateURL = async (value) => {
 	await navigate(`/${url.search}${url.hash}`);
 };
 
-wpx({
-	state: {
-		search: {
-			value: '',
-		},
-	},
+store({
 	actions: {
-		search: {
-			update: async ({ state, event }) => {
+		wpmovies: {
+			updateSearch: async ({ state, event }) => {
 				// Update the state.
 				const { value } = event.target;
-				if (value === state.search.value) {
+				if (value === state.wpmovies.searchValue) {
 					return;
 				}
-				state.search.value = value;
+				state.wpmovies.searchValue = value;
 
 				// If the search is empty, navigate to the home page.
 				if (value === '') {

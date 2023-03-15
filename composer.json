@@ -2,10 +2,10 @@
 	"name": "wordpress/movies-demo",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
-	"description": "Experiments with frontend hydration for blocks",
+	"description": "Experiments to add frontend interactivity to blocks",
 	"homepage": "https://wordpress.github.io/gutenberg/",
 	"keywords": [
-		"block-hydration-experiments",
+		"block-interactivity-experiments",
 		"wordpress-movies-demo",
 		"wordpress",
 		"wp",
@@ -13,7 +13,7 @@
 		"javascript"
 	],
 	"support": {
-		"issues": "https://github.com/WordPress/block-hydration-experiments/issues"
+		"issues": "https://github.com/WordPress/block-interactivity-experiments/issues"
 	},
 	"config": {
 		"process-timeout": 0,
@@ -42,7 +42,6 @@
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
 		"lint": "phpcs --standard=phpcs.xml.dist",
-		"create-xml": "php ./lib/content-creator/index.php",
-		"update-xml": "php ./lib/content-creator/update-xml.php"
+		"update-xml": "php ./lib/db-update/update-xml.php"
 	}
 }

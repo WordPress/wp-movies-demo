@@ -1,6 +1,7 @@
-import { wpx } from '../../../lib/runtime/wpx.js';
+// Disclaimer: Importing the `store` using a global is just a temporary solution.
+const { store } = window.__experimentalInteractivity;
 
-wpx({
+store({
 	selectors: {
 		wpmovies: {
 			isImagesTab: ({ context }) => context.tab === 'images',

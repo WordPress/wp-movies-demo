@@ -98,6 +98,27 @@
 				}
 			}
 		},
+		"blocks": {
+			"core/post-featured-image": {
+				"border": {
+					"radius": "5px"
+				},
+				"spacing": {
+					"padding": {
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
+					},
+					"margin": {
+						"top": "0px",
+						"right": "0px",
+						"bottom": "0px",
+						"left": "0px"
+					}
+				}
+			}
+		},
 		"typography": {
 			"fontFamily": "var:preset|font-family|system-font",
 			"fontSize": "var(--wp--preset--font-size--medium)",

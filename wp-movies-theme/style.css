@@ -35,11 +35,11 @@ footer a {
 	margin-top: 0.5rem;
 }
 
-.home .wp-block-post-featured-image {
+.wp-block-query .wp-block-post-featured-image {
 	filter: brightness(1);
 }
 
-.home .wp-block-post-featured-image:hover {
+.wp-block-query .wp-block-post-featured-image:hover {
 	filter: brightness(0.9);
 	transition: filter 0.1s ease-in-out;
 }

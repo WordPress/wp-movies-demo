@@ -1,16 +1,13 @@
 <?php
-
 $wrapper_attributes = get_block_wrapper_attributes(
-	array(
-		'class' => 'movie-search',
-	)
+	array( 'class' => 'movie-search' )
 );
 
 store(
 	array(
 		'state' => array(
 			'wpmovies' => array(
-				'searchValue' => '',
+				'searchValue' => get_search_query(),
 			),
 		),
 	)

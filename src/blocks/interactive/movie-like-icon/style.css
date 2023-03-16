@@ -1,0 +1,10 @@
+.wp-block-wpmovies-movie-like-icon {
+	width: 1rem;
+	cursor: pointer;
+	padding-top: 8px;
+}
+
+.wp-block-wpmovies-movie-like-icon > div:not(.wpmovies-liked) svg > path {
+	fill: #999999;
+	stroke-width: 0;
+}

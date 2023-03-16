@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:       WP Movies
  * Version:           0.1.1
@@ -38,29 +39,36 @@ if ( ! is_plugin_active( 'block-interactivity-experiments/wp-directives.php' ) )
 add_action(
 	'init',
 	function () {
-		register_block_type( __DIR__ . '/build/blocks/post-favorite' );
-		register_block_type( __DIR__ . '/build/blocks/favorites-number' );
-		register_block_type( __DIR__ . '/build/blocks/movie-data' );
-		register_block_type( __DIR__ . '/build/blocks/movie-score' );
-		register_block_type( __DIR__ . '/build/blocks/movie-background' );
-		register_block_type( __DIR__ . '/build/blocks/movie-search' );
-		register_block_type( __DIR__ . '/build/blocks/movie-trailer-button' );
-		register_block_type( __DIR__ . '/build/blocks/video-player' );
-		register_block_type( __DIR__ . '/build/blocks/movie-tabs' );
+		register_block_type( __DIR__ . '/build/blocks/interactive/movie-like-icon' );
+		register_block_type( __DIR__ . '/build/blocks/interactive/likes-number' );
+		register_block_type( __DIR__ . '/build/blocks/interactive/movie-search' );
+		register_block_type( __DIR__ . '/build/blocks/interactive/movie-trailer-button' );
+		register_block_type( __DIR__ . '/build/blocks/interactive/movie-like-button' );
+		register_block_type( __DIR__ . '/build/blocks/interactive/video-player' );
+		register_block_type( __DIR__ . '/build/blocks/interactive/movie-tabs' );
+		register_block_type( __DIR__ . '/build/blocks/interactive/movie-genres' );
+		register_block_type( __DIR__ . '/build/blocks/non-interactive/movie-data' );
+		register_block_type( __DIR__ . '/build/blocks/non-interactive/movie-score' );
+		register_block_type( __DIR__ . '/build/blocks/non-interactive/page-background' );
+		register_block_type( __DIR__ . '/build/blocks/non-interactive/movie-release-date' );
+		register_block_type( __DIR__ . '/build/blocks/non-interactive/movie-runtime' );
+		register_block_type( __DIR__ . '/build/blocks/non-interactive/actor-birthday' );
+		register_block_type( __DIR__ . '/build/blocks/non-interactive/actor-birth-place' );
 	}
 );
 
 // We need these filters to ensure the view.js files can access the window.__experimentalInteractivity
 // Once the bundling is solved and we stop using
 // window.__experimentalInteractivity we can remove them.
-enqueue_interactive_blocks_scripts( 'post-favorite' );
-enqueue_interactive_blocks_scripts( 'favorites-number' );
+enqueue_interactive_blocks_scripts( 'movie-like-icon' );
+enqueue_interactive_blocks_scripts( 'likes-number' );
 enqueue_interactive_blocks_scripts( 'movie-search' );
+enqueue_interactive_blocks_scripts( 'movie-like-button' );
 enqueue_interactive_blocks_scripts( 'video-player' );
 enqueue_interactive_blocks_scripts( 'movie-tabs' );
 
 /**
- * A helper function that euqueues scripts for the interactive blocks.
+ * A helper function that enqueues scripts for the interactive blocks.
  *
  * @param string $block - The block name.
  * @return void
@@ -69,7 +77,7 @@ function enqueue_interactive_blocks_scripts( $block ) {
 	$interactive_block_filter = function ( $content ) use ( $block ) {
 		wp_register_script(
 			'wpmovies/' . $block,
-			plugin_dir_url( __FILE__ ) . 'build/blocks/' . $block . '/view.js',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/interactive/' . $block . '/view.js',
 			array( 'wp-directive-runtime' ),
 			'1.0.0',
 			true
@@ -105,3 +113,26 @@ function dequeue_twemoji() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 ); // Emojis
 }
 add_action( 'wp_enqueue_scripts', 'dequeue_twemoji' );
+
+/**
+ * Add a unique key attribute to all images.
+ *
+ * TODO: Replace with `data-wp-key` once this is fixed:
+ * https://github.com/WordPress/block-interactivity-experiments/issues/180
+ *
+ * @param $content The block content.
+ * @return $content The block content with the added key attributes.
+ */
+
+function wpmovies_add_key_to_featured_image( $content ) {
+	$p = new WP_HTML_Tag_Processor( $content );
+	while ( $p->next_tag( array( 'tag_name' => 'img' ) ) ) {
+		$src = $p->get_attribute( 'src' );
+		if ( preg_match( '/\/([\w-]+)\.jpg$/', $src, $matches ) ) {
+			$p->set_attribute( 'key', $matches[1] );
+		}
+	};
+	return (string) $p;
+}
+
+add_filter( 'render_block', 'wpmovies_add_key_to_featured_image', 10, 1 );

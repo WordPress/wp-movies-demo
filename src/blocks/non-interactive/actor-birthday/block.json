@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wpmovies/actor-birthday",
+	"version": "0.1.0",
+	"title": "WP Movies - Actor birthday",
+	"category": "text",
+	"icon": "users",
+	"description": "",
+	"textdomain": "wpmovies",
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

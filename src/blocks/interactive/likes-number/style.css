@@ -1,0 +1,12 @@
+.wp-block-wpmovies-likes-number {
+	display: flex;
+	align-items: center;
+}
+
+.wp-block-wpmovies-likes-number svg {
+	margin-right: 10px;
+}
+
+.wp-block-wpmovies-likes-number svg > path {
+	stroke: #999999;
+}

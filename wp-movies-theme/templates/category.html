@@ -1,60 +1,35 @@
-<!-- wp:template-part {"slug":"header","tagName":"header","theme":"wp-movies-theme"} /-->
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
 <!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","right":"var:preset|spacing|60","bottom":"var:preset|spacing|60","left":"var:preset|spacing|60"},"blockGap":"0","margin":{"top":"0","bottom":"0"}}},"layout":{"type":"default"}} -->
-<div
-	class="wp-block-group alignwide"
-	style="
-		margin-top: 0;
-		margin-bottom: 0;
-		padding-top: var(--wp--preset--spacing--60);
-		padding-right: var(--wp--preset--spacing--60);
-		padding-bottom: var(--wp--preset--spacing--60);
-		padding-left: var(--wp--preset--spacing--60);
-	"
->
-	<!-- wp:query {"queryId":3,"query":{"perPage":"8","pages":0,"offset":0,"order":"asc","orderBy":"title","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[],"postType":"movies"},"tagName":"main","displayLayout":{"type":"flex","columns":4},"namespace":"wpmovies/movies-query-loop","align":"wide","layout":{"type":"constrained","contentSize":"1200px"}} -->
-	<main class="wp-block-query alignwide">
-		<!-- wp:query-title {"type":"archive","showPrefix":false} /-->
-		<!-- wp:post-template -->
-		<!-- wp:group {"className":"movie-image-container","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group movie-image-container">
-			<!-- wp:post-featured-image {"isLink":true,"dimRatio":40,"customGradient":"linear-gradient(148deg,rgb(0,0,0) 14%,rgba(255,255,255,0) 59%)","style":{"color":[]}} /-->
+<div class="wp-block-group alignwide" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)"><!-- wp:query {"queryId":3,"query":{"perPage":"8","pages":0,"offset":0,"order":"asc","orderBy":"title","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[],"postType":"movies"},"tagName":"main","displayLayout":{"type":"flex","columns":4},"namespace":"wpmovies/movies-query-loop","align":"wide","layout":{"type":"constrained","contentSize":"1200px"}} -->
+<main class="wp-block-query alignwide"><!-- wp:query-title {"type":"archive","showPrefix":false} /-->
 
-			<!-- wp:wpmovies/post-favorite /-->
-		</div>
-		<!-- /wp:group -->
+<!-- wp:post-template -->
+<!-- wp:group {"className":"movie-image-container","layout":{"type":"constrained"}} -->
+<div class="wp-block-group movie-image-container"><!-- wp:post-featured-image {"isLink":true,"dimRatio":40,"customGradient":"linear-gradient(148deg,rgb(0,0,0) 14%,rgba(255,255,255,0) 59%)","style":{"color":[]}} /-->
 
-		<!-- wp:group {"style":{"spacing":{"padding":{"top":"0","right":"0","bottom":"0","left":"0"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
-		<div
-			class="wp-block-group"
-			style="
-				padding-top: 0;
-				padding-right: 0;
-				padding-bottom: 0;
-				padding-left: 0;
-			"
-		>
-			<!-- wp:post-title {"level":3,"isLink":true,"style":{"typography":{"fontStyle":"normal","fontWeight":"300"},"spacing":{"margin":{"top":"var:preset|spacing|20","bottom":"var:preset|spacing|70"}}},"fontSize":"large"} /-->
-		</div>
-		<!-- /wp:group -->
-		<!-- /wp:post-template -->
-
-		<!-- wp:query-pagination -->
-		<!-- wp:query-pagination-previous /-->
-
-		<!-- wp:query-pagination-numbers /-->
-
-		<!-- wp:query-pagination-next /-->
-		<!-- /wp:query-pagination -->
-
-		<!-- wp:query-no-results -->
-		<!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results."} -->
-		<p></p>
-		<!-- /wp:paragraph -->
-		<!-- /wp:query-no-results -->
-	</main>
-	<!-- /wp:query -->
-</div>
+<!-- wp:wpmovies/movie-like-icon /--></div>
 <!-- /wp:group -->
 
-<!-- wp:template-part {"slug":"footer","tagName":"footer","theme":"wp-movies-theme"} /-->
+<!-- wp:group {"style":{"spacing":{"padding":{"top":"0","right":"0","bottom":"0","left":"0"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+<div class="wp-block-group" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"></div>
+<!-- /wp:group -->
+<!-- /wp:post-template -->
+
+<!-- wp:query-pagination -->
+<!-- wp:query-pagination-previous /-->
+
+<!-- wp:query-pagination-numbers /-->
+
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results."} -->
+<p></p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></main>
+<!-- /wp:query --></div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

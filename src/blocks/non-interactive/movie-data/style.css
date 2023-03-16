@@ -1,0 +1,22 @@
+.wp-block-wpmovies-movie-data > ul {
+	list-style: none;
+	padding: 0px;
+}
+
+.wp-block-wpmovies-movie-data > ul > li {
+	display: flex;
+	padding: 0.2rem 0;
+	margin-bottom: 16px;
+}
+
+.wp-block-wpmovies-movie-data > ul > li > div.wpmovies-data-list-key {
+	flex: 1;
+	max-width: 90px;
+	margin-right: 1.5rem;
+	color: var(--wp--preset--color--light-grey);
+}
+
+.wp-block-wpmovies-movie-data > ul > li > div.wpmovies-data-list-value {
+	flex: 2;
+	color: var(--wp--preset--color--white);
+}

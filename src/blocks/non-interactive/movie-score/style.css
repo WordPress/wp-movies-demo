@@ -1,0 +1,44 @@
+.wpmovies-score-wrap {
+	position: relative;
+	margin: 60px auto;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+.wpmovies-score-wrap .wpmovies-score-circle .wpmovies-score-mask,
+.wpmovies-score-wrap .wpmovies-score-circle .wpmovies-score-fill {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	border-radius: 50%;
+}
+
+.wpmovies-score-mask .wpmovies-score-fill {
+	clip: rect(0px, 30px, 60px, 0px);
+}
+
+.wpmovies-score-wrap .wpmovies-score-circle .wpmovies-score-mask {
+	clip: rect(0px, 60px, 60px, 30px);
+}
+
+.wpmovies-score-wrap .wpmovies-score-inside-circle {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	text-align: center;
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	background: #081c22;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.wpmovies-score-wrap .wpmovies-score-inside-circle > span {
+	margin: auto;
+}

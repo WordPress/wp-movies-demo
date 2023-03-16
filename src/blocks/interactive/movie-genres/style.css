@@ -1,0 +1,13 @@
+.wp-block-wpmovies-movie-genres > a {
+	text-decoration: none;
+	color: var(--wp--preset--color--light-gray);
+	background-color: #333333;
+	border-radius: 6px;
+	padding: 6px;
+	margin-right: 6px;
+}
+
+.wp-block-wpmovies-movie-genres > a:hover {
+	filter: brightness(0.9);
+	transition: filter 0.1s ease-in-out;
+}

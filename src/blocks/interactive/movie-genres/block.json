@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wpmovies/movie-genres",
+	"version": "0.1.0",
+	"title": "WP Movies - Movie Genres",
+	"category": "text",
+	"icon": "filter",
+	"description": "",
+	"textdomain": "wpmovies",
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php",
+	"editorStyle": "file:./style.css",
+	"style": "file:./style-index.css"
+}

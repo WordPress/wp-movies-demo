@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wpmovies/movie-trailer-button",
+	"version": "0.1.0",
+	"title": "WP Movies - Movie Trailer Button",
+	"category": "text",
+	"icon": "camera",
+	"description": "",
+	"textdomain": "wpmovies",
+	"supports": {
+		"spacing": {
+			"margin": true
+		},
+		"interactivity": true
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php",
+	"style": "file:./style-index.css"
+}

@@ -63,7 +63,7 @@ header > div.wp-block-group {
 	width: 100vw;
 	left: 0;
 	right: 0;
-	top: 0;
+	top: var(--wp-admin--admin-bar--height, 0);
 }
 
 .wpmovies-page-button-parent {

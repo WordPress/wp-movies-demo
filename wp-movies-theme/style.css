@@ -57,13 +57,14 @@ footer a {
 header > div.wp-block-group {
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 	backdrop-filter: blur(25px);
+	-webkit-backdrop-filter: blur(25px);
 	position: fixed;
 	z-index: 999;
 	margin: 0 auto;
 	width: 100vw;
 	left: 0;
 	right: 0;
-	top: 0;
+	top: var(--wp-admin--admin-bar--height, 0);
 }
 
 .wpmovies-page-button-parent {

@@ -14,21 +14,20 @@ store({
 	actions: {
 		wpmovies: {
 			updateSearch: async ({ state, event }) => {
-				// Update the state.
 				const { value } = event.target;
-				if (value === state.wpmovies.searchValue) {
-					return;
-				}
+
+				// Don't navigate if the search didn't really change.
+				if (value === state.wpmovies.searchValue) return;
+
 				state.wpmovies.searchValue = value;
 
-				// If the search is empty, navigate to the home page.
 				if (value === '') {
+					// If the search is empty, navigate to the home page.
 					await navigate('/');
-					return;
+				} else {
+					// If not, navigate to the new URL.
+					await updateURL(value);
 				}
-
-				// Update the URL.
-				await updateURL(value);
 			},
 		},
 	},

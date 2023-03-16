@@ -1,10 +1,7 @@
 <?php
 $post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes(
-	array(
-		'class'      => 'wpmovies-tabs',
-		'wp-context' => '{ "tab": "images" }',
-	)
+	array( 'class' => 'wpmovies-tabs' )
 );
 $images             = get_post_meta( $post->ID, '_wpmovies_images', true );
 $videos             = get_post_meta( $post->ID, '_wpmovies_videos', true );
@@ -17,15 +14,31 @@ store(
 				'isVideosTab' => false,
 			),
 		),
-	)
-)
+	),
+);
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div 
+	<?php echo $wrapper_attributes; ?>
+	wp-context='{ "tab": "images" }'
+>
 	<ul>
-		<li wp-on:click="actions.wpmovies.showImagesTab" wp-class:wpmovies-active-tab="selectors.wpmovies.isImagesTab" class="wpmovies-tabs-title">Images</li>
-		<li wp-on:click="actions.wpmovies.showVideosTab" wp-class:wpmovies-active-tab="selectors.wpmovies.isVideosTab" class=" wpmovies-tabs-title">Videos</li>
+		<li
+			wp-on:click="actions.wpmovies.showImagesTab"
+			wp-class:wpmovies-active-tab="selectors.wpmovies.isImagesTab"
+			class="wpmovies-tabs-title"
+		>
+				Images
+			</li>
+		<li
+			wp-on:click="actions.wpmovies.showVideosTab"
+			wp-class:wpmovies-active-tab="selectors.wpmovies.isVideosTab"
+			class=" wpmovies-tabs-title"
+		>
+				Videos
+			</li>
 	</ul>
+	
 	<div wp-show="selectors.wpmovies.isImagesTab">
 		<div class="wpmovies-media-scroller wpmovies-images-tab">
 			<?php
@@ -38,6 +51,7 @@ store(
 			?>
 		</div>
 	</div>
+
 	<div wp-show="selectors.wpmovies.isVideosTab">
 		<div class="wpmovies-media-scroller wpmovies-videos-tab">
 			<?php

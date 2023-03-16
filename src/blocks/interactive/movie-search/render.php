@@ -10,8 +10,8 @@ store(
 				'searchValue' => get_search_query(),
 			),
 		),
-	)
-)
+	),
+);
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>

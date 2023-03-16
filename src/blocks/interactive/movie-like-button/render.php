@@ -10,14 +10,26 @@ store(
 				'isMovieIncluded' => false,
 			),
 		),
-	)
+	),
 );
 ?>
 
-<div <?php echo $wrapper_attributes; ?> wp-context='{"post": {"id": <?php echo $post->ID; ?>}}'>
-	<div class="wpmovies-page-button-parent" wp-on:click="actions.wpmovies.toggleMovie">
-		<div class="wpmovies-page-button-child" wp-class:wpmovies-liked="selectors.wpmovies.isMovieIncluded">
-			<?php echo $play_icon; ?><span>Like</span>
+<div
+	<?php echo $wrapper_attributes; ?>
+	wp-context='{ "post": { "id": <?php echo $post->ID; ?> } }'
+>
+	<div
+		class="wpmovies-page-button-parent"
+		wp-on:click="actions.wpmovies.toggleMovie"
+	>
+		<div
+			class="wpmovies-page-button-child"
+			wp-class:wpmovies-liked="selectors.wpmovies.isMovieIncluded"
+		>
+			<?php echo $play_icon; ?>
+			<span>
+				<?php _e( 'Like' ); ?>
+			</span>
 		</div>
 	</div>
 </div>

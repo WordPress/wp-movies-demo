@@ -10,12 +10,18 @@ store(
 				'isMovieIncluded' => false,
 			),
 		),
-	)
-)
+	),
+);
 ?>
 
-<div <?php echo $wrapper_attributes; ?> wp-context='{"post": {"id": <?php echo $post->ID; ?>}}'>
-	<div wp-on:click="actions.wpmovies.toggleMovie" wp-class:wpmovies-liked="selectors.wpmovies.isMovieIncluded">
+<div
+	<?php echo $wrapper_attributes; ?>
+	wp-context='{ "post": { "id": <?php echo $post->ID; ?> } }'
+>
+	<div
+		wp-on:click="actions.wpmovies.toggleMovie"
+		wp-class:wpmovies-liked="selectors.wpmovies.isMovieIncluded"
+	>
 		<?php echo $play_icon; ?>
 	</div>
 </div>

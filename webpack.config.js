@@ -6,13 +6,13 @@ module.exports = [
 	{
 		...defaultConfig,
 		entry: {
-			'blocks/likes-number/view': './src/blocks/likes-number/view',
-			'blocks/movie-like-icon/view': './src/blocks/movie-like-icon/view',
-			'blocks/movie-search/view': './src/blocks/movie-search/view',
-			'blocks/video-player/view': './src/blocks/video-player/view',
-			'blocks/movie-tabs/view': './src/blocks/movie-tabs/view',
-			'blocks/movie-like-button/view':
-				'./src/blocks/movie-like-button/view',
+			'blocks/interactive/likes-number/view': './src/blocks/interactive/likes-number/view',
+			'blocks/interactive/movie-like-icon/view': './src/blocks/interactive/movie-like-icon/view',
+			'blocks/interactive/movie-search/view': './src/blocks/interactive/movie-search/view',
+			'blocks/interactive/video-player/view': './src/blocks/interactive/video-player/view',
+			'blocks/interactive/movie-tabs/view': './src/blocks/interactive/movie-tabs/view',
+			'blocks/interactive/movie-like-button/view':
+				'./src/blocks/interactive/movie-like-button/view',
 		},
 	},
 	{

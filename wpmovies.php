@@ -60,12 +60,12 @@ add_action(
 // We need these filters to ensure the view.js files can access the window.__experimentalInteractivity
 // Once the bundling is solved and we stop using
 // window.__experimentalInteractivity we can remove them.
+enqueue_interactive_blocks_scripts( 'movie-like-icon' );
 enqueue_interactive_blocks_scripts( 'likes-number' );
 enqueue_interactive_blocks_scripts( 'movie-search' );
+enqueue_interactive_blocks_scripts( 'movie-like-button' );
 enqueue_interactive_blocks_scripts( 'video-player' );
 enqueue_interactive_blocks_scripts( 'movie-tabs' );
-enqueue_interactive_blocks_scripts( 'movie-like-button' );
-enqueue_interactive_blocks_scripts( 'movie-like-icon' );
 
 /**
  * A helper function that enqueues scripts for the interactive blocks.
@@ -73,11 +73,11 @@ enqueue_interactive_blocks_scripts( 'movie-like-icon' );
  * @param string $block - The block name.
  * @return void
  */
-function enqueue_interactive_blocks_scripts( $block, $folder ) {
+function enqueue_interactive_blocks_scripts( $block ) {
 	$interactive_block_filter = function ( $content ) use ( $block ) {
 		wp_register_script(
 			'wpmovies/' . $block,
-			plugin_dir_url( __FILE__ ) . 'build/blocks/' . $folder . '/' . $block . '/view.js',
+			plugin_dir_url( __FILE__ ) . 'build/blocks/interactive/' . $block . '/view.js',
 			array( 'wp-directive-runtime' ),
 			'1.0.0',
 			true

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name:       WP Movies
  * Version:           0.1.1
@@ -112,3 +113,26 @@ function dequeue_twemoji() {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 ); // Emojis
 }
 add_action( 'wp_enqueue_scripts', 'dequeue_twemoji' );
+
+/**
+ * Add a unique key attribute to all images.
+ *
+ * TODO: Replace with `data-wp-key` once this is fixed:
+ * https://github.com/WordPress/block-interactivity-experiments/issues/180
+ *
+ * @param $content The block content.
+ * @return $content The block content with the added key attributes.
+ */
+
+function wpmovies_add_key_to_featured_image( $content ) {
+	$p = new WP_HTML_Tag_Processor( $content );
+	while ( $p->next_tag( array( 'tag_name' => 'img' ) ) ) {
+		$src = $p->get_attribute( 'src' );
+		if ( preg_match( '/\/([\w-]+)\.jpg$/', $src, $matches ) ) {
+			$p->set_attribute( 'key', $matches[1] );
+		}
+	};
+	return (string) $p;
+}
+
+add_filter( 'render_block', 'wpmovies_add_key_to_featured_image', 10, 1 );

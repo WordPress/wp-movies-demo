@@ -8,24 +8,24 @@ For the functionality of the likes, we created several blocks that work together
 <?php
 // render.php
 $wrapper_attributes = get_block_wrapper_attributes();
-$play_icon = file_get_contents(
-	get_template_directory() . '/assets/empty-heart.svg'
-);
-$likedMovies = [];
+$play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
+$likedMovies        = array();
 
-store([
-	'state' => [
-		'wpmovies' => [
-			'likedMovies' => $likedMovies,
-		],
-	],
-	'selectors' => [
-		'wpmovies' => [
-			'likesCount' => count($likedMovies),
-			'isLikedMoviesNotEmpty' => count($likedMovies) > 0,
-		],
-	],
-]);
+store(
+	array(
+		'state' => array(
+			'wpmovies' => array(
+				'likedMovies' => $likedMovies,
+			),
+		),
+		'selectors' => array(
+			'wpmovies' => array(
+				'likesCount'            => count( $likedMovies ),
+				'isLikedMoviesNotEmpty' => count( $likedMovies ) > 0,
+			),
+		),
+	),
+);
 ?>
 
 <div
@@ -49,16 +49,16 @@ On the server, the references of each directive will be evaluated and the HTML w
 
 ```js
 // view.js
-import { store } from '@wordpress/interactivity';
+import { store } from "@wordpress/interactivity";
 
 store({
-	selectors: {
-		wpmovies: {
-			likesCount: ({ state }) => state.wpmovies.likedMovies.length,
-			isLikedMoviesNotEmpty: ({ state }) =>
-				state.wpmovies.likedMovies.length !== 0,
-		},
-	},
+  selectors: {
+    wpmovies: {
+      likesCount: ({ state }) => state.wpmovies.likedMovies.length,
+      isLikedMoviesNotEmpty: ({ state }) =>
+        state.wpmovies.likedMovies.length !== 0,
+    },
+  },
 });
 ```
 
@@ -69,19 +69,19 @@ In the `view.js` file, we add the logic of the selectors that depend on the othe
 ```php
 <?php
 // render.php
-$post = get_post();
+$post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes();
-$play_icon = file_get_contents(
-	get_template_directory() . '/assets/empty-heart.svg'
-);
+$play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
 
-store([
-	'selectors' => [
-		'wpmovies' => [
-			'isMovieIncluded' => false,
-		],
-	],
-]);
+store(
+	array(
+		'selectors' => array(
+			'wpmovies' => array(
+				'isMovieIncluded' => false,
+			),
+		),
+	),
+);
 ?>
 
 <div
@@ -98,7 +98,7 @@ store([
 		>
 			<?php echo $play_icon; ?>
 			<span>
-				<?php _e('Like'); ?>
+				<?php _e( 'Like' ); ?>
 			</span>
 		</div>
 	</div>
@@ -115,27 +115,26 @@ It is also worth noting that we can use the PHP `_e( 'Like' )` function to trans
 
 ```js
 // view.js
-import { store } from '@wordpress/interactivity';
+import { store } from "@wordpress/interactivity";
 
 store({
-	selectors: {
-		wpmovies: {
-			isMovieIncluded: ({ state, context: { post } }) =>
-				state.wpmovies.likedMovies.includes(post.id),
-		},
-	},
-	actions: {
-		wpmovies: {
-			toggleMovie: ({ state, context }) => {
-				const index = state.wpmovies.likedMovies.findIndex(
-					(post) => post === context.post.id
-				);
-				if (index === -1)
-					state.wpmovies.likedMovies.push(context.post.id);
-				else state.wpmovies.likedMovies.splice(index, 1);
-			},
-		},
-	},
+  selectors: {
+    wpmovies: {
+      isMovieIncluded: ({ state, context: { post } }) =>
+        state.wpmovies.likedMovies.includes(post.id),
+    },
+  },
+  actions: {
+    wpmovies: {
+      toggleMovie: ({ state, context }) => {
+        const index = state.wpmovies.likedMovies.findIndex(
+          (post) => post === context.post.id
+        );
+        if (index === -1) state.wpmovies.likedMovies.push(context.post.id);
+        else state.wpmovies.likedMovies.splice(index, 1);
+      },
+    },
+  },
 });
 ```
 
@@ -148,14 +147,17 @@ In the `view.js` file, we add both the selector, which reads the post ID from th
 // render.php (simplified)
 // ...
 
-store([
-	'selectors' => [
-		'wpmovies' => [
-			'isImagesTab' => true,
-			'isVideosTab' => false,
-		],
-	],
-]); ?>
+store(
+	array(
+		'selectors' => array(
+			'wpmovies' => array(
+				'isImagesTab' => true,
+				'isVideosTab' => false,
+			),
+		),
+	),
+);
+?>
 
 <div
 	<?php echo $wrapper_attributes; ?>
@@ -178,24 +180,30 @@ store([
 
 	<div data-wp-show="selectors.wpmovies.isImagesTab">
 		<div class="wpmovies-media-scroller wpmovies-images-tab">
-			<?php foreach (json_decode($images, true) as $image_id) {
-   	$image_url = wp_get_attachment_image_url($image_id, ''); ?>
+			<?php
+			foreach ( json_decode( $images, true ) as $image_id ) {
+				$image_url = wp_get_attachment_image_url( $image_id, '' );
+				?>
 				<img src="<?php echo $image_url; ?>">
 				<?php
-   } ?>
+			}
+			?>
 		</div>
 	</div>
 
 	<div data-wp-show="selectors.wpmovies.isVideosTab">
 		<div class="wpmovies-media-scroller wpmovies-videos-tab">
-			<?php foreach (json_decode($videos, true) as $video) {
-   	$video_id = substr($video['url'], strpos($video['url'], '?v=') + 3); ?>
+			<?php
+			foreach ( json_decode( $videos, true ) as $video ) {
+				$video_id = substr( $video['url'], strpos( $video['url'], '?v=' ) + 3 );
+				?>
 				<div class="wpmovies-tabs-video-wrapper" data-wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>
 					<div data-wp-on.click="actions.wpmovies.setVideo"><svg ...></div>
 					<img src="<?php echo 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
 				</div>
 				<?php
-   } ?>
+			}
+			?>
 		</div>
 	</div>
 </div>
@@ -211,25 +219,25 @@ After the buttons, we use `data-wp-show` to show or hide the content of each tab
 
 ```js
 // view.js
-import { store } from '@wordpress/interactivity';
+import { store } from "@wordpress/interactivity";
 
 store({
-	selectors: {
-		wpmovies: {
-			isImagesTab: ({ context }) => context.tab === 'images',
-			isVideosTab: ({ context }) => context.tab === 'videos',
-		},
-	},
-	actions: {
-		wpmovies: {
-			showImagesTab: ({ context }) => {
-				context.tab = 'images';
-			},
-			showVideosTab: ({ context }) => {
-				context.tab = 'videos';
-			},
-		},
-	},
+  selectors: {
+    wpmovies: {
+      isImagesTab: ({ context }) => context.tab === "images",
+      isVideosTab: ({ context }) => context.tab === "videos",
+    },
+  },
+  actions: {
+    wpmovies: {
+      showImagesTab: ({ context }) => {
+        context.tab = "images";
+      },
+      showVideosTab: ({ context }) => {
+        context.tab = "videos";
+      },
+    },
+  },
 });
 ```
 
@@ -254,24 +262,27 @@ In the `view.js`, we simply set the selectors that vary depending on the context
 <?php
 // Video Player
 // render.php (simplified)
-store([
-	'state' => [
-		'wpmovies' => [
-			'currentVideo' => '',
-		],
-	],
-	'selectors' => [
-		'wpmovies' => [
-			'isPlaying' => false,
-		],
-	],
-]); ?>
+store(
+	array(
+		'state'     => array(
+			'wpmovies' => array(
+				'currentVideo' => '',
+			),
+		),
+		'selectors' => array(
+			'wpmovies' => array(
+				'isPlaying' => false,
+			),
+		),
+	),
+);
+?>
 
 <div data-wp-show="selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>
 	<div class="wpmovies-video-wrapper">
 		<div class="wpmovies-video-close">
 			<button class="close-button" data-wp-on.click="actions.wpmovies.closeVideo">
-				<?php _e('Close'); ?>
+				<?php _e( 'Close' ); ?>
 			</button>
 		</div>
 		<iframe
@@ -293,27 +304,25 @@ In the HTML, we use a `data-wp-show` directive to show a modal when there is a v
 
 ```js
 // view.js
-import { store } from '@wordpress/interactivity';
+import { store } from "@wordpress/interactivity";
 
 store({
-	selectors: {
-		wpmovies: {
-			isPlaying: ({ state }) => state.wpmovies.currentVideo !== '',
-		},
-	},
-	actions: {
-		wpmovies: {
-			closeVideo: ({ state }) => {
-				state.wpmovies.currentVideo = '';
-			},
-			setVideo: ({ state, context }) => {
-				state.wpmovies.currentVideo =
-					'https://www.youtube.com/embed/' +
-					context.videoId +
-					'?autoplay=1';
-			},
-		},
-	},
+  selectors: {
+    wpmovies: {
+      isPlaying: ({ state }) => state.wpmovies.currentVideo !== "",
+    },
+  },
+  actions: {
+    wpmovies: {
+      closeVideo: ({ state }) => {
+        state.wpmovies.currentVideo = "";
+      },
+      setVideo: ({ state, context }) => {
+        state.wpmovies.currentVideo =
+          "https://www.youtube.com/embed/" + context.videoId + "?autoplay=1";
+      },
+    },
+  },
 });
 ```
 
@@ -324,15 +333,19 @@ In the `view.js` file, we simply set a selector to know if there is a video play
 ```php
 <?php
 // render.php
-$wrapper_attributes = get_block_wrapper_attributes(['class' => 'movie-search']);
+$wrapper_attributes = get_block_wrapper_attributes(
+	array( 'class' => 'movie-search' )
+);
 
-store([
-	'state' => [
-		'wpmovies' => [
-			'searchValue' => get_search_query(),
-		],
-	],
-]);
+store(
+	array(
+		'state' => array(
+			'wpmovies' => array(
+				'searchValue' => get_search_query(),
+			),
+		),
+	),
+);
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>
@@ -356,38 +369,38 @@ Then, in the HTML, we use the `data-wp-bind` directive to update the input value
 
 ```js
 // view.js
-import { store } from '@wordpress/interactivity';
+import { store } from "@wordpress/interactivity";
 
 const updateURL = async (value) => {
-	const url = new URL(window.location);
-	url.searchParams.set('post_type', 'movies');
-	url.searchParams.set('orderby', 'name');
-	url.searchParams.set('order', 'asc');
-	url.searchParams.set('s', value);
-	await navigate(`/${url.search}${url.hash}`);
+  const url = new URL(window.location);
+  url.searchParams.set("post_type", "movies");
+  url.searchParams.set("orderby", "name");
+  url.searchParams.set("order", "asc");
+  url.searchParams.set("s", value);
+  await navigate(`/${url.search}${url.hash}`);
 };
 
 store({
-	actions: {
-		wpmovies: {
-			updateSearch: async ({ state, event }) => {
-				const { value } = event.target;
+  actions: {
+    wpmovies: {
+      updateSearch: async ({ state, event }) => {
+        const { value } = event.target;
 
-				// Don't navigate if the search didn't really change.
-				if (value === state.wpmovies.searchValue) return;
+        // Don't navigate if the search didn't really change.
+        if (value === state.wpmovies.searchValue) return;
 
-				state.wpmovies.searchValue = value;
+        state.wpmovies.searchValue = value;
 
-				if (value === '') {
-					// If the search is empty, navigate to the home page.
-					await navigate('/');
-				} else {
-					// If not, navigate to the new URL.
-					await updateURL(value);
-				}
-			},
-		},
-	},
+        if (value === "") {
+          // If the search is empty, navigate to the home page.
+          await navigate("/");
+        } else {
+          // If not, navigate to the new URL.
+          await updateURL(value);
+        }
+      },
+    },
+  },
 });
 ```
 

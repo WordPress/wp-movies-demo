@@ -136,3 +136,17 @@ function wpmovies_add_key_to_featured_image( $content ) {
 }
 
 add_filter( 'render_block', 'wpmovies_add_key_to_featured_image', 10, 1 );
+
+
+/**
+ * add aria-live region to query block so that the live
+ * updating results are announced to screen readers.
+ */
+function wpmovies_add_aria_live_to_query_block( $content ) {
+	$p = new WP_HTML_Tag_Processor( $content );
+	$p->next_tag( array( 'class' => 'wp-block-query' ) );
+	$p->set_attribute( 'aria-live', 'polite' );
+	return (string) $p->get_updated_html();
+}
+
+add_filter( 'render_block_core/query', 'wpmovies_add_aria_live_to_query_block', 10, 1 );

@@ -9,15 +9,9 @@ It can be installed as a WordPress plugin that creates a site similar to (TODO: 
 
 The plugin is split into:
 
--   `/src/blocks` - **Start here to understand how to build interactive blocks with the
-    Interactivity API**. The folder contains all the custom blocks used in the
-    demo. The interactive blocks that use the Interactivity API are:
-
-    -   [`/src/blocks/interactive/likes-number`](/src/blocks/interactive/likes-number) - Displays the number of movies liked.
-    -   [`/src/blocks/interactive/movie-search`](/src/blocks/interactive/movie-search) - An interactive movie search block.
-    -   [`/src/blocks/interactive/movie-like-button`](/src/blocks/interactive/movie-like-button) - A block that allows the users to like a movie.
-    -   [`/src/blocks/interactive/video-player`](/src/blocks/interactive/video-player) - A video player block that plays the movie trailers using Picture-in-Picture (PiP).
-    -   [`/src/blocks/interactive/movie-tabs`](/src/blocks/interactive/movie-tabs) - A "tabs" block which allows the user to switch between different kinds of info about the movie.
+-   `/src/blocks/interactive` - **Start here to understand how to build interactive blocks with the
+    Interactivity API**. The folder contains all the custom interactive blocks used in the
+    demo.
 
 -   `/lib` - The code that contains the runtime and internals of the Interactivity
     API and the configuration needed to run the demo.
@@ -37,7 +31,7 @@ your projects at your own risk.
 
 In order to be able to test this demo, you just need to:
 
-1. Install the required plugins
+1. Install the required plugins:
 
     - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
 
@@ -63,7 +57,7 @@ In order to be able to test this demo, you just need to:
     npm start
     ```
 
-2. Install the theme
+2. Install the theme:
 
     You need to install and activate the [Movies Demo
     Theme](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-theme.zip).
@@ -74,7 +68,7 @@ In order to be able to test this demo, you just need to:
       npx wp-env run cli "wp theme activate wp-movies-theme"
     ```
 
-3. Add the movie and actor data to the WordPress database
+3. Add the movie and actor data to the WordPress database:
 
     You can import the data manually:
 

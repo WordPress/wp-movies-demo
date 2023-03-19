@@ -89,29 +89,6 @@ function auto_inject_interactivity_dependency() {
 	}
 }
 
-
-/**
- * A helper function that enqueues scripts for the interactive blocks.
- *
- * @param string $block - The block name.
- * @return void
- */
-function enqueue_interactive_blocks_scripts( $block ) {
-	$interactive_block_filter = function ( $content ) use ( $block ) {
-		wp_register_script(
-			'wpmovies/' . $block,
-			plugin_dir_url( __FILE__ ) . 'build/blocks/interactive/' . $block . '/view.js',
-			array( 'wp-directive-runtime' ),
-			'1.0.0',
-			true
-		);
-		wp_enqueue_script( 'wpmovies/' . $block );
-		return $content;
-	};
-	add_filter( 'render_block_wpmovies/' . $block, $interactive_block_filter );
-}
-
-
 // ADD CRON EVENTS TO IMPORT MOVIES DAILY
 // Create the necessary hook
 add_action( 'cron_wpmovies_add_movies', 'wpmovies_add_movies' );

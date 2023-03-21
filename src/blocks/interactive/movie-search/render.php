@@ -15,13 +15,13 @@ store(
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>
-	<input 
-	  type="search" 
-	  name="s" 
-	  inputmode="search" 
-	  placeholder="Search for a movie..." 
-		required="" 
-		wp-bind:value="state.wpmovies.searchValue" 
-		wp-on:input="actions.wpmovies.updateSearch"
+	<input
+		type="search"
+		name="s"
+		inputmode="search"
+		placeholder="Search for a movie..."
+		required=""
+		data-wp-bind.value="state.wpmovies.searchValue"
+		data-wp-on.input="actions.wpmovies.updateSearch"
 	>
 </div>

@@ -18,55 +18,55 @@ store(
 );
 ?>
 
-<div 
+<div
 	<?php echo $wrapper_attributes; ?>
-	wp-context='{ "tab": "images" }'
+	data-wp-context='{ "tab": "images" }'
 >
 	<ul>
 		<li
-			wp-on:click="actions.wpmovies.showImagesTab"
-			wp-class:wpmovies-active-tab="selectors.wpmovies.isImagesTab"
+			data-wp-on.click="actions.wpmovies.showImagesTab"
+			data-wp-class.wpmovies-active-tab="selectors.wpmovies.isImagesTab"
 			class="wpmovies-tabs-title"
 		>
-				Images
-			</li>
+			Images
+		</li>
 		<li
-			wp-on:click="actions.wpmovies.showVideosTab"
-			wp-class:wpmovies-active-tab="selectors.wpmovies.isVideosTab"
+			data-wp-on.click="actions.wpmovies.showVideosTab"
+			data-wp-class.wpmovies-active-tab="selectors.wpmovies.isVideosTab"
 			class=" wpmovies-tabs-title"
 		>
-				Videos
-			</li>
+			Videos
+		</li>
 	</ul>
-	
-	<div wp-show="selectors.wpmovies.isImagesTab">
+
+	<div data-wp-show="selectors.wpmovies.isImagesTab">
 		<div class="wpmovies-media-scroller wpmovies-images-tab">
 			<?php
 			foreach ( json_decode( $images, true ) as $image_id ) {
 				$image_url = wp_get_attachment_image_url( $image_id, '' );
-				?>
+			?>
 				<img src="<?php echo $image_url; ?>">
-				<?php
+			<?php
 			}
 			?>
 		</div>
 	</div>
 
-	<div wp-show="selectors.wpmovies.isVideosTab">
+	<div data-wp-show="selectors.wpmovies.isVideosTab">
 		<div class="wpmovies-media-scroller wpmovies-videos-tab">
 			<?php
 			foreach ( json_decode( $videos, true ) as $video ) {
 				$video_id = substr( $video['url'], strpos( $video['url'], '?v=' ) + 3 );
-				?>
-				<div class="wpmovies-tabs-video-wrapper" wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>
-					<div wp-on:click="actions.wpmovies.setVideo">
+			?>
+				<div class="wpmovies-tabs-video-wrapper" data-wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>
+					<div data-wp-on.click="actions.wpmovies.setVideo">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" class="play-icon">
 							<path d="M3 22v-20l18 10-18 10z" />
 						</svg>
 					</div>
 					<img src="<?php echo 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
 				</div>
-				<?php
+			<?php
 			}
 			?>
 		</div>

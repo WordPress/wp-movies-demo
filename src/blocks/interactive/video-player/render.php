@@ -19,19 +19,19 @@ store(
 );
 ?>
 
-<div wp-show="selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>
+<div data-wp-show="selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>
 	<div class="wpmovies-video-wrapper">
 		<div class="wpmovies-video-close">
-			<button class="close-button" wp-on:click="actions.wpmovies.closeVideo">
+			<button class="close-button" data-wp-on.click="actions.wpmovies.closeVideo">
 				<?php _e( 'Close' ); ?>
 			</button>
 		</div>
 		<iframe
-			width="420" 
-			height="315" 
+			width="420"
+			height="315"
 			allow="autoplay"
 			allowfullscreen
-			wp-bind:src="state.wpmovies.currentVideo"
+			data-wp-bind.src="state.wpmovies.currentVideo"
 		></iframe>
 	</div>
 </div>

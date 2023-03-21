@@ -6,18 +6,6 @@ module.exports = [
 	{
 		...defaultConfig,
 		entry: {
-			'blocks/interactive/likes-number/view': './src/blocks/interactive/likes-number/view',
-			'blocks/interactive/movie-like-icon/view': './src/blocks/interactive/movie-like-icon/view',
-			'blocks/interactive/movie-search/view': './src/blocks/interactive/movie-search/view',
-			'blocks/interactive/video-player/view': './src/blocks/interactive/video-player/view',
-			'blocks/interactive/movie-tabs/view': './src/blocks/interactive/movie-tabs/view',
-			'blocks/interactive/movie-like-button/view':
-				'./src/blocks/interactive/movie-like-button/view',
-		},
-	},
-	{
-		...defaultConfig,
-		entry: {
 			'query-loop-variations': './lib/query-loop-variations',
 		},
 		output: {

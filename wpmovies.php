@@ -36,58 +36,58 @@ if ( ! is_plugin_active( 'block-interactivity-experiments/wp-directives.php' ) )
 	return;
 }
 
-add_action(
-	'init',
-	function () {
-		register_block_type( __DIR__ . '/build/blocks/interactive/movie-like-icon' );
-		register_block_type( __DIR__ . '/build/blocks/interactive/likes-number' );
-		register_block_type( __DIR__ . '/build/blocks/interactive/movie-search' );
-		register_block_type( __DIR__ . '/build/blocks/interactive/movie-trailer-button' );
-		register_block_type( __DIR__ . '/build/blocks/interactive/movie-like-button' );
-		register_block_type( __DIR__ . '/build/blocks/interactive/video-player' );
-		register_block_type( __DIR__ . '/build/blocks/interactive/movie-tabs' );
-		register_block_type( __DIR__ . '/build/blocks/interactive/movie-genres' );
-		register_block_type( __DIR__ . '/build/blocks/non-interactive/movie-data' );
-		register_block_type( __DIR__ . '/build/blocks/non-interactive/movie-score' );
-		register_block_type( __DIR__ . '/build/blocks/non-interactive/page-background' );
-		register_block_type( __DIR__ . '/build/blocks/non-interactive/movie-release-date' );
-		register_block_type( __DIR__ . '/build/blocks/non-interactive/movie-runtime' );
-		register_block_type( __DIR__ . '/build/blocks/non-interactive/actor-birthday' );
-		register_block_type( __DIR__ . '/build/blocks/non-interactive/actor-birth-place' );
-	}
-);
+add_action( 'init', 'auto_register_block_types' );
 
-// We need these filters to ensure the view.js files can access the window.__experimentalInteractivity
-// Once the bundling is solved and we stop using
-// window.__experimentalInteractivity we can remove them.
-enqueue_interactive_blocks_scripts( 'movie-like-icon' );
-enqueue_interactive_blocks_scripts( 'likes-number' );
-enqueue_interactive_blocks_scripts( 'movie-search' );
-enqueue_interactive_blocks_scripts( 'movie-like-button' );
-enqueue_interactive_blocks_scripts( 'video-player' );
-enqueue_interactive_blocks_scripts( 'movie-tabs' );
+// Register all blocks found in the `build/blocks` folder.
+function auto_register_block_types() {
+	if ( file_exists( __DIR__ . '/build/blocks/' ) ) {
+		$interactive_block_json_files     = glob( __DIR__ . '/build/blocks/interactive/*/block.json' );
+		$non_interactive_block_json_files = glob( __DIR__ . '/build/blocks/non-interactive/*/block.json' );
+		$block_json_files                 = array_merge( $interactive_block_json_files, $non_interactive_block_json_files );
 
-/**
- * A helper function that enqueues scripts for the interactive blocks.
- *
- * @param string $block - The block name.
- * @return void
- */
-function enqueue_interactive_blocks_scripts( $block ) {
-	$interactive_block_filter = function ( $content ) use ( $block ) {
-		wp_register_script(
-			'wpmovies/' . $block,
-			plugin_dir_url( __FILE__ ) . 'build/blocks/interactive/' . $block . '/view.js',
-			array( 'wp-directive-runtime' ),
-			'1.0.0',
-			true
-		);
-		wp_enqueue_script( 'wpmovies/' . $block );
-		return $content;
+		// auto register all blocks that were found.
+		foreach ( $block_json_files as $filename ) {
+			$block_folder = dirname( $filename );
+			register_block_type( $block_folder );
+		};
 	};
-	add_filter( 'render_block_wpmovies/' . $block, $interactive_block_filter );
 }
 
+function add_script_dependency( $handle, $dep, $in_footer ) {
+	global $wp_scripts;
+
+	$script = $wp_scripts->query( $handle, 'registered' );
+	if ( ! $script )
+		return false;
+
+	if ( ! in_array( $dep, $script->deps, true ) ) {
+		$script->deps[] = $dep;
+
+		if ( $in_footer ) {
+			// move script to the footer
+			$wp_scripts->add_data( $handle, 'group', 1 );
+		}
+	}
+
+	return true;
+}
+
+add_action( 'wp_enqueue_scripts', 'auto_inject_interactivity_dependency' );
+
+function auto_inject_interactivity_dependency() {
+	$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
+
+	foreach ( $registered_blocks as $name => $block ) {
+		$has_interactivity_support = $block->supports['interactivity'] ?? false;
+
+		if ( ! $has_interactivity_support ) {
+			continue;
+		}
+		foreach ( $block->view_script_handles as $handle ) {
+			add_script_dependency( $handle, 'wp-directive-runtime', true );
+		}
+	}
+}
 
 // ADD CRON EVENTS TO IMPORT MOVIES DAILY
 // Create the necessary hook

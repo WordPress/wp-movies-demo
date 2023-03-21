@@ -35,7 +35,7 @@ In order to be able to test this demo, you just need to:
 
     - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
 
-    - [Block Interactivity Experiments](https://github.com/WordPress/block-hydration-experiments/releases/latest/download/block-interactivity-experiments.zip). This one requires Gutenberg to work.
+    - [Block Interactivity Experiments](https://github.com/WordPress/block-interactivity-experiments/releases/latest/download/block-interactivity-experiments.zip). This one requires Gutenberg to work.
 
     - [Movies Demo Plugin](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip). This one requires the Block Interactivity Experiments to work.
 

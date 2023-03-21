@@ -20,10 +20,9 @@ store(
 );
 ?>
 
-<div
+<div 
 	<?php echo $wrapper_attributes; ?>
-	wp-class:wpmovies-liked="selectors.wpmovies.isLikedMoviesNotEmpty"
->
+	data-wp-class.wpmovies-liked="selectors.wpmovies.isLikedMoviesNotEmpty">
 	<?php echo $play_icon; ?>
-	<span wp-text="selectors.wpmovies.likesCount"></span>
+	<span data-wp-text="selectors.wpmovies.likesCount"></span>
 </div>

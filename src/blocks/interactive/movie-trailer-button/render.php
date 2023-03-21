@@ -15,12 +15,12 @@ if ( count( $trailers ) !== 0 ) {
 	$trailer_id  = substr( $trailer_url, strpos( $trailer_url, '?v=' ) + 3 );
 ?>
 
-<div <?php echo $wrapper_attributes; ?> wp-context='{ "videoId": "<?php echo $trailer_id; ?>" }'>
-	<div class="wpmovies-page-button-parent" wp-on:click="actions.wpmovies.setVideo">
-		<div class="wpmovies-page-button-child">
-			<?php echo $play_icon; ?><span>Play trailer</span>
+	<div <?php echo $wrapper_attributes; ?> data-wp-context='{ "videoId": "<?php echo $trailer_id; ?>" }'>
+		<div class="wpmovies-page-button-parent" data-wp-on.click="actions.wpmovies.setVideo">
+			<div class="wpmovies-page-button-child">
+				<?php echo $play_icon; ?><span>Play trailer</span>
+			</div>
 		</div>
 	</div>
-</div>
 
 <?php } ?>

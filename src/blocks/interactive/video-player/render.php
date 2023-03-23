@@ -3,7 +3,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'wpmovies-video-player' )
 );
 
-store(
+wp_store(
 	array(
 		'state'     => array(
 			'wpmovies' => array(

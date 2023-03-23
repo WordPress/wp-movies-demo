@@ -6,7 +6,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 $images             = get_post_meta( $post->ID, '_wpmovies_images', true );
 $videos             = get_post_meta( $post->ID, '_wpmovies_videos', true );
 
-store(
+wp_store(
 	array(
 		'selectors' => array(
 			'wpmovies' => array(

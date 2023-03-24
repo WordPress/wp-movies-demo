@@ -6,7 +6,7 @@
 .wp-block-wpmovies-movie-data > ul > li {
 	display: flex;
 	padding: 0.2rem 0;
-	margin-bottom: 16px;
+	margin-bottom: 4px;
 }
 
 .wp-block-wpmovies-movie-data > ul > li > div.wpmovies-data-list-key {

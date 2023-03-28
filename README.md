@@ -5,7 +5,7 @@
 ## What is this?
 
 This is a demo plugin which shows the features of the [Interactivity API](https://github.com/WordPress/block-interactivity-experiments) for
-WordPress (TODO: `link to the blog post in Make Core`).
+WordPress proposed in this post in Make WordPress Core blog. (TODO: `link to the blog post in Make Core`).
 
 The plugin is split into:
 

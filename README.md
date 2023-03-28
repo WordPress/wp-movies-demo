@@ -1,11 +1,11 @@
 # Interactivity API Demo - WP Movies
 
+🎥 Live demo: [wpmovies.dev](https://wpmovies.dev)
+
 ## What is this?
 
 This is a demo plugin which shows the features of the [Interactivity API](https://github.com/WordPress/block-interactivity-experiments) for
 WordPress (TODO: `link to the blog post in Make Core`).
-
-It can be installed as a WordPress plugin that creates a site similar to (TODO: `insert URL when have a production site`)
 
 The plugin is split into:
 

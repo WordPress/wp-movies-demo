@@ -153,8 +153,8 @@ function wpmovies_add_aria_live_to_query_block( $content ) {
 add_filter( 'render_block_core/query', 'wpmovies_add_aria_live_to_query_block', 10, 1 );
 
 function wp_directives_prefetch_page_nambers_false( $block_content ) {
-		$site_url = parse_url( get_site_url() );
-		$w        = new WP_HTML_Tag_Processor( $block_content );
+	$site_url = parse_url( get_site_url() );
+	$w        = new WP_HTML_Tag_Processor( $block_content );
 	while ( $w->next_tag( 'a' ) ) {
 		if ( $w->get_attribute( 'target' ) === '_blank' ) {
 			break;
@@ -173,7 +173,7 @@ function wp_directives_prefetch_page_nambers_false( $block_content ) {
 			}
 		}
 	}
-		return (string) $w;
+	return (string) $w;
 }
 // We go only through the Query Loops and the template parts until we find a better solution.
 add_filter(

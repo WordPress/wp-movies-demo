@@ -99,3 +99,7 @@ header > div.wp-block-group {
 .wpmovies-liked svg > path {
 	stroke-width: 0;
 }
+
+.page-numbers {
+	margin-right: 8px;
+}

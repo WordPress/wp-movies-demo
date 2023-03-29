@@ -100,6 +100,9 @@ header > div.wp-block-group {
 	stroke-width: 0;
 }
 
-.page-numbers {
-	margin-right: 8px;
+@media screen and (max-width: 900px) {
+	.page-numbers {
+		padding: 20px;
+		font-size: 18px;
+	}
 }

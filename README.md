@@ -2,6 +2,10 @@
 
 🎥 Live demo: [wpmovies.dev](https://wpmovies.dev)
 
+
+https://user-images.githubusercontent.com/5417266/228688653-4af8bbae-0360-468e-a662-1a3998e62cb6.mp4
+
+
 ## What is this?
 
 This is a demo plugin which shows the features of the [Interactivity API](https://github.com/WordPress/block-interactivity-experiments) for
@@ -22,7 +26,7 @@ The plugin is split into:
 
 ## When will I be able to use this?
 
-The Interactivity API is an **experimental feature** and not ready for adoption yet.
+The [Interactivity API](https://github.com/WordPress/block-interactivity-experiments) is an **experimental feature** and not ready for adoption yet.
 It is under active development and its final public API is **very likely going to change before an official release**.
 For now, it's recommended to experiment with the Interactivity API via this demo. Use this in
 your projects at your own risk.
@@ -37,7 +41,7 @@ In order to be able to test this demo, you just need to:
 
     - [Block Interactivity Experiments](https://github.com/WordPress/block-interactivity-experiments/releases/latest/download/block-interactivity-experiments.zip). This one requires Gutenberg to work.
 
-    - [Movies Demo Plugin](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip). This one requires the Block Interactivity Experiments to work.
+    - [Movies Demo Plugin](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip). This one requires the Block Interactivity Experiments to work.
 
     Note that, if you are using `wp-env` to run your site locally, these plugins will be installed by default after running `wp-env` start. Before that, don't forget to:
 
@@ -60,7 +64,7 @@ In order to be able to test this demo, you just need to:
 2. Install the theme:
 
     You need to install and activate the [Movies Demo
-    Theme](https://github.com/c4rl0sbr4v0/wp-movies-demo/releases/latest/download/wp-movies-theme.zip).
+    Theme](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-theme.zip).
     Again, if you are using `wp-env`, it is already installed by default and you
     just have to activate it. You can run:
 

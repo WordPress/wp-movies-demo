@@ -103,7 +103,7 @@ function wpmovies_add_movies() {
 	$actors_per_movie = intval( $_ENV['ACTORS_PER_MOVIE'] );
 
 	for ( $i = $movie_pages; $i >= 1; $i-- ) {
-		$movies = $moviesRepository->getPopular( array( 'page' => $i ) );
+		$movies = $moviesRepository->getTopRated( array( 'page' => $i ) );
 		foreach ( array_reverse( $movies->toArray() ) as $movie ) {
 			// 0. GET DATA
 			// From TMDB API

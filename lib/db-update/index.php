@@ -113,7 +113,7 @@ function wpmovies_add_movies() {
 			// Filter adult movies
 			$movie_adult = $movie_data->getAdult();
 			if ( $movie_adult === true ) {
-				break;
+				continue;
 			}
 			$movie_keywords = $movie_data->getKeywords();
 			$skip_movie     = false;
@@ -124,7 +124,7 @@ function wpmovies_add_movies() {
 				}
 			}
 			if ( $skip_movie === true ) {
-				break;
+				continue;
 			}
 
 			// Movie Fields

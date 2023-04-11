@@ -50,13 +50,15 @@ function wpmovies_build_query( $query ) {
 		$order_metafield = '_wpmovies_actors_popularity';
 	};
 	$query['meta_query'] = array(
-		'_wpmovies_metafield__order_by' => array(
-			'key'     => $order_metafield,
-			'type'    => 'CHAR',
+		array(
+			'key'     => '_wpmovies_vote_count',
+			'value'   => '3000',
+			'type'    => 'NUMERIC',
 			'compare' => '>',
-		),
+		)
 	);
-	$query['orderby']    = '_wpmovies_metafield__order_by';
+	$query['meta_key']   = $order_metafield;
+	$query['orderby']    = 'meta_value_num';
 	$query['order']      = 'DESC';
 
 	// Get correct taxonomy

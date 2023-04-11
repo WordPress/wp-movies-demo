@@ -43,20 +43,20 @@ function wpmovies_update_demo_query( $pre_render, $parsed_block ) {
 
 function wpmovies_build_query( $query ) {
 	// Order by popularity
-	$popularity_metafield = '';
+	$order_metafield = '';
 	if ( $query['post_type'] === 'movies' ) {
-		$popularity_metafield = '_wpmovies_popularity';
+		$order_metafield = '_wpmovies_vote_average';
 	} elseif ( $query['post_type'] === 'actors' ) {
-		$popularity_metafield = '_wpmovies_actors_popularity';
+		$order_metafield = '_wpmovies_actors_popularity';
 	};
 	$query['meta_query'] = array(
-		'_wpmovies_popularity__order_by' => array(
-			'key'     => $popularity_metafield,
-			'type'    => 'NUMERIC',
-			'compare' => 'NUMERIC',
+		'_wpmovies_metafield__order_by' => array(
+			'key'     => $order_metafield,
+			'type'    => 'CHAR',
+			'compare' => '>',
 		),
 	);
-	$query['orderby']    = '_wpmovies_popularity__order_by';
+	$query['orderby']    = '_wpmovies_metafield__order_by';
 	$query['order']      = 'DESC';
 
 	// Get correct taxonomy
@@ -85,14 +85,7 @@ function wpmovies_build_query( $query ) {
 	$replace_query = array(
 		'taxonomy'         => $taxonomy_type,
 		'terms'            => array( $wp_term->term_id ),
-		'include_children' => false,
-		'meta_query'       => array(
-			'_wpmovies_popularity__order_by' => array(
-				'key'     => '_wpmovies_popularity',
-				'type'    => 'NUMERIC',
-				'compare' => 'NUMERIC',
-			),
-		),
+		'include_children' => false
 	);
 
 	$new_query = array_replace( $query, array( 'tax_query' => array( $replace_query ) ) );

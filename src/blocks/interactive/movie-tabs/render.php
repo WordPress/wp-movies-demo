@@ -44,9 +44,9 @@ wp_store(
 			<?php
 			foreach ( json_decode( $images, true ) as $image_id ) {
 				$image_url = wp_get_attachment_image_url( $image_id, '' );
-			?>
+				?>
 				<img src="<?php echo $image_url; ?>">
-			<?php
+				<?php
 			}
 			?>
 		</div>
@@ -57,16 +57,16 @@ wp_store(
 			<?php
 			foreach ( json_decode( $videos, true ) as $video ) {
 				$video_id = substr( $video['url'], strpos( $video['url'], '?v=' ) + 3 );
-			?>
+				?>
 				<div class="wpmovies-tabs-video-wrapper" data-wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>
-					<div data-wp-on.click="actions.wpmovies.setVideo">
+					<div data-wp-on.click="actions.wpmovies.setVideo" aria-controls="wp-movies-video-player">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" class="play-icon">
 							<path d="M3 22v-20l18 10-18 10z" />
 						</svg>
 					</div>
 					<img src="<?php echo 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
 				</div>
-			<?php
+				<?php
 			}
 			?>
 		</div>

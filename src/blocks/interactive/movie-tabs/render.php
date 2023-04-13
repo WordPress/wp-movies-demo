@@ -22,24 +22,32 @@ wp_store(
 	<?php echo $wrapper_attributes; ?>
 	data-wp-context='{ "tab": "images" }'
 >
-	<ul>
-		<li
-			data-wp-on.click="actions.wpmovies.showImagesTab"
-			data-wp-class.wpmovies-active-tab="selectors.wpmovies.isImagesTab"
-			class="wpmovies-tabs-title"
-		>
+	<ul role="tablist">
+		<li class="wpmovies-tabs-title">
+			<button
+				data-wp-on.click="actions.wpmovies.showImagesTab"
+				data-wp-class.wpmovies-active-tab="selectors.wpmovies.isImagesTab"
+				data-wp-bind.aria-selected="selectors.wpmovies.isImagesTab"
+				role="tab"
+				class="wpmovies-tab-button"
+			>
 			Images
+			</button>
 		</li>
-		<li
-			data-wp-on.click="actions.wpmovies.showVideosTab"
-			data-wp-class.wpmovies-active-tab="selectors.wpmovies.isVideosTab"
-			class=" wpmovies-tabs-title"
-		>
+		<li class="wpmovies-tabs-title">
+			<button
+				data-wp-on.click="actions.wpmovies.showVideosTab"
+				data-wp-class.wpmovies-active-tab="selectors.wpmovies.isVideosTab"
+				data-wp-bind.aria-selected="selectors.wpmovies.isVideosTab"
+				role="tab"
+				class="wpmovies-tab-button"
+			>
 			Videos
+			</button>
 		</li>
 	</ul>
 
-	<div data-wp-show="selectors.wpmovies.isImagesTab">
+	<div role="tabpanel" data-wp-show="selectors.wpmovies.isImagesTab">
 		<div class="wpmovies-media-scroller wpmovies-images-tab">
 			<?php
 			foreach ( json_decode( $images, true ) as $image_id ) {
@@ -52,7 +60,7 @@ wp_store(
 		</div>
 	</div>
 
-	<div data-wp-show="selectors.wpmovies.isVideosTab">
+	<div role="tabpanel" data-wp-show="selectors.wpmovies.isVideosTab">
 		<div class="wpmovies-media-scroller wpmovies-videos-tab">
 			<?php
 			foreach ( json_decode( $videos, true ) as $video ) {

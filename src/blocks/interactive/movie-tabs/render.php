@@ -25,6 +25,7 @@ wp_store(
 	<ul role="tablist">
 		<li class="wpmovies-tabs-title">
 			<button
+				id="wpmovies-images-tab"
 				data-wp-on.click="actions.wpmovies.showImagesTab"
 				data-wp-class.wpmovies-active-tab="selectors.wpmovies.isImagesTab"
 				data-wp-bind.aria-selected="selectors.wpmovies.isImagesTab"
@@ -36,6 +37,7 @@ wp_store(
 		</li>
 		<li class="wpmovies-tabs-title">
 			<button
+				id="wpmovies-videos-tab"
 				data-wp-on.click="actions.wpmovies.showVideosTab"
 				data-wp-class.wpmovies-active-tab="selectors.wpmovies.isVideosTab"
 				data-wp-bind.aria-selected="selectors.wpmovies.isVideosTab"
@@ -47,7 +49,12 @@ wp_store(
 		</li>
 	</ul>
 
-	<div role="tabpanel" data-wp-show="selectors.wpmovies.isImagesTab">
+	<div 
+		role="tabpanel" 
+		data-wp-show="selectors.wpmovies.isImagesTab" 
+		aria-hidden="selectors.wpmovies.isVideosTab" 
+		aria-labelledby="wpmovies-images-tab"
+	>
 		<div class="wpmovies-media-scroller wpmovies-images-tab">
 			<?php
 			foreach ( json_decode( $images, true ) as $image_id ) {
@@ -60,7 +67,12 @@ wp_store(
 		</div>
 	</div>
 
-	<div role="tabpanel" data-wp-show="selectors.wpmovies.isVideosTab">
+	<div 
+		role="tabpanel" 
+		data-wp-show="selectors.wpmovies.isVideosTab" 
+		aria-hidden="selectors.wpmovies.isImagesTab" 
+		aria-labelledby="wpmovies-videos-tab"
+	>
 		<div class="wpmovies-media-scroller wpmovies-videos-tab">
 			<?php
 			foreach ( json_decode( $videos, true ) as $video ) {

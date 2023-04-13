@@ -23,7 +23,17 @@
 	white-space: nowrap;
 }
 
-.wpmovies-media-scroller img {
+/* Hide the 2nd image/video on smaller screens */
+@media screen and (max-width: 1080px) {
+	.wpmovies-media-scroller img:nth-of-type(n+2) {
+		display: none;
+	}	
+	.wpmovies-media-scroller video:nth-of-type(n+2) {
+		display: none;
+	}
+}
+
+.wpmovies-media-scroller img:first-of-type {
 	margin-right: 10px;
 }
 

@@ -15,14 +15,19 @@ wp_store(
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>
-	<input
-		type="search"
-		name="s"
-		inputmode="search"
-		placeholder="Search for a movie..."
-		required=""
-		autocomplete="off"
-		data-wp-bind.value="state.wpmovies.searchValue"
-		data-wp-on.input="actions.wpmovies.updateSearch"
-	>
+	<form>
+		<label class="search-label" for="movie-search">Search for a movie</label>
+		<input
+			id="movie-search"
+			type="search"
+			name="s"
+			role="search"
+			inputmode="search"
+			placeholder="Search for a movie..."
+			required=""
+			autocomplete="off"
+			data-wp-bind.value="state.wpmovies.searchValue"
+			data-wp-on.input="actions.wpmovies.updateSearch"
+			>
+	</form>
 </div>

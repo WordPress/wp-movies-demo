@@ -19,7 +19,7 @@ wp_store(
 );
 ?>
 
-<div data-wp-show="selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>
+<div id="wp-movies-video-player" data-wp-show="selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>
 	<div class="wpmovies-video-wrapper">
 		<div class="wpmovies-video-close">
 			<button class="close-button" data-wp-on.click="actions.wpmovies.closeVideo">

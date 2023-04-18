@@ -6,9 +6,6 @@
 
 .wpmovies-tabs-title {
 	display: inline-block;
-	cursor: pointer;
-	padding: 8px 0px;
-	margin-right: 20px;
 }
 
 .wpmovies-active-tab {
@@ -60,6 +57,24 @@
 	transform: translate(-50%, -50%);
 }
 
-.wpmovies-active-tab {
+.wpmovies-tabs-title .wpmovies-tab-button {
+	cursor: pointer;
+	padding: 8px 0px;
+	margin-right: 20px;
+	background: none;
+	border: none;
+	color: inherit;
+	font: inherit;
+	text-align: left;
+	outline: none;
+}
+
+.wpmovies-tabs-title .wpmovies-tab-button:focus-visible {
+	outline: 1px solid var(--wp--preset--color--white);
+	outline-offset: 1px;
+}
+
+.wpmovies-tabs-title .wpmovies-tab-button.wpmovies-active-tab {
 	color: var(--wp--preset--color--white);
+	border-bottom: 4px solid;
 }

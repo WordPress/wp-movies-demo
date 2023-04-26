@@ -34,4 +34,5 @@
 
 .wpmovies-video-wrapper iframe { 
 	border: none;
+	max-width: 100vw;
 }

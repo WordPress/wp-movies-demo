@@ -69,6 +69,12 @@
 		}
 	},
 	"styles": {
+		"spacing": {
+			"padding": {
+				"right": "25px",
+				"left": "25px"
+			}
+		},
 		"color": {
 			"background": "var:preset|color|light-black",
 			"text": "var:preset|color|light-grey"

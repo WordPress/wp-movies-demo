@@ -26,8 +26,8 @@ wp_store(
 			placeholder="Search for a movie..."
 			required=""
 			autocomplete="off"
-			data-wp-bind.value="state.wpmovies.searchValue"
-			data-wp-on.input="actions.wpmovies.updateSearch"
+			data-wp-bind--value="state.wpmovies.searchValue"
+			data-wp-on--input="actions.wpmovies.updateSearch"
 			>
 	</form>
 </div>

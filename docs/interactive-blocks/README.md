@@ -30,7 +30,7 @@ wp_store(
 
 <div
 	<?php echo $wrapper_attributes; ?>
-	data-wp-class.wpmovies-liked="selectors.wpmovies.isLikedMoviesNotEmpty"
+	data-wp-class--wpmovies-liked="selectors.wpmovies.isLikedMoviesNotEmpty"
 >
 	<?php echo $play_icon; ?>
 	<span data-wp-text="selectors.wpmovies.likesCount"></span>
@@ -90,11 +90,11 @@ wp_store(
 >
 	<div
 		class="wpmovies-page-button-parent"
-		data-wp-on.click="actions.wpmovies.toggleMovie"
+		data-wp-on--click="actions.wpmovies.toggleMovie"
 	>
 		<div
 			class="wpmovies-page-button-child"
-			data-wp-class.wpmovies-liked="selectors.wpmovies.isMovieIncluded"
+			data-wp-class--wpmovies-liked="selectors.wpmovies.isMovieIncluded"
 		>
 			<?php echo $play_icon; ?>
 			<span>
@@ -165,14 +165,14 @@ wp_store(
 >
 	<ul>
 		<li
-			data-wp-on.click="actions.wpmovies.showImagesTab"
-			data-wp-class.wpmovies-active-tab="selectors.wpmovies.isImagesTab"
+			data-wp-on--click="actions.wpmovies.showImagesTab"
+			data-wp-class--wpmovies-active-tab="selectors.wpmovies.isImagesTab"
 		>
 				Images
 			</li>
 		<li
-			data-wp-on.click="actions.wpmovies.showVideosTab"
-			data-wp-class.wpmovies-active-tab="selectors.wpmovies.isVideosTab"
+			data-wp-on--click="actions.wpmovies.showVideosTab"
+			data-wp-class--wpmovies-active-tab="selectors.wpmovies.isVideosTab"
 		>
 				Videos
 			</li>
@@ -198,7 +198,7 @@ wp_store(
 				$video_id = substr( $video['url'], strpos( $video['url'], '?v=' ) + 3 );
 				?>
 				<div class="wpmovies-tabs-video-wrapper" data-wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>
-					<div data-wp-on.click="actions.wpmovies.setVideo"><svg ...></div>
+					<div data-wp-on--click="actions.wpmovies.setVideo"><svg ...></div>
 					<img src="<?php echo 'https://img.youtube.com/vi/' . $video_id . '/0.jpg'; ?>">
 				</div>
 				<?php
@@ -250,7 +250,7 @@ In the `view.js`, we simply set the selectors that vary depending on the context
 // Movie Trailer Button
 // render.php (simplified)
 <div <?php echo $wrapper_attributes; ?> data-wp-context='{ "videoId": "<?php echo $trailer_id; ?>" }'>
-	<div class="wpmovies-page-button-parent" data-wp-on.click="actions.wpmovies.setVideo">
+	<div class="wpmovies-page-button-parent" data-wp-on--click="actions.wpmovies.setVideo">
 		<div class="wpmovies-page-button-child">
 			<?php echo $play_icon; ?><span>Play trailer</span>
 		</div>
@@ -281,7 +281,7 @@ wp_store(
 <div data-wp-show="selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>
 	<div class="wpmovies-video-wrapper">
 		<div class="wpmovies-video-close">
-			<button class="close-button" data-wp-on.click="actions.wpmovies.closeVideo">
+			<button class="close-button" data-wp-on--click="actions.wpmovies.closeVideo">
 				<?php _e( 'Close' ); ?>
 			</button>
 		</div>
@@ -355,8 +355,8 @@ wp_store(
 	  inputmode="search"
 	  placeholder="Search for a movie..."
 		required=""
-		data-wp-bind.value="state.wpmovies.searchValue"
-		data-wp-on.input="actions.wpmovies.updateSearch"
+		data-wp-bind--value="state.wpmovies.searchValue"
+		data-wp-on--input="actions.wpmovies.updateSearch"
 	>
 </div>
 ```

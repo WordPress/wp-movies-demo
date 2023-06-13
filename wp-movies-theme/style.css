@@ -28,6 +28,11 @@ footer a {
 	position: relative;
 }
 
+.wp-block-group.movie-image-container:hover {
+	transition: transform 0.2s ease-in-out;
+	transform: scale(1.05);
+}
+
 .wp-block-group.movie-image-container .wp-block-wpmovies-movie-like-icon {
 	position: absolute;
 	top: 0px;
@@ -105,4 +110,24 @@ header > div.wp-block-group {
 		padding: 20px;
 		font-size: 18px;
 	}
+}
+
+::view-transition-old(root) {
+	animation-duration: 0s;
+	display: none;
+}
+
+::view-transition-new(root) {
+	animation-duration: 0.25s;
+}
+
+header > div:not(.wpmovies-page-background) {
+	view-transition-name: main-header;
+	contain: paint;
+}
+
+::view-transition-old(main-header),
+::view-transition-new(main-header) {
+	animation-duration: 0s;
+	contain: layout;
 }

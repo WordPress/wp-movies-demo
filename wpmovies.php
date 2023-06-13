@@ -130,13 +130,48 @@ function wpmovies_add_key_to_featured_image( $content ) {
 	while ( $p->next_tag( array( 'tag_name' => 'img' ) ) ) {
 		$src = $p->get_attribute( 'src' );
 		if ( preg_match( '/\/([\w-]+)\.jpg$/', $src, $matches ) ) {
-			$p->set_attribute( 'key', $matches[1] );
+			$p->set_attribute( 'data-key', $matches[1] );
 		}
 	};
 	return (string) $p;
 }
 
 add_filter( 'render_block', 'wpmovies_add_key_to_featured_image', 10, 1 );
+
+/**
+ * Add view transition to post featured images if they are not a link.
+ *
+ * @param $content The block content.
+ * @return $content The block content with the added key attributes.
+ */
+
+ function wpmovies_add_transition_to_featured_image( $content ) {
+	$p = new WP_HTML_Tag_Processor( $content );
+	if ( $p->next_tag( 'figure' ) ) {
+		$p->set_attribute( 'data-wp-on--click', 'actions.core.navigation.addTransition' );
+		$p->set_bookmark( 'parent' );
+		$is_link = false;
+		if ( $p->next_tag( 'a' ) ) { 
+			$is_link = true;
+			// $p->set_attribute( 'data-wp-on--click', 'actions.core.navigation.addTransition' );
+		}
+		$p->seek( 'parent' );
+		$data_key = '';
+		if ( $p->next_tag( 'img' ) ) {
+			$data_key = $p->get_attribute( 'data-key' );
+		}
+		$p->seek( 'parent' );
+		$p->release_bookmark( 'parent' );
+		if ( ! $is_link ) {
+			$p->set_attribute( 'data-wp-transition--main', $data_key );
+		} else {
+			$p->set_attribute( 'data-wp-transition', $data_key );
+		}
+	};
+	return (string) $p;
+}
+
+add_filter( 'render_block_core/post-featured-image', 'wpmovies_add_transition_to_featured_image', 15, 1 );
 
 
 /**

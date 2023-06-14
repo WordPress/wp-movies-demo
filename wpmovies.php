@@ -151,9 +151,8 @@ add_filter( 'render_block', 'wpmovies_add_key_to_featured_image', 10, 1 );
 		$p->set_attribute( 'data-wp-on--click', 'actions.core.navigation.addTransition' );
 		$p->set_bookmark( 'parent' );
 		$is_link = false;
-		if ( $p->next_tag( 'a' ) ) { 
+		if ( $p->next_tag( 'a' ) ) {
 			$is_link = true;
-			// $p->set_attribute( 'data-wp-on--click', 'actions.core.navigation.addTransition' );
 		}
 		$p->seek( 'parent' );
 		$data_key = '';
@@ -163,10 +162,9 @@ add_filter( 'render_block', 'wpmovies_add_key_to_featured_image', 10, 1 );
 		$p->seek( 'parent' );
 		$p->release_bookmark( 'parent' );
 		if ( ! $is_link ) {
-			$p->set_attribute( 'data-wp-transition--main', $data_key );
-		} else {
-			$p->set_attribute( 'data-wp-transition', $data_key );
+			$p->set_attribute( 'data-wp-transition-main', 'true' );
 		}
+		$p->set_attribute( 'data-wp-transition', $data_key );
 	};
 	return (string) $p;
 }

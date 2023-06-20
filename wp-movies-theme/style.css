@@ -114,7 +114,6 @@ header > div.wp-block-group {
 
 ::view-transition-old(root) {
 	animation-duration: 0s;
-	display: none;
 }
 
 ::view-transition-new(root) {
@@ -124,10 +123,4 @@ header > div.wp-block-group {
 header > div:not(.wpmovies-page-background) {
 	view-transition-name: main-header;
 	contain: paint;
-}
-
-::view-transition-old(main-header),
-::view-transition-new(main-header) {
-	animation-duration: 0s;
-	contain: layout;
 }

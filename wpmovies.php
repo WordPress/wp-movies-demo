@@ -215,3 +215,8 @@ add_filter(
 	20,
 	1
 );
+
+function wpmovies_enqueue_scripts() {
+	wp_enqueue_script( 'view-transitions', plugins_url( 'build/view-transitions.js', __FILE__ ), array( 'wp-directive-runtime' ), '1.0.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'wpmovies_enqueue_scripts' );

@@ -4,12 +4,8 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'wpmovies-tabs' )
 );
 
-$all_images = get_post_meta( $post->ID, '_wpmovies_images', true );
-$all_videos = get_post_meta( $post->ID, '_wpmovies_videos', true );
-
-// The first 2 images and videos
-$images = array_slice( json_decode( $all_images, true ), 0, 2 );
-$videos = array_slice( json_decode( $all_videos, true ), 0, 2 );
+$images = get_post_meta( $post->ID, '_wpmovies_images', true );
+$videos = get_post_meta( $post->ID, '_wpmovies_videos', true );
 
 wp_store(
 	array(

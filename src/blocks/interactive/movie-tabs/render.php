@@ -3,8 +3,9 @@ $post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'wpmovies-tabs' )
 );
-$images             = get_post_meta( $post->ID, '_wpmovies_images', true );
-$videos             = get_post_meta( $post->ID, '_wpmovies_videos', true );
+
+$images = json_decode( get_post_meta( $post->ID, '_wpmovies_images', true ), true );
+$videos = json_decode( get_post_meta( $post->ID, '_wpmovies_videos', true ), true );
 
 wp_store(
 	array(
@@ -57,7 +58,7 @@ wp_store(
 	>
 		<div class="wpmovies-media-scroller wpmovies-images-tab">
 			<?php
-			foreach ( json_decode( $images, true ) as $image_id ) {
+			foreach ( $images as $image_id ) {
 				$image_url = wp_get_attachment_image_url( $image_id, '' );
 				?>
 				<img src="<?php echo $image_url; ?>">
@@ -75,7 +76,7 @@ wp_store(
 	>
 		<div class="wpmovies-media-scroller wpmovies-videos-tab">
 			<?php
-			foreach ( json_decode( $videos, true ) as $video ) {
+			foreach ( $videos as $video ) {
 				$video_id = substr( $video['url'], strpos( $video['url'], '?v=' ) + 3 );
 				?>
 				<div class="wpmovies-tabs-video-wrapper" data-wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>

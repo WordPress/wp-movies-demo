@@ -6,6 +6,19 @@
 	z-index: -1;
 }
 
+
+@media screen and (max-width: 900px) {
+	.wpmovies-page-background {
+		top: 50px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.wpmovies-page-background {
+		top: 100px;
+	}
+}
+
 .wpmovies-movie-background {
 	position: relative;
 }

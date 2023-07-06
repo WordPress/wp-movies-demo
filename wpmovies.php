@@ -130,7 +130,7 @@ function wpmovies_add_key_to_featured_image( $content ) {
 	while ( $p->next_tag( array( 'tag_name' => 'img' ) ) ) {
 		$src = $p->get_attribute( 'src' );
 		if ( preg_match( '/\/([\w-]+)\.jpg$/', $src, $matches ) ) {
-			$p->set_attribute( 'data-key', $matches[1] );
+			$p->set_attribute( 'data-wp-key', $matches[1] );
 		}
 	};
 	return (string) $p;
@@ -157,7 +157,7 @@ add_filter( 'render_block', 'wpmovies_add_key_to_featured_image', 10, 1 );
 		$p->seek( 'parent' );
 		$data_key = '';
 		if ( $p->next_tag( 'img' ) ) {
-			$data_key = $p->get_attribute( 'data-key' );
+			$data_key = $p->get_attribute( 'data-wp-key' );
 		}
 		$p->seek( 'parent' );
 		$p->release_bookmark( 'parent' );

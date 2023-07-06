@@ -4,7 +4,7 @@
 	border-radius: 3px;
 }
 
-.wp-block-wpmovies-movie-search > input {
+.wp-block-wpmovies-movie-search input {
 	background: transparent;
 	color: var(--wp--preset--color--white);
 	border: none;
@@ -14,11 +14,11 @@
 	padding: 12px;
 }
 
-.wp-block-wpmovies-movie-search > input::placeholder {
+.wp-block-wpmovies-movie-search input::placeholder {
 	color: rgba(255, 255, 255, 0.5);
 }
 
-.wp-block-wpmovies-movie-search > input:focus-visible {
+.wp-block-wpmovies-movie-search input:focus-visible {
 	color: var(--wp--preset--color--white);
 	background-color: #181818;
 	border: 1px solid rgba(255, 255, 255, 0.07);
@@ -26,4 +26,14 @@
 	border: none;
 	padding: 12px;
 	outline: none;
+}
+
+.wp-block-wpmovies-movie-search > form {
+	position: relative;
+}
+
+/* Hide the label offscreen but it should still be present for a11y */
+.wp-block-wpmovies-movie-search .search-label {
+	position: absolute;
+	text-indent: -9999px;
 }

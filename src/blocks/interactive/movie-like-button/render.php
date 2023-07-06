@@ -20,11 +20,11 @@ wp_store(
 >
 	<div
 		class="wpmovies-page-button-parent"
-		data-wp-on.click="actions.wpmovies.toggleMovie"
+		data-wp-on--click="actions.wpmovies.toggleMovie"
 	>
 		<div
 			class="wpmovies-page-button-child"
-			data-wp-class.wpmovies-liked="selectors.wpmovies.isMovieIncluded"
+			data-wp-class--wpmovies-liked="selectors.wpmovies.isMovieIncluded"
 		>
 			<?php echo $play_icon; ?>
 			<span>

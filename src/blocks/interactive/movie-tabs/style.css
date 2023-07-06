@@ -20,7 +20,7 @@
 	white-space: nowrap;
 }
 
-.wpmovies-media-scroller img:first-of-type {
+.wpmovies-media-scroller img {
 	margin-right: 10px;
 }
 

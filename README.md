@@ -33,35 +33,34 @@ your projects at your own risk.
 
 ## Setup
 
-In order to be able to test this demo, you just need to:
-
 1. Install the required plugins:
 
-    - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
+   - If you use [`wp-env`]([url](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)), run `npx wp-env start` to install the plugins automatically and run a local WP instance.
 
-    - [Block Interactivity Experiments](https://github.com/WordPress/block-interactivity-experiments/releases/latest/download/block-interactivity-experiments.zip). This one requires Gutenberg to work.
+   - Otherwise, install the following plugins:
 
-    - [Movies Demo Plugin](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip). This one requires the Block Interactivity Experiments to work.
+     - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
 
-    Note that, if you are using `wp-env` to run your site locally, these plugins will be installed by default after running `wp-env` start. Before that, don't forget to:
+     - [Block Interactivity Experiments](https://github.com/WordPress/block-interactivity-experiments/releases/latest/download/block-interactivity-experiments.zip). This one requires Gutenberg to work.
 
-    - Install the dependencies:
+     - [Movies Demo Plugin](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip). This one requires the Block Interactivity Experiments to work.
 
+
+2.  Install the dependencies and build the plugin:
+  
     ```sh
     npm install && composer install
-    ```
-
-    - Build the plugin:
-
-    ```sh
     npm run build
-
-    # If you plan on tinkering with the frontend code you start the webpack
-    # server which automatically rebuild the files when you make any changes.
+    ```
+    
+    If you plan on tinkering with the frontend code, start the webpack
+    server which automatically rebuild the files when you make any changes:
+    
+    ```
     npm start
     ```
 
-2. Install the theme:
+3. Install the theme:
 
     You need to install and activate the [Movies Demo
     Theme](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-theme.zip).
@@ -72,7 +71,7 @@ In order to be able to test this demo, you just need to:
       npx wp-env run cli "wp theme activate wp-movies-theme"
     ```
 
-3. Add the movie and actor data to the WordPress database:
+4. Add the movie and actor data to the WordPress database:
 
     You can import the data manually:
 
@@ -93,7 +92,7 @@ In order to be able to test this demo, you just need to:
 
     If you run into any problems you can run `npx wp-env clean all` and start this step over again.
 
-4. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
+5. Set the permalinks to use the `Post name` in **Settings > Permalinks**.
 
     If you are using `wp-env` you can just run this command:
 
@@ -101,8 +100,8 @@ In order to be able to test this demo, you just need to:
     npx wp-env run cli "wp rewrite structure '/%postname%/'"
     ```
 
-5. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
-6. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
+6. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
+7. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
 
 ## Things to try
 

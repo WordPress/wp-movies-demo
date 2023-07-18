@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name:       WP Movies
- * Version:           0.1.21
+ * Version:           0.1.22
  * Requires at least: 6.0
  * Requires PHP:      5.6
  * Description:       Plugin that demoes the usage of the Interactivity API.
@@ -217,6 +217,6 @@ add_filter(
 );
 
 function wpmovies_enqueue_scripts() {
-	wp_enqueue_script( 'wp-view-transitions', plugins_url( 'lib/view-transitions.js', __FILE__ ), array( 'wp-directive-runtime' ), '1.0.0', true );
+	wp_enqueue_script( 'wp-view-transitions', plugins_url( 'lib/view-transitions.js', __FILE__ ), array( 'wp-directive-runtime' ), '1.0.1', true );
 }
 add_action( 'wp_enqueue_scripts', 'wpmovies_enqueue_scripts' );

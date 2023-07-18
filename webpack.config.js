@@ -7,6 +7,7 @@ module.exports = [
 		...defaultConfig,
 		entry: {
 			'query-loop-variations': './lib/query-loop-variations',
+			'view-transitions': './lib/view-transitions',
 		},
 		output: {
 			filename: '[name].js',

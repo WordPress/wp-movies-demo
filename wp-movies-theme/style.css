@@ -92,12 +92,9 @@ header > div.wp-block-group {
 	margin-right: 14px;
 }
 
-.wpmovies-liked svg {
-	fill: #dc3e3e;
-}
-
-.wpmovies-liked svg > path {
+.wpmovies-liked > svg > path {
 	stroke-width: 0;
+	fill: #dc3e3e;
 }
 
 @media screen and (max-width: 900px) {

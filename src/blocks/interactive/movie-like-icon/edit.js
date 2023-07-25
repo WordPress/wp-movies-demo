@@ -1,16 +1,11 @@
 import '@wordpress/block-editor';
 import { useBlockProps } from '@wordpress/block-editor';
+import { ReactComponent as EmptyHeart } from '../../../../wp-movies-theme/assets/empty-heart.svg';
 
 const Edit = () => {
 	return (
 		<div {...useBlockProps()}>
-			<img
-				draggable="false"
-				role="img"
-				className="emoji"
-				alt=":heart:"
-				src="https://s.w.org/images/core/emoji/14.0.0/svg/2764.svg"
-			/>
+			<EmptyHeart />
 		</div>
 	);
 };

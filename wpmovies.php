@@ -182,3 +182,13 @@ add_filter(
 	20,
 	1
 );
+
+function add_defer_attribute( $tag, $handle ) {
+	if ( 'wp-directive-runtime' === $handle || 'wp-directive-vendors' === $handle ) {
+		return str_replace( ' src', ' defer src', $tag );
+	} else {
+		return $tag;
+	}
+
+}
+add_filter( 'script_loader_tag', 'add_defer_attribute', 10, 2 );

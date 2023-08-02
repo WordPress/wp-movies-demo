@@ -52,7 +52,7 @@ wp_store(
 
 	<div 
 		role="tabpanel" 
-		data-wp-show="selectors.wpmovies.isImagesTab" 
+		data-wp-bind--hidden="selectors.wpmovies.isVideosTab" 
 		data-wp-bind--aria-hidden="selectors.wpmovies.isVideosTab" 
 		aria-labelledby="wpmovies-images-tab"
 	>
@@ -70,7 +70,7 @@ wp_store(
 
 	<div 
 		role="tabpanel" 
-		data-wp-show="selectors.wpmovies.isVideosTab" 
+		data-wp-bind--hidden="selectors.wpmovies.isImagesTab" 
 		data-wp-bind--aria-hidden="selectors.wpmovies.isImagesTab" 
 		aria-labelledby="wpmovies-videos-tab"
 	>

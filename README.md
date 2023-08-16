@@ -9,7 +9,7 @@ https://user-images.githubusercontent.com/5417266/228688653-4af8bbae-0360-468e-a
 ## What is this?
 
 This is a demo plugin which shows the features of the [Interactivity API](https://github.com/WordPress/block-interactivity-experiments) for
-WordPress proposed in this post in Make WordPress Core blog. (TODO: `link to the blog post in Make Core`).
+WordPress proposed in [this post in Make WordPress Core blog](https://make.wordpress.org/core/2023/03/30/proposal-the-interactivity-api-a-better-developer-experience-in-building-interactive-blocks/).
 
 The plugin is split into:
 

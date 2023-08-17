@@ -24,14 +24,14 @@ The plugin is split into:
     styling and the templates for the header & footer as well as the movie &
     actors pages.
 
-## When will I be able to use this?
+## When will I be able to use the Interactivity API?
 
 The [Interactivity API](https://github.com/WordPress/block-interactivity-experiments) is an **experimental feature** and not ready for adoption yet.
 It is under active development and its final public API is **very likely going to change before an official release**.
-For now, it's recommended to experiment with the Interactivity API via this demo. Use this in
-your projects at your own risk.
 
 ## Setup
+
+> ⚠️ **WARNING**: This instructions don't work anymore because there's a conflict between the Interactivity API shipped in the Block Interactivity Experiments plugin and the Interactivity API shipped now in Gutenberg. We'll migrate this repo to use only Gutenberg, but in the meantime, please use this [Getting Started guide](https://github.com/WordPress/gutenberg/blob/trunk/packages/interactivity/docs/1-getting-started.md) if you want to test the Interactivity API. If you have questions, you can open a discussion in the [Interactivity API category](https://github.com/WordPress/gutenberg/discussions/categories/interactivity-api) of GitHub.
 
 1. Install the required plugins:
 

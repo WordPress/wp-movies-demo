@@ -5,6 +5,7 @@
 
 https://user-images.githubusercontent.com/5417266/228688653-4af8bbae-0360-468e-a662-1a3998e62cb6.mp4
 
+## WARNING - CODE IS CURRENTLY BROKEN (see below, Setup)
 
 ## What is this?
 
@@ -31,7 +32,7 @@ It is under active development and its final public API is **very likely going t
 
 ## Setup
 
-> ⚠️ **WARNING**: This instructions don't work anymore because there's a conflict between the Interactivity API shipped in the Block Interactivity Experiments plugin and the Interactivity API shipped now in Gutenberg. We'll migrate this repo to use only Gutenberg, but in the meantime, please use this [Getting Started guide](https://github.com/WordPress/gutenberg/blob/trunk/packages/interactivity/docs/1-getting-started.md) if you want to test the Interactivity API. If you have questions, you can open a discussion in the [Interactivity API category](https://github.com/WordPress/gutenberg/discussions/categories/interactivity-api) of GitHub.
+> ⚠️ **WARNING**: These instructions don't work anymore because there's a conflict between the Interactivity API shipped in the Block Interactivity Experiments plugin and the Interactivity API shipped now in Gutenberg. We'll migrate this repo to use only Gutenberg, but in the meantime, please use this [Getting Started guide](https://github.com/WordPress/gutenberg/blob/trunk/packages/interactivity/docs/1-getting-started.md) if you want to test the Interactivity API. If you have questions, you can open a discussion in the [Interactivity API category](https://github.com/WordPress/gutenberg/discussions/categories/interactivity-api) of GitHub.
 
 1. Install the required plugins:
 

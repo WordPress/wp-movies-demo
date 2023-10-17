@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name:       WP Movies
- * Version:           0.1.26
+ * Version:           0.1.27
  * Requires at least: 6.0
  * Requires PHP:      5.6
  * Description:       Plugin that demoes the usage of the Interactivity API.

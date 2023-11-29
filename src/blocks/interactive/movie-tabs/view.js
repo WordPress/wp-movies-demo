@@ -1,5 +1,5 @@
 // Disclaimer: Importing the `store` using a global is just a temporary solution.
-const { store, getContext } = window.__experimentalInteractivity;
+import { store, getContext } from '@wordpress/interactivity';
 
 store({
 	state: {

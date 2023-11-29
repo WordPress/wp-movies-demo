@@ -36,6 +36,7 @@
 		"@wordpress/blocks": "^11.7.0",
 		"@wordpress/element": "^4.3.0",
 		"@wordpress/env": "^5.9.0",
+		"@wordpress/interactivity": "^1.2.0",
 		"@wordpress/scripts": "^24.3.0",
 		"archiver": "^5.3.1",
 		"babel-jest": "^28.1.0",

@@ -19,7 +19,7 @@ wp_store(
 >
 	<div
 		data-wp-on--click="actions.toggleMovie"
-		data-wp-class--wpmovies-liked="selectors.isMovieIncluded"
+		data-wp-class--wpmovies-liked="state.isMovieIncluded"
 	>
 		<?php echo $play_icon; ?>
 	</div>

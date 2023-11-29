@@ -16,7 +16,7 @@ wp_store(
 <div
 	id="wp-movies-video-player"
 	data-wp-interactive=\'{"namespace":"wpmovies"}\'
-	data-wp-bind--hidden="!selectors.isPlaying"
+	data-wp-bind--hidden="!state.isPlaying"
 	<?php echo $wrapper_attributes; ?>
 >
 	<div class="wpmovies-video-wrapper">

@@ -11,11 +11,6 @@ const updateURL = async (value) => {
 };
 
 store({
-	state: {
-		wpmovies: {
-			searchValue: '',
-		},
-	},
 	actions: {
 		wpmovies: {
 			updateSearch: async ({ state, event }) => {

@@ -1,18 +1,20 @@
 // Disclaimer: Importing the `store` using a global is just a temporary solution.
-const { store } = window.__experimentalInteractivity;
+const { store, getContext } = window.__experimentalInteractivity;
 
 store('wpmovies', {
-	selectors: {
-		isMovieIncluded: ({ state, context: { post } }) =>
-			state.wpmovies.likedMovies.includes(post.id),
+	state: {
+		get isMovieIncluded() {
+			const context = getContext();
+			return state.wpmovies.likedMovies.includes(context.post.id);
+		},
 	},
 	actions: {
 		toggleMovie: ({ state, context }) => {
-			const index = state.wpmovies.likedMovies.findIndex(
+			const index = state.likedMovies.findIndex(
 				(post) => post === context.post.id
 			);
-			if (index === -1) state.wpmovies.likedMovies.push(context.post.id);
-			else state.wpmovies.likedMovies.splice(index, 1);
+			if (index === -1) state.likedMovies.push(context.post.id);
+			else state.likedMovies.splice(index, 1);
 		},
 	},
 });

@@ -5,10 +5,8 @@ $play_icon          = file_get_contents( get_template_directory() . '/assets/emp
 
 wp_store(
 	array(
-		'selectors' => array(
-			'wpmovies' => array(
-				'isMovieIncluded' => false,
-			),
+		'state' => array(
+			'isMovieIncluded' => false,
 		),
 	),
 );
@@ -17,10 +15,11 @@ wp_store(
 <div
 	<?php echo $wrapper_attributes; ?>
 	data-wp-context='{ "post": { "id": <?php echo $post->ID; ?> } }'
+	data-wp-interactive=\'{"namespace":"wpmovies"}\'
 >
 	<div
-		data-wp-on--click="actions.wpmovies.toggleMovie"
-		data-wp-class--wpmovies-liked="selectors.wpmovies.isMovieIncluded"
+		data-wp-on--click="actions.toggleMovie"
+		data-wp-class--wpmovies-liked="selectors.isMovieIncluded"
 	>
 		<?php echo $play_icon; ?>
 	</div>

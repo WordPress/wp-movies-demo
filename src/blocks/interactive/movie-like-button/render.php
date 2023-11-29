@@ -5,7 +5,7 @@ $play_icon          = file_get_contents( get_template_directory() . '/assets/emp
 
 wp_store(
 	array(
-		'selectors' => array(
+		'state' => array(
 			'isMovieIncluded' => false,
 		),
 	),
@@ -23,7 +23,7 @@ wp_store(
 	>
 		<div
 			class="wpmovies-page-button-child"
-			data-wp-class--wpmovies-liked="selectors.isMovieIncluded"
+			data-wp-class--wpmovies-liked="state.isMovieIncluded"
 		>
 			<?php echo $play_icon; ?>
 			<span>

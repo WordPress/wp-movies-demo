@@ -9,7 +9,8 @@ store('wpmovies', {
 		},
 	},
 	actions: {
-		toggleMovie: ({ state, context }) => {
+		toggleMovie: () => {
+			const context = getContext();
 			const index = state.likedMovies.findIndex(
 				(post) => post === context.post.id
 			);

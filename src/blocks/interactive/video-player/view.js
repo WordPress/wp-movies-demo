@@ -1,7 +1,11 @@
 // Disclaimer: Importing the `store` using a global is just a temporary solution.
-import { store, getContext } from '@wordpress/interactivity';
+// import { store, getContext } from '@wordpress/interactivity';
+const {
+	store,
+	getContext,
+} = require('../../../../../gutenberg/node_modules/@wordpress/interactivity');
 
-store('wpmovies', {
+const { state } = store('wpmovies', {
 	state: {
 		get isPlaying() {
 			return state.currentVideo !== '';

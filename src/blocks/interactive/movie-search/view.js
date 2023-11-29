@@ -1,6 +1,9 @@
 // Disclaimer: Importing the `store` using a global is just a temporary solution.
 const { navigate } = window.__experimentalInteractivity;
-import { store } from '@wordpress/interactivity';
+// import { store } from '@wordpress/interactivity';
+const {
+	store,
+} = require('../../../../../gutenberg/node_modules/@wordpress/interactivity');
 
 const updateURL = async (value) => {
 	const url = new URL(window.location);
@@ -11,7 +14,7 @@ const updateURL = async (value) => {
 	await navigate(`/${url.search}${url.hash}`);
 };
 
-store('wpmovies', {
+const { state } = store('wpmovies', {
 	actions: {
 		updateSearch: async ({ event }) => {
 			const { value } = event.target;

@@ -12,13 +12,13 @@ const updateURL = async (value) => {
 
 store('wpmovies', {
 	actions: {
-		updateSearch: async ({ state, event }) => {
+		updateSearch: async ({ event }) => {
 			const { value } = event.target;
 
 			// Don't navigate if the search didn't really change.
-			if (value === state.wpmovies.searchValue) return;
+			if (value === state.searchValue) return;
 
-			state.wpmovies.searchValue = value;
+			state.searchValue = value;
 
 			if (value === '') {
 				// If the search is empty, navigate to the home page.

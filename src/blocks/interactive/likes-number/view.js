@@ -7,7 +7,7 @@ store('wpmovies', {
 			return state.likedMovies.length;
 		},
 		get isLikedMoviesNotEmpty() {
-			return state.wpmovies.likedMovies.length !== 0;
+			return state.likedMovies.length !== 0;
 		},
 	},
 });

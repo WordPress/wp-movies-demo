@@ -6,9 +6,7 @@ $play_icon          = file_get_contents( get_template_directory() . '/assets/emp
 wp_store(
 	array(
 		'selectors' => array(
-			'wpmovies' => array(
-				'isMovieIncluded' => false,
-			),
+			'isMovieIncluded' => false,
 		),
 	),
 );
@@ -16,15 +14,16 @@ wp_store(
 
 <div
 	<?php echo $wrapper_attributes; ?>
+	data-wp-interactive=\'{"namespace":"wpmovies"}\'
 	data-wp-context='{ "post": { "id": <?php echo $post->ID; ?> } }'
 >
 	<div
 		class="wpmovies-page-button-parent"
-		data-wp-on--click="actions.wpmovies.toggleMovie"
+		data-wp-on--click="actions.toggleMovie"
 	>
 		<div
 			class="wpmovies-page-button-child"
-			data-wp-class--wpmovies-liked="selectors.wpmovies.isMovieIncluded"
+			data-wp-class--wpmovies-liked="selectors.isMovieIncluded"
 		>
 			<?php echo $play_icon; ?>
 			<span>

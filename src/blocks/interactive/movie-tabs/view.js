@@ -1,21 +1,25 @@
 // Disclaimer: Importing the `store` using a global is just a temporary solution.
-const { store } = window.__experimentalInteractivity;
+const { store, getContext } = window.__experimentalInteractivity;
 
 store({
-	selectors: {
-		wpmovies: {
-			isImagesTab: ({ context }) => context.tab === 'images',
-			isVideosTab: ({ context }) => context.tab === 'videos',
+	state: {
+		get isImagesTab() {
+			const context = getContext();
+			return context.tab === 'images';
+		},
+		get isVideosTab() {
+			const context = getContext();
+			return context.tab === 'videos';
 		},
 	},
 	actions: {
-		wpmovies: {
-			showImagesTab: ({ context }) => {
-				context.tab = 'images';
-			},
-			showVideosTab: ({ context }) => {
-				context.tab = 'videos';
-			},
+		showImagesTab: () => {
+			const context = getContext();
+			context.tab = 'images';
+		},
+		showVideosTab: () => {
+			const context = getContext();
+			context.tab = 'videos';
 		},
 	},
 });

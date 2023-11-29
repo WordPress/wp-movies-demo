@@ -2,6 +2,11 @@
 const { store } = window.__experimentalInteractivity;
 
 store({
+	state: {
+		wpmovies: {
+			likedMovies: [],
+		},
+	},
 	selectors: {
 		wpmovies: {
 			likesCount: ({ state }) => state.wpmovies.likedMovies.length,

@@ -5,7 +5,7 @@ store('wpmovies', {
 	state: {
 		get isMovieIncluded() {
 			const context = getContext();
-			return state.wpmovies.likedMovies.includes(context.post.id);
+			return state.likedMovies.includes(context.post.id);
 		},
 	},
 	actions: {

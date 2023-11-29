@@ -1,9 +1,4 @@
-// Disclaimer: Importing the `store` using a global is just a temporary solution.
-const { navigate } = window.__experimentalInteractivity;
-// import { store } from '@wordpress/interactivity';
-const {
-	store,
-} = require('../../../../../gutenberg/node_modules/@wordpress/interactivity');
+import { store } from '@wordpress/interactivity';
 
 const updateURL = async (value) => {
 	const url = new URL(window.location);

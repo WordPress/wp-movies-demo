@@ -1,8 +1,5 @@
-// Disclaimer: Importing the `store` using a global is just a temporary solution.
-// import { store } from '@wordpress/interactivity';
-const {
-	store,
-} = require('../../../../../gutenberg/node_modules/@wordpress/interactivity');
+import { store } from '@wordpress/interactivity';
+
 const { state } = store('wpmovies', {
 	state: {
 		get likesCount() {

@@ -1,4 +1,5 @@
-import { store } from '@wordpress/interactivity';
+// Disclaimer: the full client-side navigation doesn't work yet.
+import { store, navigate } from '@wordpress/interactivity';
 
 const updateURL = async (value) => {
 	const url = new URL(window.location);

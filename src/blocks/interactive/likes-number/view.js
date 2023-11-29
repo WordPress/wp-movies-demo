@@ -1,12 +1,12 @@
-// Disclaimer: Importing the `store` using a global is just a temporary solution.
-const { store } = window.__experimentalInteractivity;
+import { store } from '@wordpress/interactivity';
 
-store({
-	selectors: {
-		wpmovies: {
-			likesCount: ({ state }) => state.wpmovies.likedMovies.length,
-			isLikedMoviesNotEmpty: ({ state }) =>
-				state.wpmovies.likedMovies.length !== 0,
+const { state } = store('wpmovies', {
+	state: {
+		get likesCount() {
+			return state.likedMovies.length;
+		},
+		get isLikedMoviesNotEmpty() {
+			return state.likedMovies.length !== 0;
 		},
 	},
 });

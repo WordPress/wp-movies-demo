@@ -6,15 +6,16 @@ $wrapper_attributes = get_block_wrapper_attributes(
 wp_store(
 	array(
 		'state' => array(
-			'wpmovies' => array(
-				'searchValue' => get_search_query(),
-			),
+			'searchValue' => get_search_query(),
 		),
 	),
 );
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div
+	<?php echo $wrapper_attributes; ?>
+	data-wp-interactive=\'{"namespace":"wpmovies"}\'
+>
 	<form>
 		<label class="search-label" for="movie-search">Search for a movie</label>
 		<input
@@ -26,8 +27,8 @@ wp_store(
 			placeholder="Search for a movie..."
 			required=""
 			autocomplete="off"
-			data-wp-bind--value="state.wpmovies.searchValue"
-			data-wp-on--input="actions.wpmovies.updateSearch"
+			data-wp-bind--value="state.searchValue"
+			data-wp-on--input="actions.updateSearch"
 			>
 	</form>
 </div>

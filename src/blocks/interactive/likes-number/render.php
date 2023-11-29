@@ -16,6 +16,7 @@ wp_store(
 
 <div 
 	<?php echo $wrapper_attributes; ?>
+	data-wp-interactive=\'{"namespace":"wpmovies"}\'
 	data-wp-class--wpmovies-liked="state.isLikedMoviesNotEmpty">
 	<?php echo $play_icon; ?>
 	<span data-wp-text="state.likesCount"></span>

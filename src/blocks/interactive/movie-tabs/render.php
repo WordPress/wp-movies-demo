@@ -7,16 +7,10 @@ $wrapper_attributes = get_block_wrapper_attributes(
 $images = json_decode( get_post_meta( $post->ID, '_wpmovies_images', true ), true );
 $videos = json_decode( get_post_meta( $post->ID, '_wpmovies_videos', true ), true );
 
-wp_store(
-	array(
-		'selectors' => array(
-			'wpmovies' => array(
-				'isImagesTab' => true,
-				'isVideosTab' => false,
-			),
-		),
-	),
-);
+wp_initial_state('wpmovies', array(
+	'isImagesTab' => true,
+	'isVideosTab' => false,
+));
 ?>
 
 <div

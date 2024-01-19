@@ -3,15 +3,9 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'movie-search' )
 );
 
-wp_store(
-	array(
-		'state' => array(
-			'wpmovies' => array(
-				'searchValue' => get_search_query(),
-			),
-		),
-	),
-);
+wp_initial_state('wpmovies', array(
+	'searchValue' => get_search_query(),
+));
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>

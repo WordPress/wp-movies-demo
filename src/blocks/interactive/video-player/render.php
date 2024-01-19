@@ -3,20 +3,10 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'wpmovies-video-player' )
 );
 
-wp_store(
-	array(
-		'state'     => array(
-			'wpmovies' => array(
-				'currentVideo' => '',
-			),
-		),
-		'selectors' => array(
-			'wpmovies' => array(
-				'isPlaying' => false,
-			),
-		),
-	),
-);
+wp_initial_state('wpmovies', array(
+	'currentVideo' => '',
+	'isPlaying' => false,
+));
 ?>
 
 <div id="wp-movies-video-player" data-wp-bind--hidden="!selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>

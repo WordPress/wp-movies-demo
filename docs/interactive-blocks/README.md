@@ -11,21 +11,11 @@ $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
 $likedMovies        = array();
 
-wp_store(
-	array(
-		'state' => array(
-			'wpmovies' => array(
-				'likedMovies' => $likedMovies,
-			),
-		),
-		'selectors' => array(
-			'wpmovies' => array(
-				'likesCount'            => count( $likedMovies ),
-				'isLikedMoviesNotEmpty' => count( $likedMovies ) > 0,
-			),
-		),
-	),
-);
+wp_initial_state('wpmovies', array(
+	'likedMovies' => $likedMovies,
+	'likesCount'            => count( $likedMovies ),
+	'isLikedMoviesNotEmpty' => count( $likedMovies ) > 0,
+));
 ?>
 
 <div
@@ -73,15 +63,10 @@ $post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
 
-wp_store(
-	array(
-		'selectors' => array(
-			'wpmovies' => array(
-				'isMovieIncluded' => false,
-			),
-		),
-	),
-);
+wp_initial_state('wpmovies', array(
+	'isMovieIncluded' => false,
+));
+
 ?>
 
 <div
@@ -147,16 +132,10 @@ In the `view.js` file, we add both the selector, which reads the post ID from th
 // render.php (simplified)
 // ...
 
-wp_store(
-	array(
-		'selectors' => array(
-			'wpmovies' => array(
-				'isImagesTab' => true,
-				'isVideosTab' => false,
-			),
-		),
-	),
-);
+wp_initial_state('wpmovies', array(
+	'isImagesTab' => true,
+	'isVideosTab' => false,
+));
 ?>
 
 <div
@@ -262,20 +241,11 @@ In the `view.js`, we simply set the selectors that vary depending on the context
 <?php
 // Video Player
 // render.php (simplified)
-wp_store(
-	array(
-		'state'     => array(
-			'wpmovies' => array(
-				'currentVideo' => '',
-			),
-		),
-		'selectors' => array(
-			'wpmovies' => array(
-				'isPlaying' => false,
-			),
-		),
-	),
-);
+
+wp_initial_state('wpmovies', array(
+	'isPlaying' => false,
+	'currentVideo' => '',
+));
 ?>
 
 <div data-wp-show="selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>
@@ -337,15 +307,9 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'movie-search' )
 );
 
-wp_store(
-	array(
-		'state' => array(
-			'wpmovies' => array(
-				'searchValue' => get_search_query(),
-			),
-		),
-	),
-);
+wp_initial_state('wpmovies', array(
+	'searchValue' => get_search_query(),
+));
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>

@@ -9,6 +9,12 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'movie-search' )
 );
 
+wp_enqueue_script_module(
+	'wp-movies-movie-search',
+	plugin_dir_url( __FILE__ ) . 'index.js',
+	array( '@wordpress/interactivity' ),
+);
+
 wp_interactivity_state(
 	'wpmovies',
 	array(

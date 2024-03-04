@@ -9,6 +9,12 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'wpmovies-video-player' )
 );
 
+wp_enqueue_script_module(
+	'wp-movies-video-player',
+	plugin_dir_url( __FILE__ ) . 'index.js',
+	array( '@wordpress/interactivity' ),
+);
+
 wp_interactivity_state(
 	'wpmovies',
 	array(

@@ -15,6 +15,5 @@
 	"editorScript": "file:./index.js",
 	"render": "file:./render.php",
 	"editorStyle": "file:./style.css",
-	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js"
+	"style": "file:./style-index.css"
 }

@@ -13,6 +13,12 @@ $wrapper_attributes = get_block_wrapper_attributes(
 $images = json_decode( get_post_meta( $post->ID, '_wpmovies_images', true ), true );
 $videos = json_decode( get_post_meta( $post->ID, '_wpmovies_videos', true ), true );
 
+wp_enqueue_script_module(
+	'wp-movies-movie-tab',
+	plugin_dir_url( __FILE__ ) . 'index.js',
+	array( '@wordpress/interactivity' ),
+);
+
 wp_interactivity_state(
 	'wpmovies',
 	array(

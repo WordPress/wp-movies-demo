@@ -43,6 +43,8 @@
 		"prettier": "^2.7.1"
 	},
 	"dependencies": {
-		"@wordpress/i18n": "^4.24.0"
+		"@wordpress/i18n": "^4.24.0",
+		"@wordpress/interactivity": "^5.1.0",
+		"@wordpress/interactivity-router": "^1.2.0"
 	}
 }

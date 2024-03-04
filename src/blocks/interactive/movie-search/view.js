@@ -1,5 +1,5 @@
-// Disclaimer: Importing the `store` using a global is just a temporary solution.
-const { store, navigate } = window.__experimentalInteractivity;
+import { getElement, store } from '@wordpress/interactivity';
+import { navigate } from '@wordpress/interactivity-router';
 
 const updateURL = async (value) => {
 	const url = new URL(window.location);
@@ -10,25 +10,24 @@ const updateURL = async (value) => {
 	await navigate(`/${url.search}${url.hash}`);
 };
 
-store({
+const { state } = store({
 	actions: {
-		wpmovies: {
-			updateSearch: async ({ state, event }) => {
-				const { value } = event.target;
+		*updateSearch() {
+			const element = getElement();
+			const { value } = element.event.target;
 
-				// Don't navigate if the search didn't really change.
-				if (value === state.wpmovies.searchValue) return;
+			// Don't navigate if the search didn't really change.
+			if (value === state.searchValue) return;
 
-				state.wpmovies.searchValue = value;
+			state.searchValue = value;
 
-				if (value === '') {
-					// If the search is empty, navigate to the home page.
-					await navigate('/');
-				} else {
-					// If not, navigate to the new URL.
-					await updateURL(value);
-				}
-			},
+			if (value === '') {
+				// If the search is empty, navigate to the home page.
+				yield navigate('/');
+			} else {
+				// If not, navigate to the new URL.
+				yield updateURL(value);
+			}
 		},
 	},
 });

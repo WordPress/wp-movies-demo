@@ -9,6 +9,12 @@ $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
 $liked_movies       = array();
 
+wp_enqueue_script_module(
+	'likes-number',
+	plugin_dir_url( __FILE__ ) . 'index.js',
+	array( '@wordpress/interactivity' ),
+);
+
 wp_interactivity_state(
 	'wpmovies',
 	array(

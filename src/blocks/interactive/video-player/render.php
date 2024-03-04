@@ -1,29 +1,28 @@
 <?php
+/**
+ * Server rendering for the video player block.
+ *
+ * @package wpmovies
+ */
+
 $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'wpmovies-video-player' )
 );
 
-wp_store(
+wp_interactivity_state(
+	'wpmovies',
 	array(
-		'state'     => array(
-			'wpmovies' => array(
-				'currentVideo' => '',
-			),
-		),
-		'selectors' => array(
-			'wpmovies' => array(
-				'isPlaying' => false,
-			),
-		),
+		'currentVideo' => '',
+		'isPlaying'    => false,
 	),
 );
 ?>
 
-<div id="wp-movies-video-player" data-wp-bind--hidden="!selectors.wpmovies.isPlaying" <?php echo $wrapper_attributes; ?>>
+<div id="wp-movies-video-player" data-wp-bind--hidden="!state.isPlaying" <?php echo $wrapper_attributes; ?>>
 	<div class="wpmovies-video-wrapper">
 		<div class="wpmovies-video-close">
-			<button class="close-button" data-wp-on--click="actions.wpmovies.closeVideo">
-				<?php _e( 'Close' ); ?>
+			<button class="close-button" data-wp-on--click="actions.closeVideo">
+				<?php _e( 'Close', 'wp-movies-demo' ); ?>
 			</button>
 		</div>
 		<iframe
@@ -31,7 +30,7 @@ wp_store(
 			height="315"
 			allow="autoplay"
 			allowfullscreen
-			data-wp-bind--src="state.wpmovies.currentVideo"
+			data-wp-bind--src="state.currentVideo"
 		></iframe>
 	</div>
 </div>

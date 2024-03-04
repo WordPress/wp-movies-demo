@@ -11,7 +11,7 @@ $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
 $likedMovies        = array();
 
-wp_store(
+wp_interactivity_state(
 	array(
 		'state' => array(
 			'wpmovies' => array(
@@ -73,7 +73,7 @@ $post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
 
-wp_store(
+wp_interactivity_state(
 	array(
 		'selectors' => array(
 			'wpmovies' => array(
@@ -147,7 +147,7 @@ In the `view.js` file, we add both the selector, which reads the post ID from th
 // render.php (simplified)
 // ...
 
-wp_store(
+wp_interactivity_state(
 	array(
 		'selectors' => array(
 			'wpmovies' => array(
@@ -262,7 +262,7 @@ In the `view.js`, we simply set the selectors that vary depending on the context
 <?php
 // Video Player
 // render.php (simplified)
-wp_store(
+wp_interactivity_state(
 	array(
 		'state'     => array(
 			'wpmovies' => array(
@@ -337,12 +337,11 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'movie-search' )
 );
 
-wp_store(
+wp_interactivity_state(
+	'wpmovies',
 	array(
 		'state' => array(
-			'wpmovies' => array(
-				'searchValue' => get_search_query(),
-			),
+			'searchValue' => get_search_query(),
 		),
 	),
 );
@@ -355,8 +354,8 @@ wp_store(
 	  inputmode="search"
 	  placeholder="Search for a movie..."
 		required=""
-		data-wp-bind--value="state.wpmovies.searchValue"
-		data-wp-on--input="actions.wpmovies.updateSearch"
+		data-wp-bind--value="state.searchValue"
+		data-wp-on--input="actions.updateSearch"
 	>
 </div>
 ```

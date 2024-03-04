@@ -1,4 +1,10 @@
 <?php
+/**
+ * Server rendering for the movie trailer button block.
+ *
+ * @package wpmovies
+ */
+
 $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'wpmovies-trailer-button' )
 );
@@ -9,7 +15,7 @@ $videos    = get_post_meta( $post->ID, '_wpmovies_videos', true );
 $trailers  = array_filter(
 	json_decode( $videos, true ),
 	function( $video ) {
-		return $video['type'] === 'Trailer';
+		return 'Trailer' === $video['type'];
 	}
 );
 
@@ -19,7 +25,7 @@ if ( count( $trailers ) !== 0 ) {
 	?>
 
 	<div <?php echo $wrapper_attributes; ?> data-wp-context='<?php echo esc_attr( wp_json_encode( array( 'videoId' => $trailer_id ) ) ); ?>'>
-		<div class="wpmovies-page-button-parent" data-wp-on--click="actions.wpmovies.setVideo" aria-controls="wp-movies-video-player">
+		<div class="wpmovies-page-button-parent" data-wp-on--click="actions.setVideo" aria-controls="wp-movies-video-player">
 			<div class="wpmovies-page-button-child">
 				<?php echo $play_icon; ?><span>Play trailer</span>
 			</div>

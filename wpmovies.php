@@ -22,19 +22,6 @@ require_once __DIR__ . '/lib/db-update/index.php';
 if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
-if ( ! is_plugin_active( 'block-interactivity-experiments/wp-directives.php' ) ) {
-	// Show an error message.
-	add_action(
-		'admin_notices',
-		function () {
-			echo sprintf( '<div class="error"><p>%s</p></div>', __( 'This plugin requires the WP Directives plugin to be installed and activated.', 'wp-movies-demo' ) );
-		}
-	);
-
-	// Deactivate the plugin.
-	deactivate_plugins( plugin_basename( __FILE__ ) );
-	return;
-}
 
 add_action( 'init', 'auto_register_block_types' );
 
@@ -124,7 +111,6 @@ add_action( 'wp_enqueue_scripts', 'dequeue_twemoji' );
  * @param $content The block content.
  * @return $content The block content with the added key attributes.
  */
-
 function wpmovies_add_key_to_featured_image( $content ) {
 	$p = new WP_HTML_Tag_Processor( $content );
 	while ( $p->next_tag( array( 'tag_name' => 'img' ) ) ) {

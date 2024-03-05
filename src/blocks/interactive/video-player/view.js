@@ -1,18 +1,18 @@
-import { store } from '@wordpress/interactivity';
+import { store, getContext } from '@wordpress/interactivity';
 
 const { state } = store('wpmovies', {
 	state: {
 		isPlaying: () => state.currentVideo !== '',
 	},
 	actions: {
-		closeVideo: ({ state }) => {
+		closeVideo: () => {
 			state.currentVideo = '';
 		},
-		setVideo: ({ state, context }) => {
+		setVideo: () => {
+			const ctx = getContext();
+			console.log('ctx', ctx);
 			state.currentVideo =
-				'https://www.youtube.com/embed/' +
-				context.videoId +
-				'?autoplay=1';
+				'https://www.youtube.com/embed/' + ctx.videoId + '?autoplay=1';
 		},
 	},
 });

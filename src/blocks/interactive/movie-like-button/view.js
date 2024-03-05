@@ -2,13 +2,14 @@ import { store, getContext } from '@wordpress/interactivity';
 
 store('wpmovies', {
 	state: {
-		isMovieIncluded: ({ context: { post } }) => {
+		isMovieIncluded() {
 			const ctx = getContext();
 			return state.likedMovies.includes(ctx.post.id);
 		},
 	},
 	actions: {
 		toggleMovie: () => {
+			console.log('toggleMovie');
 			const ctx = getContext();
 			const index = state.likedMovies.findIndex(
 				(post) => post === ctx.post.id

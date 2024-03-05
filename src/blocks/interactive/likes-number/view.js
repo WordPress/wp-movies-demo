@@ -3,7 +3,11 @@ import { store } from '@wordpress/interactivity';
 
 const { state } = store({
 	state: {
-		likesCount: () => state.wpmovies.likedMovies.length,
-		isLikedMoviesNotEmpty: () => state.wpmovies.likedMovies.length !== 0,
+		likesCount() {
+			return state.likedMovies.length;
+		},
+		isLikedMoviesNotEmpty() {
+			return state.likedMovies.length !== 0;
+		},
 	},
 });

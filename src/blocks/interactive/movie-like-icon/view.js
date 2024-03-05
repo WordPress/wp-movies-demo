@@ -2,7 +2,7 @@ import { store, getContext } from '@wordpress/interactivity';
 
 const { state } = store('wpmovies', {
 	state: {
-		isMovieIncluded: () => {
+		isMovieIncluded() {
 			const ctx = getContext();
 			return state.likedMovies.includes(ctx.post.id);
 		},

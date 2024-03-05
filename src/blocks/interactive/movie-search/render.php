@@ -12,14 +12,12 @@ $wrapper_attributes = get_block_wrapper_attributes(
 wp_interactivity_state(
 	'wpmovies',
 	array(
-		'state' => array(
-			'searchValue' => get_search_query(),
-		),
+		'searchValue' => get_search_query(),
 	),
 );
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; ?> data-wp-interactive="wpmovies">
 	<form>
 		<label class="search-label" for="movie-search">Search for a movie</label>
 		<input

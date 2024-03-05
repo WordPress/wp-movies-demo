@@ -18,6 +18,7 @@ wp_interactivity_state(
 ?>
 
 <div
+	data-wp-interactive="wpmovies"
 	<?php echo $wrapper_attributes; ?>
 	data-wp-context='{ "post": { "id": <?php echo $post->ID; ?> } }'
 >

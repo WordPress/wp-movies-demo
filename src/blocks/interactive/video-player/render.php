@@ -18,7 +18,7 @@ wp_interactivity_state(
 );
 ?>
 
-<div id="wp-movies-video-player" data-wp-bind--hidden="!state.isPlaying" <?php echo $wrapper_attributes; ?>>
+<div data-wp-interactive="wpmovies" id="wp-movies-video-player" data-wp-bind--hidden="!state.isPlaying" <?php echo $wrapper_attributes; ?>>
 	<div class="wpmovies-video-wrapper">
 		<div class="wpmovies-video-close">
 			<button class="close-button" data-wp-on--click="actions.closeVideo">

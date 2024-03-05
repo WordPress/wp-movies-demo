@@ -40,43 +40,6 @@ function auto_register_block_types() {
 	};
 }
 
-function add_script_dependency( $handle, $dep, $in_footer ) {
-	global $wp_scripts;
-
-	$script = $wp_scripts->query( $handle, 'registered' );
-	if ( ! $script ) {
-		return false;
-	}
-
-	if ( ! in_array( $dep, $script->deps, true ) ) {
-		$script->deps[] = $dep;
-
-		if ( $in_footer ) {
-			// move script to the footer
-			$wp_scripts->add_data( $handle, 'group', 1 );
-		}
-	}
-
-	return true;
-}
-
-add_action( 'wp_enqueue_scripts', 'auto_inject_interactivity_dependency' );
-
-function auto_inject_interactivity_dependency() {
-	$registered_blocks = \WP_Block_Type_Registry::get_instance()->get_all_registered();
-
-	foreach ( $registered_blocks as $name => $block ) {
-		$has_interactivity_support = $block->supports['interactivity'] ?? false;
-
-		if ( ! $has_interactivity_support ) {
-			continue;
-		}
-		foreach ( $block->view_script_handles as $handle ) {
-			add_script_dependency( $handle, 'wp-directive-runtime', true );
-		}
-	}
-}
-
 // ADD CRON EVENTS TO IMPORT MOVIES DAILY
 // Create the necessary hook
 add_action( 'cron_wpmovies_add_movies', 'wpmovies_add_movies' );
@@ -168,13 +131,3 @@ add_filter(
 	20,
 	1
 );
-
-function add_defer_attribute( $tag, $handle ) {
-	if ( 'wp-directive-runtime' === $handle || 'wp-directive-vendors' === $handle ) {
-		return str_replace( ' src', ' defer src', $tag );
-	} else {
-		return $tag;
-	}
-
-}
-add_filter( 'script_loader_tag', 'add_defer_attribute', 10, 2 );

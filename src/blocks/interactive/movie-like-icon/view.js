@@ -15,6 +15,8 @@ const { state } = store('wpmovies', {
 			);
 			if (index === -1) state.likedMovies.push(ctx.post.id);
 			else state.likedMovies.splice(index, 1);
+			state.likesCount = state.likedMovies.length;
+			state.isLikedMoviesNotEmpty = state.likedMovies.length > 0;
 		},
 	},
 });

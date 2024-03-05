@@ -1,6 +1,6 @@
 import { store, getContext } from '@wordpress/interactivity';
 
-store('wpmovies', {
+const { state } = store('wpmovies', {
 	state: {
 		isMovieIncluded() {
 			const ctx = getContext();
@@ -9,13 +9,14 @@ store('wpmovies', {
 	},
 	actions: {
 		toggleMovie: () => {
-			console.log('toggleMovie');
 			const ctx = getContext();
 			const index = state.likedMovies.findIndex(
 				(post) => post === ctx.post.id
 			);
 			if (index === -1) state.likedMovies.push(ctx.post.id);
 			else state.likedMovies.splice(index, 1);
+			state.likesCount = state.likedMovies.length;
+			state.isLikedMoviesNotEmpty = state.likedMovies.length > 0;
 		},
 	},
 });

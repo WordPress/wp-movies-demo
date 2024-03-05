@@ -13,6 +13,7 @@ wp_interactivity_state(
 	'wpmovies',
 	array(
 		'isMovieIncluded' => false,
+
 	),
 );
 ?>

@@ -7,7 +7,7 @@ const Edit = () => {
 			<input
 				type="search"
 				name="s"
-				inputmode="search"
+				inputMode="search"
 				placeholder={__('Search for a movie', 'wp-movies')}
 				required=""
 			/>

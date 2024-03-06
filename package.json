@@ -3,12 +3,14 @@
 	"version": "0.1.27",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build --experimental-modules",
-		"build:i-api": "webpack --mode=production --config iapi.webpack.config.js",
+		"build": "npm run build:other && npm run build:blocks",
+		"build:blocks": "wp-scripts build --experimental-modules",
+		"build:other": "wp-scripts build --config custom-webpack.config.js",
 		"build:custom": "wp-scripts build src/index.js",
-		"start": "wp-scripts start --experimental-modules",
+		"start": "concurrently 'npm run start:other' 'npm run start:blocks'",
+		"start:blocks": "wp-scripts start --experimental-modules",
+		"start:other": "wp-scripts start --config custom-webpack.config.js",
 		"dev": "npm start",
 		"format:php": "wp-env run composer run-script format",
 		"lint:php": "wp-env run composer run-script lint",
@@ -29,22 +31,19 @@
 		"phpVersion": "5.6"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.17.10",
-		"@babel/preset-env": "^7.17.10",
-		"@prettier/plugin-php": "^0.18.9",
-		"@types/jest": "^27.5.1",
-		"@wordpress/blocks": "^11.7.0",
-		"@wordpress/element": "^4.3.0",
+		"@babel/core": "^7.24.0",
+		"@babel/preset-env": "^7.24.0",
+		"@prettier/plugin-php": "^0.22.2",
+		"@wordpress/blocks": "^12.29.0",
+		"@wordpress/element": "^5.29.0",
 		"@wordpress/scripts": "^27.3.0",
-		"@wordpress/env": "^5.9.0",
-		"archiver": "^5.3.1",
-		"babel-jest": "^28.1.0",
-		"jest": "^28.1.0",
-		"prettier": "^2.7.1"
+		"@wordpress/env": "^9.4.0",
+		"archiver": "^7.0.0",
+		"concurrently": "^8.2.2",
+		"prettier": "^3.2.5"
 	},
 	"dependencies": {
-		"@wordpress/i18n": "^4.24.0",
-		"@wordpress/interactivity": "^5.1.0",
-		"@wordpress/interactivity-router": "^1.2.0"
+		"@wordpress/i18n": "^4.52.0",
+		"@wordpress/interactivity": "^5.1.0"
 	}
 }

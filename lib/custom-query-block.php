@@ -104,14 +104,13 @@ add_action( 'pre_render_block', 'wpmovies_update_demo_query', 10, 2 );
  * Add the movie and the cast variations to the Query Loop block.
  */
 function wpmovies_add_query_loop_variations() {
-	$variations_assets_file = get_stylesheet_directory() . '../build/variations.asset.php';
-	if ( file_exists( $variations_assets_file ) ) {
-		$assets = include $variations_assets_file;
+	if ( file_exists( plugin_dir_path( __DIR__ ) . 'build/query-loop-variations.asset.php' ) ) {
+		$asset_file = include( plugin_dir_path( __DIR__ ) . 'build/query-loop-variations.asset.php' );
 		wp_enqueue_script(
 			'query-loop-variations',
-			plugin_dir_url( __FILE__ ) . '../build/query-loop-variations.js',
-			$assets['dependencies'],
-			$assets['version'],
+			plugin_dir_url( __DIR__ ) . 'build/query-loop-variations.js',
+			$asset_file['dependencies'],
+			$asset_file['version'],
 			true
 		);
 	}

@@ -1,9 +1,14 @@
 <?php
+/**
+ * Custom Query Block.
+ *
+ * @package wpmovies
+ */
 
 /**
  * Check that the block is a movie or a cast variation of the Query Loop block.
  *
- *  @param $parsed_block
+ *  @param array $parsed_block The block being rendered.
  */
 function wpmovies_is_demo_variation( $parsed_block ) {
 	return isset( $parsed_block['attrs']['namespace'] )
@@ -15,8 +20,8 @@ function wpmovies_is_demo_variation( $parsed_block ) {
  * a movie or a cast variation of the Query Loop block. So it loads
  * the movies or the actors depending if the user is in the actor or the movie page.
  *
- * @param $pre_render The pre-rendered content. Default null.
- * @param $parsed_block The block being rendered.
+ * @param string $pre_render The pre-rendered content. Default null.
+ * @param array  $parsed_block The block being rendered.
  */
 function wpmovies_update_demo_query( $pre_render, $parsed_block ) {
 	if ( 'core/query' !== $parsed_block['blockName'] ) {
@@ -37,31 +42,30 @@ function wpmovies_update_demo_query( $pre_render, $parsed_block ) {
  * Return a new query, with the actors of the movie or
  * the movies of an actor, depending the post type rendered.
  *
- * @param $query Array containing parameters for WP_Query as parsed by the block context.
- * @return $query Array with the new query, a movies or an actors one.
+ * @param array $query Parameters for WP_Query as parsed by the block context.
+ * @return array $query  The new query, a movies or an actors one.
  */
-
 function wpmovies_build_query( $query ) {
-	// Order by popularity
+	// Order by popularity.
 	$order_metafield = '';
-	if ( $query['post_type'] === 'movies' ) {
-		$order_metafield = '_wpmovies_vote_average';
+	if ( 'movies' === $query['post_type'] ) {
+		$order_metafield     = '_wpmovies_vote_average';
 		$query['meta_query'] = array(
 			array(
 				'key'     => '_wpmovies_vote_count',
 				'value'   => '3000',
 				'type'    => 'NUMERIC',
 				'compare' => '>',
-			)
+			),
 		);
-	} elseif ( $query['post_type'] === 'actors' ) {
+	} elseif ( 'actors' === $query['post_type'] ) {
 		$order_metafield = '_wpmovies_actors_popularity';
 	};
-	$query['meta_key']   = $order_metafield;
-	$query['orderby']    = 'meta_value_num';
-	$query['order']      = 'DESC';
+	$query['meta_key'] = $order_metafield;
+	$query['orderby']  = 'meta_value_num';
+	$query['order']    = 'DESC';
 
-	// Get correct taxonomy
+	// Get correct taxonomy.
 	$taxonomy_type = null;
 	if ( is_category() ) {
 		$taxonomy_type = 'category';
@@ -70,13 +74,13 @@ function wpmovies_build_query( $query ) {
 		$wp_term       = get_term_by( 'id', $cat_id, 'category' );
 	} else {
 		global $post;
-		if ( $post->post_type === 'movies' ) {
+		if ( 'movies' === $post->post_type ) {
 			$taxonomy_type = 'movies_tax';
 		}
-		if ( $post->post_type === 'actors' ) {
+		if ( 'actors' === $post->post_type ) {
 			$taxonomy_type = 'actors_tax';
 		}
-		if ( $taxonomy_type === null ) {
+		if ( null === $taxonomy_type ) {
 			return $query;
 		}
 		$wp_term = get_term_by( 'slug', $post->post_name, $taxonomy_type );
@@ -87,7 +91,7 @@ function wpmovies_build_query( $query ) {
 	$replace_query = array(
 		'taxonomy'         => $taxonomy_type,
 		'terms'            => array( $wp_term->term_id ),
-		'include_children' => false
+		'include_children' => false,
 	);
 
 	$new_query = array_replace( $query, array( 'tax_query' => array( $replace_query ) ) );
@@ -100,10 +104,16 @@ add_action( 'pre_render_block', 'wpmovies_update_demo_query', 10, 2 );
  * Add the movie and the cast variations to the Query Loop block.
  */
 function wpmovies_add_query_loop_variations() {
-	wp_enqueue_script(
-		'query-loop-variations',
-		plugin_dir_url( __FILE__ ) . '../build/query-loop-variations.js',
-		array( 'wp-blocks' )
-	);
+	$variations_assets_file = get_stylesheet_directory() . '../build/variations.asset.php';
+	if ( file_exists( $variations_assets_file ) ) {
+		$assets = include $variations_assets_file;
+		wp_enqueue_script(
+			'query-loop-variations',
+			plugin_dir_url( __FILE__ ) . '../build/query-loop-variations.js',
+			$assets['dependencies'],
+			$assets['version'],
+			true
+		);
+	}
 }
-add_action( 'admin_enqueue_scripts', 'wpmovies_add_query_loop_variations' );
+add_action( 'enqueue_block_editor_assets', 'wpmovies_add_query_loop_variations' );

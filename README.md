@@ -5,12 +5,9 @@
 
 https://user-images.githubusercontent.com/5417266/228688653-4af8bbae-0360-468e-a662-1a3998e62cb6.mp4
 
-## WARNING - CODE IS CURRENTLY BROKEN (see below, Setup)
-
 ## What is this?
 
-This is a demo plugin which shows the features of the [Interactivity API](https://github.com/WordPress/block-interactivity-experiments) for
-WordPress proposed in [this post in Make WordPress Core blog](https://make.wordpress.org/core/2023/03/30/proposal-the-interactivity-api-a-better-developer-experience-in-building-interactive-blocks/).
+This is a demo plugin which shows the features of the [Interactivity API](https://make.wordpress.org/core/2024/03/04/interactivity-api-dev-note/).
 
 The plugin is split into:
 
@@ -27,12 +24,9 @@ The plugin is split into:
 
 ## When will I be able to use the Interactivity API?
 
-The [Interactivity API](https://github.com/WordPress/block-interactivity-experiments) is an **experimental feature** and not ready for adoption yet.
-It is under active development and its final public API is **very likely going to change before an official release**.
+The Interactivity API is available in WordPress 6.5.
 
 ## Setup
-
-> ⚠️ **WARNING**: These instructions don't work anymore because there's a conflict between the Interactivity API shipped in the Block Interactivity Experiments plugin and the Interactivity API shipped now in Gutenberg. We'll migrate this repo to use only Gutenberg, but in the meantime, please use this [Getting Started guide](https://github.com/WordPress/gutenberg/blob/trunk/packages/interactivity/docs/1-getting-started.md) if you want to test the Interactivity API. If you have questions, you can open a discussion in the [Interactivity API category](https://github.com/WordPress/gutenberg/discussions/categories/interactivity-api) of GitHub.
 
 1. Install the required plugins:
 
@@ -102,7 +96,7 @@ It is under active development and its final public API is **very likely going t
     ```
 
 6. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
-7. Enable the **Client Side Navigations** in the **Settings > WP Directives**.
+7. Enable the **Client Side Navigations** in the **Gutenberg > Experiments**.
 
 ## Things to try
 
@@ -110,7 +104,7 @@ It is under active development and its final public API is **very likely going t
 
 When enabled, the lists of movies and actors will paginate without doing a full
 page refresh. You can enable this behavior in your WordPress admin page in
-**Settings > WP Directives**. Click around to the next/previous
+**Gutenberg > Experiments**. Click around to the next/previous
 page of the movies or actors. You the list is loaded without a delay. This is
 because the HTML for that page is prefetched ahead of time, and only the
 nodes that are different between the current page and the next page are updated.

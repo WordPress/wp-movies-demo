@@ -1,3 +1,6 @@
+/**
+ * WordPress dependencies.
+ */
 import { getElement, store } from '@wordpress/interactivity';
 
 const updateURL = async (event, value) => {

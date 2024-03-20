@@ -32,7 +32,6 @@
 		"@wordpress/env": "^9.4.0",
 		"@wordpress/scripts": "^27.3.0",
 		"archiver": "^7.0.0",
-		"concurrently": "^8.2.2",
 		"prettier": "^3.2.5"
 	},
 	"dependencies": {

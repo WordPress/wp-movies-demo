@@ -68,7 +68,7 @@ The Interactivity API is [available in WordPress 6.5](https://make.wordpress.org
 > When running `wp-env` commands like the one above, it is assumed that the
 > Docker container is called `cli` on your local machine. If you had
 > previously used `wp-env` to run other WordPress sites, this name might be
-> different, e.g. `cli-1` in which case the full command would be `npx wp-env run cli-1 "wp theme activate wp-movies-theme".
+> different, e.g. `cli-1` in which case the full command would be `npx wp-env run cli-1 "wp theme activate wp-movies-theme"`.
 
 4. Add the movie and actor data to the WordPress database:
 

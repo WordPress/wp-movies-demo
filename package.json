@@ -23,7 +23,8 @@
 		"bracketSpacing": true,
 		"semi": true,
 		"arrowParens": "always",
-		"phpVersion": "5.6"
+		"phpVersion": "5.6",
+		"plugins": ["@prettier/plugin-php"]
 	},
 	"devDependencies": {
 		"@prettier/plugin-php": "^0.22.2",

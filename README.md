@@ -2,7 +2,6 @@
 
 🎥 Live demo: [wpmovies.dev](https://wpmovies.dev)
 
-
 https://user-images.githubusercontent.com/5417266/228688653-4af8bbae-0360-468e-a662-1a3998e62cb6.mp4
 
 ## What is this?
@@ -11,60 +10,65 @@ This is a demo plugin which shows the features of the [Interactivity API](https:
 
 The plugin is split into:
 
--   `/src/blocks/interactive` - **Start here to understand how to build interactive blocks with the
-    Interactivity API**. The folder contains all the custom interactive blocks used in the
-    demo.
-
--   `/lib` - The code that contains the runtime and internals of the Interactivity
-    API and the configuration needed to run the demo.
+-   `/src/blocks/interactive` - **Start here to understand how to build
+    interactive blocks with the Interactivity API**. The folder contains all the
+    custom interactive blocks used in the demo.
 
 -   `/wp-movies-theme` - The custom theme used in the demo. Contains some custom
     styling and the templates for the header & footer as well as the movie &
     actors pages.
 
+-   `/lib` - Helpers and support code for this demo. It's not relevant for
+    understanding the Interactivity API.
+
 ## When will I be able to use the Interactivity API?
 
-The Interactivity API is available in WordPress 6.5.
+The Interactivity API is [available in WordPress 6.5](https://make.wordpress.org/core/2024/03/04/interactivity-api-dev-note/).
 
 ## Setup
 
 1. Install the required plugins:
 
-   - If you use [`wp-env`]([url](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)), run `npx wp-env start` to install the plugins automatically and run a local WP instance.
+    - If you use [`wp-env`](<[url](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)>), run `npx wp-env start` to install the plugins automatically and run a local WP instance.
 
-   - Otherwise, install the following plugins:
+    - Otherwise, install the following plugins:
 
-     - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
+        - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
 
-     - [Block Interactivity Experiments](https://github.com/WordPress/block-interactivity-experiments/releases/latest/download/block-interactivity-experiments.zip). This one requires Gutenberg to work.
+        - [Movies Demo
+          Plugin](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip)
+          (this repo)
 
-     - [Movies Demo Plugin](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip). This one requires the Block Interactivity Experiments to work.
+2. Install the dependencies and build the plugin:
 
-
-2.  Install the dependencies and build the plugin:
-  
     ```sh
     npm install && composer install
     npm run build
     ```
-    
+
     If you plan on tinkering with the frontend code, start the webpack
-    server which automatically rebuild the files when you make any changes:
-    
-    ```
+    server which automatically rebuilds the files when you make any changes:
+
+    ```sh
     npm start
     ```
 
-3. Install the theme:
+3. Install & activate the theme:
 
     You need to install and activate the [Movies Demo
-    Theme](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-theme.zip).
-    Again, if you are using `wp-env`, it is already installed by default and you
+    Theme](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-theme.zip)
+    (`/wp-movies-theme` in this repo). If you are using `wp-env`, it is already installed by default and you
     just have to activate it. You can run:
 
     ```sh
       npx wp-env run cli "wp theme activate wp-movies-theme"
     ```
+
+    > [!NOTE]  
+    > When running `wp-env` commands like the one above, it is assumed that the
+    > Docker container is called `cli` on your local machine. If you have
+    > already used `wp-env` to run other WordPress sites, this name might be
+    > different, e.g. `cli-1` in which case the full command would be `npx wp-env run cli-1 "wp theme activate wp-movies-theme".
 
 4. Add the movie and actor data to the WordPress database:
 
@@ -95,8 +99,7 @@ The Interactivity API is available in WordPress 6.5.
     npx wp-env run cli "wp rewrite structure '/%postname%/'"
     ```
 
-6. Change settings to show `8` posts and RSS items per page in **Settings > Reading**
-7. Enable the **Client Side Navigations** in the **Gutenberg > Experiments**.
+6. Enable the **Full client-side navigation** in the **Gutenberg > Experiments**.
 
 ## Things to try
 

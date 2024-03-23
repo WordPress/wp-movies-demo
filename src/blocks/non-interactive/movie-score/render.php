@@ -24,15 +24,15 @@ $wrapper_attributes = get_block_wrapper_attributes(
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>
-   <div class="wpmovies-score-circle">
-	  <div class="wpmovies-score-mask wpmovies-score-full" <?php echo 'style="transform: rotate(' . $degrees_css . 'deg)"'; ?>>
-		 <div class="wpmovies-score-fill" <?php echo 'style="background-color: ' . $score_color . ';transform: rotate(' . $degrees_css . 'deg)"'; ?>></div>
-	  </div>
-	  <div class="wpmovies-score-mask wpmovies-score-half">
-		 <div class="wpmovies-score-fill" <?php echo 'style="background-color: ' . $score_color . ';transform: rotate(' . $degrees_css . 'deg)"'; ?>></div>
-	  </div>
-	  <div class="wpmovies-score-inside-circle">
-		 <span><?php echo round( $score * 10 ) . '%'; ?></span>
-	  </div>
-   </div>
+	<div class="wpmovies-score-circle">
+		<div class="wpmovies-score-mask wpmovies-score-full" <?php echo 'style="transform: rotate(' . $degrees_css . 'deg)"'; ?>>
+			<div class="wpmovies-score-fill" <?php echo 'style="background-color: ' . $score_color . ';transform: rotate(' . $degrees_css . 'deg)"'; ?>></div>
+		</div>
+		<div class="wpmovies-score-mask wpmovies-score-half">
+			<div class="wpmovies-score-fill" <?php echo 'style="background-color: ' . $score_color . ';transform: rotate(' . $degrees_css . 'deg)"'; ?>></div>
+		</div>
+		<div class="wpmovies-score-inside-circle">
+			<span><?php echo round( $score * 10 ) . '%'; ?></span>
+		</div>
+	</div>
 </div>

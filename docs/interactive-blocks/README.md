@@ -15,7 +15,7 @@ wp_interactivity_state(
 	'wpmovies',
 	array(
 		'likedMovies' 			=> $likedMovies,
-		'likesCount'            => count( $likedMovies ),
+		'likesCount'            => 0,
 		'isLikedMoviesNotEmpty' => count( $likedMovies ) > 0,
 		),
 );

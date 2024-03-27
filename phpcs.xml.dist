@@ -10,7 +10,7 @@
 	<rule ref="WordPress-Core"/>
 	<rule ref="WordPress-Docs"/>
 	<rule ref="WordPress.WP.I18n"/>
-	<config name="text_domain" value="gutenberg,default"/>
+	<config name="text_domain" value="wp-movies-demo,gutenberg,default"/>
 
 	<rule ref="VariableAnalysis.CodeAnalysis.VariableAnalysis">
 		<properties>
@@ -25,15 +25,20 @@
 		</properties>
 	</rule>
 
+	<rule ref="Squiz.Commenting.FileComment.Missing">
+		<exclude-pattern>./wpmovies.php</exclude-pattern>
+	</rule>
+
 	<arg value="ps"/>
 	<arg name="extensions" value="php"/>
 
 	<file>./wpmovies.php</file>
-	<file>./lib</file>
 	<file>./src</file>
 
 	<!-- Exclude generated files -->
 	<exclude-pattern>./build</exclude-pattern>
 	<exclude-pattern>./vendor</exclude-pattern>
 	<exclude-pattern>./node_modules</exclude-pattern>
+	<exclude-pattern>./tests</exclude-pattern>
+	<xclude-pattern>./lib/db-update</xclude-pattern>
 </ruleset>

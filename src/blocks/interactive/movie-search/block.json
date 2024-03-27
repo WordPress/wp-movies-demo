@@ -16,5 +16,5 @@
 	"render": "file:./render.php",
 	"editorStyle": "file:./style.css",
 	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js"
+	"viewScriptModule": "file:./view.js"
 }

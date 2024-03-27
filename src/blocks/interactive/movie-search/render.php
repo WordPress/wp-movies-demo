@@ -1,20 +1,23 @@
 <?php
+/**
+ * Server rendering for the movie search block.
+ *
+ * @package wpmovies
+ */
+
 $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'movie-search' )
 );
 
-wp_store(
+wp_interactivity_state(
+	'wpmovies',
 	array(
-		'state' => array(
-			'wpmovies' => array(
-				'searchValue' => get_search_query(),
-			),
-		),
+		'searchValue' => get_search_query(),
 	),
 );
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div data-wp-interactive="wpmovies" <?php echo $wrapper_attributes; ?> >
 	<form>
 		<label class="search-label" for="movie-search">Search for a movie</label>
 		<input
@@ -23,11 +26,11 @@ wp_store(
 			name="s"
 			role="search"
 			inputmode="search"
-			placeholder="Search for a movie..."
+			placeholder=<?php _e( 'Search for a movie', 'wp-movies-demo' ); ?>
 			required=""
 			autocomplete="off"
-			data-wp-bind--value="state.wpmovies.searchValue"
-			data-wp-on--input="actions.wpmovies.updateSearch"
+			data-wp-bind--value="state.searchValue"
+			data-wp-on--input="actions.updateSearch"
 			>
 	</form>
 </div>

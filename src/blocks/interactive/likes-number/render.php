@@ -1,28 +1,27 @@
 <?php
+/**
+ * Server rendering for the movie like button block.
+ *
+ * @package wpmovies
+ */
+
 $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
-$likedMovies				= array();
-
-wp_store(
+$liked_movies       = array();
+wp_interactivity_state(
+	'wpmovies',
 	array(
-		'state'     => array(
-			'wpmovies' => array(
-				'likedMovies' => $likedMovies,
-			),
-		),
-		'selectors' => array(
-			'wpmovies' => array(
-				'likesCount'            => count( $likedMovies ),
-				'isLikedMoviesNotEmpty' => count( $likedMovies ) > 0,
-			),
-		),
+		'likedMovies'           => $liked_movies,
+		'likesCount'            => 0,
+		'isLikedMoviesNotEmpty' => count( $liked_movies ) > 0,
 	),
 );
 ?>
 
 <div 
+	data-wp-interactive="wpmovies"
 	<?php echo $wrapper_attributes; ?>
-	data-wp-class--wpmovies-liked="selectors.wpmovies.isLikedMoviesNotEmpty">
+	data-wp-class--wpmovies-liked="state.isLikedMoviesNotEmpty">
 	<?php echo $play_icon; ?>
-	<span data-wp-text="selectors.wpmovies.likesCount"></span>
+	<span data-wp-text="state.likesCount"></span>
 </div>

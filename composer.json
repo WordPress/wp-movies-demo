@@ -22,7 +22,8 @@
 		},
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true,
-			"composer/installers": true
+			"composer/installers": true,
+			"php-http/discovery": true
 		}
 	},
 	"require-dev": {

@@ -84,7 +84,7 @@ wp_interactivity_state(
 				$video_id = substr( $video['url'], strpos( $video['url'], '?v=' ) + 3 );
 				?>
 				<div class="wpmovies-tabs-video-wrapper" data-wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>
-					<div data-wp-on--click="actions.wpmovies.setVideo" aria-controls="wp-movies-video-player">
+					<div data-wp-on--click="actions.setVideo" aria-controls="wp-movies-video-player">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" class="play-icon">
 							<path d="M3 22v-20l18 10-18 10z" />
 						</svg>

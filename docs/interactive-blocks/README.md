@@ -9,14 +9,13 @@ For the functionality of the likes, we created several blocks that work together
 // render.php
 $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
-$likedMovies        = array();
 
 wp_interactivity_state(
 	'wpmovies',
 	array(
-		'likedMovies' 			=> $likedMovies,
+		'likedMovies' 			=> array(),
 		'likesCount'            => 0,
-		'isLikedMoviesNotEmpty' => count( $likedMovies ) > 0,
+		'isLikedMoviesNotEmpty' => false,
 		),
 );
 ?>
@@ -43,12 +42,11 @@ On the server, the references of each directive will be evaluated and the HTML w
 
 ```js
 // view.js
-import { store } from "@wordpress/interactivity";
+import { store } from '@wordpress/interactivity';
 
 const { state } = store('wpmovies', {
 	likesCount: () => state.likedMovies.length,
-	isLikedMoviesNotEmpty: () =>
-        state.likedMovies.length !== 0,
+	isLikedMoviesNotEmpty: () => state.likedMovies.length !== 0,
 });
 ```
 
@@ -216,7 +214,7 @@ const { state } = store('wpmovies', {
       isVideosTab: () => {
 		const context = getContext();
 		return context.tab === "videos",
-	  } 
+	  }
   },
   actions: {
 	showImagesTab: () => {
@@ -287,22 +285,24 @@ In the HTML, we use a `data-wp-class` directive to show a modal when there is a 
 
 ```js
 // view.js
-import { store, getContext } from "@wordpress/interactivity";
+import { store, getContext } from '@wordpress/interactivity';
 
-const { state } = store('wpmovies',{
-  state: {
-	isPlaying: () => state.currentVideo !== "",
-  },
-  actions: {
-	closeVideo: () => {
-		state.currentVideo = "";
+const { state } = store('wpmovies', {
+	state: {
+		isPlaying: () => state.currentVideo !== '',
 	},
-	setVideo: () => {
-		const context = getContext();
-		state.currentVideo =
-			"https://www.youtube.com/embed/" + context.videoId + "?autoplay=1";
+	actions: {
+		closeVideo: () => {
+			state.currentVideo = '';
 		},
-  },
+		setVideo: () => {
+			const context = getContext();
+			state.currentVideo =
+				'https://www.youtube.com/embed/' +
+				context.videoId +
+				'?autoplay=1';
+		},
+	},
 });
 ```
 
@@ -361,24 +361,24 @@ const updateURL = async (event, value) => {
 };
 
 const { state } = store({
-  actions: {
-	*updateSearch(event) {
-		const { ref } = getElement();
-		const { value } = ref;
-		// Don't navigate if the search didn't really change.
-		if (value === state.searchValue) return;
+	actions: {
+		*updateSearch(event) {
+			const { ref } = getElement();
+			const { value } = ref;
+			// Don't navigate if the search didn't really change.
+			if (value === state.searchValue) return;
 
-		state.searchValue = value;
+			state.searchValue = value;
 
-		if (value === '') {
-			// If the search is empty, navigate to the home page.
-			yield store('core/router').actions.navigate(event, '/');
-		} else {
-			// If not, navigate to the new URL.
-			yield updateURL(event, value);
-		}
+			if (value === '') {
+				// If the search is empty, navigate to the home page.
+				yield store('core/router').actions.navigate(event, '/');
+			} else {
+				// If not, navigate to the new URL.
+				yield updateURL(event, value);
+			}
+		},
 	},
-  },
 });
 ```
 

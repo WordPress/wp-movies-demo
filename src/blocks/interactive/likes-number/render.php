@@ -7,13 +7,13 @@
 
 $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
-$liked_movies       = array();
+
 wp_interactivity_state(
 	'wpmovies',
 	array(
-		'likedMovies'           => $liked_movies,
+		'likedMovies'           => array(),
 		'likesCount'            => 0,
-		'isLikedMoviesNotEmpty' => count( $liked_movies ) > 0,
+		'isLikedMoviesNotEmpty' => false,
 	),
 );
 ?>

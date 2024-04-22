@@ -1,41 +1,40 @@
 {
-  "name": "wordpress-movies-demo",
-  "version": "0.1.27",
-  "author": "The WordPress Contributors",
-  "license": "GPL-2.0-or-later",
-  "scripts": {
-    "build": "wp-scripts build --experimental-modules",
-    "start": "wp-scripts start --experimental-modules",
-    "dev": "npm start",
-    "format:php": "wp-env run --env-cwd='wp-content/plugins/wp-movies-demo' cli composer run-script format",
-    "lint:php": "wp-env run --env-cwd='wp-content/plugins/wp-movies-demo' cli composer run-script lint",
-    "plugin-zip": "node .github/scripts/build-plugin.js",
-    "theme-zip": "node .github/scripts/build-theme.js",
-    "wp-env": "wp-env"
-	
-  },
-  "prettier": {
-    "useTabs": true,
-    "tabWidth": 4,
-    "printWidth": 80,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "bracketSameLine": false,
-    "bracketSpacing": true,
-    "semi": true,
-    "arrowParens": "always",
-    "phpVersion": "5.6"
-  },
-  "devDependencies": {
-    "@wordpress/blocks": "^12.29.0",
-    "@wordpress/element": "^5.29.0",
-    "@wordpress/env": "^9.4.0",
-    "@wordpress/scripts": "^27.3.0",
-    "archiver": "^7.0.0",
-    "prettier": "^3.2.5"
-  },
-  "dependencies": {
-    "@wordpress/i18n": "^4.52.0",
-    "@wordpress/interactivity": "^5.1.0"
-  }
+	"name": "wordpress-movies-demo",
+	"version": "0.1.28",
+	"author": "The WordPress Contributors",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"build": "wp-scripts build --experimental-modules",
+		"start": "wp-scripts start --experimental-modules",
+		"dev": "npm start",
+		"format:php": "wp-env run --env-cwd='wp-content/plugins/wp-movies-demo' cli composer run-script format",
+		"lint:php": "wp-env run --env-cwd='wp-content/plugins/wp-movies-demo' cli composer run-script lint",
+		"plugin-zip": "node .github/scripts/build-plugin.js",
+		"theme-zip": "node .github/scripts/build-theme.js",
+		"wp-env": "wp-env"
+	},
+	"prettier": {
+		"useTabs": true,
+		"tabWidth": 4,
+		"printWidth": 80,
+		"singleQuote": true,
+		"trailingComma": "es5",
+		"bracketSameLine": false,
+		"bracketSpacing": true,
+		"semi": true,
+		"arrowParens": "always",
+		"phpVersion": "5.6"
+	},
+	"devDependencies": {
+		"@wordpress/blocks": "^12.29.0",
+		"@wordpress/element": "^5.29.0",
+		"@wordpress/env": "^9.4.0",
+		"@wordpress/scripts": "^27.3.0",
+		"archiver": "^7.0.0",
+		"prettier": "^3.2.5"
+	},
+	"dependencies": {
+		"@wordpress/i18n": "^4.52.0",
+		"@wordpress/interactivity": "^5.1.0"
+	}
 }

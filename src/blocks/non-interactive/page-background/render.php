@@ -1,4 +1,10 @@
 <?php
+/**
+ * Page Background Block render.
+ *
+ * @package wpmovies
+ */
+
 $post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(

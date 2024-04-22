@@ -1,4 +1,3 @@
-import '@wordpress/block-editor';
 import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
@@ -8,7 +7,7 @@ const Edit = () => {
 			<input
 				type="search"
 				name="s"
-				inputmode="search"
+				inputMode="search"
 				placeholder={__('Search for a movie', 'wp-movies')}
 				required=""
 			/>

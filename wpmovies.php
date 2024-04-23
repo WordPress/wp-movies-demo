@@ -30,7 +30,7 @@ if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 				'<div class="error"><p>%s</p></div>',
 				__(
 					'WP Movies plugin requires the Gutenberg plugin to be installed and activated.',
-					'wp-directives'
+					'wp-movies-demo'
 				)
 			);
 		}

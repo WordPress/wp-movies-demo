@@ -22,6 +22,23 @@ if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 }
 
+if ( ! is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
+	add_action(
+		'admin_notices',
+		function () {
+			echo sprintf(
+				'<div class="error"><p>%s</p></div>',
+				__(
+					'WP Movies plugin requires the Gutenberg plugin to be installed and activated.',
+					'wp-directives'
+				)
+			);
+		}
+	);
+	deactivate_plugins( plugin_basename( __FILE__ ) );
+	return;
+}
+
 add_action( 'init', 'auto_register_block_types' );
 
 /**

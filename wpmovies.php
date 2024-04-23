@@ -9,18 +9,13 @@
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       wp-movies-demo
+ * Requires Plugins:  gutenberg
  */
 
 require_once __DIR__ . '/lib/custom-post-types.php';
 require_once __DIR__ . '/lib/custom-taxonomies.php';
 require_once __DIR__ . '/lib/custom-query-block.php';
 require_once __DIR__ . '/lib/db-update/index.php';
-
-
-// Check if Gutenberg plugin is active.
-if ( ! function_exists( 'is_plugin_active' ) ) {
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-}
 
 add_action( 'init', 'auto_register_block_types' );
 

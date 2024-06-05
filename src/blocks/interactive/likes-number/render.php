@@ -12,7 +12,6 @@ wp_interactivity_state(
 	'wpmovies',
 	array(
 		'likedMovies'           => array(),
-		'likesCount'            => 0,
 		'isLikedMoviesNotEmpty' => false,
 	),
 );
@@ -21,7 +20,8 @@ wp_interactivity_state(
 <div 
 	data-wp-interactive="wpmovies"
 	<?php echo $wrapper_attributes; ?>
-	data-wp-class--wpmovies-liked="state.isLikedMoviesNotEmpty">
+	data-wp-class--wpmovies-liked="state.isLikedMoviesNotEmpty"
+>
 	<?php echo $play_icon; ?>
-	<span data-wp-text="state.likesCount"></span>
+	<span data-wp-text="state.likedMovies.length"></span>
 </div>

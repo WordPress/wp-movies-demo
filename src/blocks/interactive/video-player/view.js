@@ -5,7 +5,9 @@ import { store, getContext } from '@wordpress/interactivity';
 
 const { state } = store('wpmovies', {
 	state: {
-		isPlaying: () => state.currentVideo !== '',
+		get isPlaying() {
+			return state.currentVideo !== '';
+		},
 	},
 	actions: {
 		closeVideo: () => {

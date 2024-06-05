@@ -5,7 +5,7 @@ import { store, getContext } from '@wordpress/interactivity';
 
 const { state } = store('wpmovies', {
 	state: {
-		isMovieIncluded() {
+		get isMovieIncluded() {
 			const ctx = getContext();
 			return state.likedMovies.includes(ctx.post.id);
 		},
@@ -18,8 +18,6 @@ const { state } = store('wpmovies', {
 			);
 			if (index === -1) state.likedMovies.push(ctx.post.id);
 			else state.likedMovies.splice(index, 1);
-			state.likesCount = state.likedMovies.length;
-			state.isLikedMoviesNotEmpty = state.likedMovies.length > 0;
 		},
 	},
 });

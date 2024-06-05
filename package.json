@@ -22,8 +22,7 @@
 		"bracketSameLine": false,
 		"bracketSpacing": true,
 		"semi": true,
-		"arrowParens": "always",
-		"phpVersion": "5.6"
+		"arrowParens": "always"
 	},
 	"devDependencies": {
 		"@wordpress/blocks": "^12.29.0",

@@ -43,13 +43,13 @@ On the server, the references of each directive will be evaluated and the HTML w
 ### `view.js`
 
 ```js
-const { state } = store("wpmovies", {
-  state: {
-    get isLikedMoviesNotEmpty() {
-      return state.likedMovies.length > 0;
-    },
-  },
-});
+const { state } = store( 'wpmovies', {
+	state: {
+		get isLikedMoviesNotEmpty() {
+			return state.likedMovies.length > 0;
+		},
+	},
+} );
 ```
 
 In the `view.js` file, we add the logic of the derived state that depend on the other parts of the state. After hydration, the HTML will be modified reactively when any of the values of those references change.
@@ -106,22 +106,24 @@ It is also worth noting that we can use the PHP `_e( 'Like' )` function to trans
 ### `view.js`
 
 ```js
-const { state } = store("wpmovies", {
-  state: {
-    get isMovieIncluded() {
-      const ctx = getContext();
-      return state.likedMovies.includes(ctx.post.id);
-    },
-  },
-  actions: {
-    toggleMovie: () => {
-      const ctx = getContext();
-      const index = state.likedMovies.findIndex((post) => post === ctx.post.id);
-      if (index === -1) state.likedMovies.push(ctx.post.id);
-      else state.likedMovies.splice(index, 1);
-    },
-  },
-});
+const { state } = store( 'wpmovies', {
+	state: {
+		get isMovieIncluded() {
+			const ctx = getContext();
+			return state.likedMovies.includes( ctx.post.id );
+		},
+	},
+	actions: {
+		toggleMovie: () => {
+			const ctx = getContext();
+			const index = state.likedMovies.findIndex(
+				( post ) => post === ctx.post.id
+			);
+			if ( index === -1 ) state.likedMovies.push( ctx.post.id );
+			else state.likedMovies.splice( index, 1 );
+		},
+	},
+} );
 ```
 
 In the `view.js` file, we add both the derived state, which reads the post ID from the context and returns whether that post ID is present or not in the general array (`state.likedMovies`), and an event handler that toggles that post ID in the general array.
@@ -237,28 +239,28 @@ After the buttons, we use `data-wp-class` to show or hide the content of each ta
 ### `view.js`
 
 ```js
-store("wpmovies", {
-  state: {
-    get isImagesTab() {
-      const ctx = getContext();
-      return ctx.tab === "images";
-    },
-    get isVideosTab() {
-      const ctx = getContext();
-      return ctx.tab === "videos";
-    },
-  },
-  actions: {
-    showImagesTab: () => {
-      const ctx = getContext();
-      ctx.tab = "images";
-    },
-    showVideosTab: () => {
-      const ctx = getContext();
-      ctx.tab = "videos";
-    },
-  },
-});
+store( 'wpmovies', {
+	state: {
+		get isImagesTab() {
+			const ctx = getContext();
+			return ctx.tab === 'images';
+		},
+		get isVideosTab() {
+			const ctx = getContext();
+			return ctx.tab === 'videos';
+		},
+	},
+	actions: {
+		showImagesTab: () => {
+			const ctx = getContext();
+			ctx.tab = 'images';
+		},
+		showVideosTab: () => {
+			const ctx = getContext();
+			ctx.tab = 'videos';
+		},
+	},
+} );
 ```
 
 In the `view.js`, we simply add the logic of the derived state that vary depending on the context, and the actions that modify it.
@@ -341,23 +343,23 @@ In the HTML, we use a `data-wp-class` directive to show a modal when there is a 
 ### `view.js`
 
 ```js
-const { state } = store("wpmovies", {
-  state: {
-    get isPlaying() {
-      return state.currentVideo !== "";
-    },
-  },
-  actions: {
-    closeVideo: () => {
-      state.currentVideo = "";
-    },
-    setVideo: () => {
-      const ctx = getContext();
-      state.currentVideo =
-        "https://www.youtube.com/embed/" + ctx.videoId + "?autoplay=1";
-    },
-  },
-});
+const { state } = store( 'wpmovies', {
+	state: {
+		get isPlaying() {
+			return state.currentVideo !== '';
+		},
+	},
+	actions: {
+		closeVideo: () => {
+			state.currentVideo = '';
+		},
+		setVideo: () => {
+			const ctx = getContext();
+			state.currentVideo =
+				'https://www.youtube.com/embed/' + ctx.videoId + '?autoplay=1';
+		},
+	},
+} );
 ```
 
 In the `view.js` file, we simply add the logic of the derived state value that indicates if there is a video playing or not, and the actions that change the value of the part of the state that contains the video.
@@ -413,38 +415,40 @@ Then, in the HTML, we use the `data-wp-bind` directive to update the input value
 ### `view.js`
 
 ```js
-const updateURL = async (value) => {
-  const url = new URL(window.location);
-  url.searchParams.set("post_type", "movies");
-  url.searchParams.set("orderby", "name");
-  url.searchParams.set("order", "asc");
-  url.searchParams.set("s", value);
-  const { actions } = await import("@wordpress/interactivity-router");
-  await actions.navigate(`/${url.search}${url.hash}`);
+const updateURL = async ( value ) => {
+	const url = new URL( window.location );
+	url.searchParams.set( 'post_type', 'movies' );
+	url.searchParams.set( 'orderby', 'name' );
+	url.searchParams.set( 'order', 'asc' );
+	url.searchParams.set( 's', value );
+	const { actions } = await import( '@wordpress/interactivity-router' );
+	await actions.navigate( `/${ url.search }${ url.hash }` );
 };
 
-const { state } = store("wpmovies", {
-  actions: {
-    *updateSearch() {
-      const { ref } = getElement();
-      const { value } = ref;
+const { state } = store( 'wpmovies', {
+	actions: {
+		*updateSearch() {
+			const { ref } = getElement();
+			const { value } = ref;
 
-      // Don't navigate if the search didn't really change.
-      if (value === state.searchValue) return;
+			// Don't navigate if the search didn't really change.
+			if ( value === state.searchValue ) return;
 
-      state.searchValue = value;
+			state.searchValue = value;
 
-      if (value === "") {
-        // If the search is empty, navigate to the home page.
-        const { actions } = yield import("@wordpress/interactivity-router");
-        yield actions.navigate("/");
-      } else {
-        // If not, navigate to the new URL.
-        yield updateURL(value);
-      }
-    },
-  },
-});
+			if ( value === '' ) {
+				// If the search is empty, navigate to the home page.
+				const { actions } = yield import(
+					'@wordpress/interactivity-router'
+				);
+				yield actions.navigate( '/' );
+			} else {
+				// If not, navigate to the new URL.
+				yield updateURL( value );
+			}
+		},
+	},
+} );
 ```
 
 In the `view.js` part, we simply set the action that controls the navigation. It contains some custom logic to generate the new URL and uses the `navigate` action of the `@wordpress/interactivity-router` store to do the navigation in the client.

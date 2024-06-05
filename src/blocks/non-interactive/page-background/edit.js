@@ -1,8 +1,7 @@
-
 import { useBlockProps } from '@wordpress/block-editor';
 
 const Edit = () => {
-	return <div {...useBlockProps()}>Page background</div>;
+	return <div { ...useBlockProps() }>Page background</div>;
 };
 
 export default Edit;

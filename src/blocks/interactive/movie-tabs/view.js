@@ -3,7 +3,7 @@
  */
 import { getContext, store } from '@wordpress/interactivity';
 
-store('wpmovies', {
+store( 'wpmovies', {
 	state: {
 		get isImagesTab() {
 			const ctx = getContext();
@@ -24,4 +24,4 @@ store('wpmovies', {
 			ctx.tab = 'videos';
 		},
 	},
-});
+} );

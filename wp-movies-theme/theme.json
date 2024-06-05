@@ -8,7 +8,7 @@
 			"wideSize": "1000px"
 		},
 		"spacing": {
-			"units": ["%", "px", "em", "rem", "vh", "vw"]
+			"units": [ "%", "px", "em", "rem", "vh", "vw" ]
 		},
 		"color": {
 			"palette": [

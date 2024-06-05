@@ -1,7 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 
 const Edit = () => {
-	return <div {...useBlockProps()}>Movie Tabs</div>;
+	return <div { ...useBlockProps() }>Movie Tabs</div>;
 };
 
 export default Edit;

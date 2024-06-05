@@ -1,9 +1,8 @@
-
 import { useBlockProps } from '@wordpress/block-editor';
 
 const Edit = () => {
 	return (
-		<div {...useBlockProps()}>
+		<div { ...useBlockProps() }>
 			<ul className="wpmovies-data-list">
 				<li className="wpmovies-data-list-item">
 					<div className="wpmovies-data-list-key">Language</div>

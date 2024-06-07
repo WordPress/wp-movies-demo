@@ -5,11 +5,11 @@ import { getContext, store } from '@wordpress/interactivity';
 
 store('wpmovies', {
 	state: {
-		isImagesTab: () => {
+		get isImagesTab() {
 			const ctx = getContext();
 			return ctx.tab === 'images';
 		},
-		isVideosTab: () => {
+		get isVideosTab() {
 			const ctx = getContext();
 			return ctx.tab === 'videos';
 		},

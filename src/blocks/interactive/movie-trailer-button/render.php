@@ -22,12 +22,22 @@ $trailers  = array_filter(
 if ( count( $trailers ) !== 0 ) {
 	$trailer_url = reset( $trailers )['url'];
 	$trailer_id  = substr( $trailer_url, strpos( $trailer_url, '?v=' ) + 3 );
+	$context     = array( 'videoId' => $trailer_id );
 	?>
 
-	<div data-wp-interactive="wpmovies" <?php echo $wrapper_attributes; ?> data-wp-context='<?php echo esc_attr( wp_json_encode( array( 'videoId' => $trailer_id ) ) ); ?>'>
-		<div class="wpmovies-page-button-parent" data-wp-on--click="actions.setVideo" aria-controls="wp-movies-video-player">
+	<div
+		data-wp-interactive="wpmovies"
+		<?php echo $wrapper_attributes; ?>
+		<?php echo wp_interactivity_data_wp_context( $context ); ?>
+	>
+		<div
+			class="wpmovies-page-button-parent"
+			data-wp-on--click="actions.setVideo"
+			aria-controls="wp-movies-video-player"
+		>
 			<div class="wpmovies-page-button-child">
-				<?php echo $play_icon; ?><span>Play trailer</span>
+				<?php echo $play_icon; ?>
+				<span>Play trailer</span>
 			</div>
 		</div>
 	</div>

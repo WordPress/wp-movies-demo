@@ -17,9 +17,14 @@ wp_interactivity_state(
 );
 ?>
 
-<div data-wp-interactive="wpmovies" <?php echo $wrapper_attributes; ?> >
+<div
+	<?php echo $wrapper_attributes; ?>
+	data-wp-interactive="wpmovies"
+>
 	<form>
-		<label class="search-label" for="movie-search">Search for a movie</label>
+		<label class="search-label" for="movie-search">
+			<?php _e( 'Search for a movie', 'wp-movies-demo' ); ?>
+		</label>
 		<input
 			id="movie-search"
 			type="search"

@@ -10,31 +10,32 @@ This is a demo plugin which shows the features of the [Interactivity API](https:
 
 The plugin is split into:
 
--   `/src/blocks/interactive` - **Start here to understand how to build
-    interactive blocks with the Interactivity API**. The folder contains all the
-    custom interactive blocks used in the demo.
+-   `/src/blocks/interactive`
 
--   `/wp-movies-theme` - The custom theme used in the demo. Contains some custom
-    styling and the templates for the header & footer as well as the movie &
-    actors pages.
+    This folder contains all the custom interactive blocks used in the demo.
 
--   `/lib` - Helpers and support code for this demo. It's not relevant for
-    understanding the Interactivity API.
+    **Follow this guide to understand how we built each interactive block with the Interactivity API:\
+    [Movie Interactive Blocks](https://github.com/WordPress/wp-movies-demo/blob/main/docs/interactive-blocks/README.md)**
+
+-   `/wp-movies-theme`
+
+    The custom theme used in the demo. Contains some custom styling and the templates for the header & footer as well as the movie & actors pages.
+
+-   `/lib`
+
+    Helpers and support code for this demo. It's not relevant for understanding the Interactivity API.
 
 ## When will I be able to use the Interactivity API?
 
-The Interactivity API is [available in WordPress 6.5](https://make.wordpress.org/core/2024/03/04/interactivity-api-dev-note/).
+The Interactivity API is already [available in WordPress 6.5](https://make.wordpress.org/core/2024/03/04/interactivity-api-dev-note/).
 
 ## Setup
 
 1. Install the required plugins:
 
     - If you use [`wp-env`](<[url](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/)>), run `npx wp-env start` to install the plugins automatically and run a local WP instance.
-
     - Otherwise, install the following plugins:
-
         - [Gutenberg](https://github.com/WordPress/gutenberg/releases/latest/download/gutenberg.zip)
-
         - [Movies Demo
           Plugin](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-plugin.zip)
           (this repo)
@@ -46,8 +47,7 @@ The Interactivity API is [available in WordPress 6.5](https://make.wordpress.org
     npm run build
     ```
 
-    If you plan on tinkering with the frontend code, start the webpack
-    server which automatically rebuilds the files when you make any changes:
+    If you plan on tinkering with the frontend code, start the webpack server which automatically rebuilds the files when you make any changes:
 
     ```sh
     npm start
@@ -55,20 +55,11 @@ The Interactivity API is [available in WordPress 6.5](https://make.wordpress.org
 
 3. Install & activate the theme:
 
-    You need to install and activate the [Movies Demo
-    Theme](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-theme.zip)
-    (`/wp-movies-theme` in this repo). If you are using `wp-env`, it is already installed by default and you
-    just have to activate it. You can run:
+    You need to install and activate the [Movies Demo Theme](https://github.com/WordPress/wp-movies-demo/releases/latest/download/wp-movies-theme.zip) (`/wp-movies-theme` in this repo). If you are using `wp-env`, it is already installed by default and you just have to activate it. You can run:
 
     ```sh
-      npx wp-env run cli "wp theme activate wp-movies-theme"
+    npx wp-env run cli -- wp theme activate wp-movies-theme
     ```
-
-> [!NOTE]  
-> When running `wp-env` commands like the one above, it is assumed that the
-> Docker container is called `cli` on your local machine. If you had
-> previously used `wp-env` to run other WordPress sites, this name might be
-> different, e.g. `cli-1` in which case the full command would be `npx wp-env run cli-1 "wp theme activate wp-movies-theme"`.
 
 4. Add the movie and actor data to the WordPress database:
 
@@ -84,9 +75,10 @@ The Interactivity API is [available in WordPress 6.5](https://make.wordpress.org
     If you are using `wp-env`, you can run the following commands:
 
     ```sh
-      npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_movies.xml --authors=create"
-      npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_media.xml  --authors=create"
-      npx wp-env run cli "import wp-content/plugins/wp-movies-demo/wp_sampledata_actors.xml --authors=create"
+    npx wp-env run cli -- wp plugin activate wordpress-importer
+    npx wp-env run cli -- wp import wp-content/plugins/wp-movies-demo/wp_sampledata_movies.xml --authors=create
+    npx wp-env run cli -- wp import wp-content/plugins/wp-movies-demo/wp_sampledata_media.xml  --authors=create
+    npx wp-env run cli -- wp import wp-content/plugins/wp-movies-demo/wp_sampledata_actors.xml --authors=create
     ```
 
     If you run into any problems you can run `npx wp-env clean all` and start this step over again.
@@ -96,48 +88,34 @@ The Interactivity API is [available in WordPress 6.5](https://make.wordpress.org
     If you are using `wp-env` you can just run this command:
 
     ```sh
-    npx wp-env run cli "wp rewrite structure '/%postname%/'"
+    npx wp-env run cli -- wp rewrite structure '/%postname%/'
     ```
 
-6. Enable the **Full client-side navigation** in the **Gutenberg > Experiments**.
+6. Enable the **Full-page client-side navigation** in the **Gutenberg > Experiments**.
 
 ## Things to try
 
-### Client-side Navigations and pagination
+### Full-page client-side navigation
 
-When enabled, the lists of movies and actors will paginate without doing a full
-page refresh. You can enable this behavior in your WordPress admin page in
-**Gutenberg > Experiments**. Click around to the next/previous
-page of the movies or actors. You the list is loaded without a delay. This is
-because the HTML for that page is prefetched ahead of time, and only the
-nodes that are different between the current page and the next page are updated.
+When enabled, the lists of movies and actors will paginate without doing a full page refresh. You can enable this behavior in your WordPress admin page in **Gutenberg > Experiments**.
+
+Click around to the next/previous page of the movies or actors: the list is loaded without a delay. This is because the HTML for that page is prefetched ahead of time, and only the nodes that are different between the current page and the next page are updated.
 
 ### Add to favourites
 
-When you add a movie to favourites notice how the number of movie likes is
-preserved when navigating to another page. In addition to client-side
-navigations, the Interactivity API uses a smart DOM diffing algorithm. This
-allows the interactive state of blocks on the current page to be preserved!
+When you add a movie to favourites notice how the number of movie likes is preserved when navigating to another page. In addition to client-side navigations, the Interactivity API uses a smart DOM diffing algorithm. This allows the interactive state of blocks on the current page to be preserved!
 
 ### Instant search
 
-Try searching for movies or actors. The search results are rendered dynamically
-on the server!
+Try searching for movies or actors. The search results are rendered dynamically on the server!
 
 ### Remove the Search template
 
-Try opening the site editor and removing the "Search" template. You'll notice
-that the Search experience keeps working but that now the Search results look
-different. That's because in the absence of the Search template, the Archive
-template is being used. The Interactivity API is designed to work with the
-server-rendered markup and Full-site editing.
+Try opening the site editor and removing the "Search" template. You'll notice that the Search experience keeps working but that now the Search results look different. That's because in the absence of the Search template, the Archive template is being used. The Interactivity API is designed to work with the server-rendered markup and Full Site Editing.
 
 ### Play the movie trailers
 
-When you navigate to the page for a movie, you can play its trailer. If you
-have the client-side navigations
-[enabled](#client-side-navigations-and-pagination), you'll notice that the
-trailer will keep playing as you keep navigating around the site!
+When you navigate to the page for a movie, you can play its trailer. If you have the full-page client-side navigation [enabled](#client-side-navigations-and-pagination), you'll notice that the trailer will keep playing as you keep navigating around the site!
 
 ## Credits
 

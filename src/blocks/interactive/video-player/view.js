@@ -3,7 +3,7 @@
  */
 import { store, getContext } from '@wordpress/interactivity';
 
-const { state } = store('wpmovies', {
+const { state } = store( 'wpmovies', {
 	state: {
 		get isPlaying() {
 			return state.currentVideo !== '';
@@ -19,4 +19,4 @@ const { state } = store('wpmovies', {
 				'https://www.youtube.com/embed/' + ctx.videoId + '?autoplay=1';
 		},
 	},
-});
+} );

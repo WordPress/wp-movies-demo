@@ -13,24 +13,14 @@
 		"theme-zip": "node .github/scripts/build-theme.js",
 		"wp-env": "wp-env"
 	},
-	"prettier": {
-		"useTabs": true,
-		"tabWidth": 4,
-		"printWidth": 80,
-		"singleQuote": true,
-		"trailingComma": "es5",
-		"bracketSameLine": false,
-		"bracketSpacing": true,
-		"semi": true,
-		"arrowParens": "always"
-	},
 	"devDependencies": {
 		"@wordpress/blocks": "^12.29.0",
 		"@wordpress/element": "^5.29.0",
 		"@wordpress/env": "^10.0.0",
+		"@wordpress/prettier-config": "^4.0.0",
 		"@wordpress/scripts": "^27.3.0",
 		"archiver": "^7.0.0",
-		"prettier": "^3.2.5"
+		"prettier": "npm:wp-prettier@3.0.3"
 	},
 	"dependencies": {
 		"@wordpress/i18n": "^4.52.0",

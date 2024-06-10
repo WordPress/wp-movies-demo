@@ -4,7 +4,7 @@
 		"https://downloads.wordpress.org/plugin/wordpress-importer.latest-stable.zip",
 		"."
 	],
-	"themes": ["./wp-movies-theme"],
+	"themes": [ "./wp-movies-theme" ],
 	"config": {
 		"ALTERNATE_WP_CRON": true,
 		"PERMALINK_STRUCTURE": "/%postname%/",

@@ -3,7 +3,7 @@ import { ReactComponent as EmptyHeart } from '../../../../wp-movies-theme/assets
 
 const Edit = () => {
 	return (
-		<div {...useBlockProps()}>
+		<div { ...useBlockProps() }>
 			<EmptyHeart />
 		</div>
 	);

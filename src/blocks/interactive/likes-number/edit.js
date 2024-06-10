@@ -2,7 +2,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 
 const Edit = () => {
 	return (
-		<div {...useBlockProps()}>
+		<div { ...useBlockProps() }>
 			<img
 				draggable="false"
 				role="img"

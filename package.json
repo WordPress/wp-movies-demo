@@ -1,6 +1,6 @@
 {
 	"name": "wordpress-movies-demo",
-	"version": "0.1.32",
+	"version": "0.1.33",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"scripts": {

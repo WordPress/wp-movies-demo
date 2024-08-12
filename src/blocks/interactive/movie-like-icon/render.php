@@ -8,6 +8,7 @@
 $post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes();
 $play_icon          = file_get_contents( get_template_directory() . '/assets/empty-heart.svg' );
+$context            = array( 'post' => array( 'id' => $post->ID ) );
 
 wp_interactivity_state(
 	'wpmovies',
@@ -21,7 +22,7 @@ wp_interactivity_state(
 <div
 	data-wp-interactive="wpmovies"
 	<?php echo $wrapper_attributes; ?>
-	data-wp-context='{ "post": { "id": <?php echo $post->ID; ?> } }'
+	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >
 	<div
 		data-wp-on--click="actions.toggleMovie"

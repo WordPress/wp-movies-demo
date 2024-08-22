@@ -12,6 +12,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 
 $images = json_decode( get_post_meta( $post->ID, '_wpmovies_images', true ), true );
 $videos = json_decode( get_post_meta( $post->ID, '_wpmovies_videos', true ), true );
+$context            = array( 'tab' => 'images' );
 
 wp_interactivity_state(
 	'wpmovies',
@@ -25,7 +26,7 @@ wp_interactivity_state(
 <div
 	data-wp-interactive="wpmovies"
 	<?php echo $wrapper_attributes; ?>
-	data-wp-context='{ "tab": "images" }'
+	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >
 	<ul role="tablist">
 		<li class="wpmovies-tabs-title">
@@ -82,8 +83,9 @@ wp_interactivity_state(
 			<?php
 			foreach ( $videos as $video ) {
 				$video_id = substr( $video['url'], strpos( $video['url'], '?v=' ) + 3 );
+				$context            = array( 'videoId' => $video_id );
 				?>
-				<div class="wpmovies-tabs-video-wrapper" data-wp-context='{ "videoId": "<?php echo $video_id; ?>" }'>
+				<div class="wpmovies-tabs-video-wrapper" <?php echo wp_interactivity_data_wp_context( $context ); ?>>
 					<div data-wp-on--click="actions.setVideo" aria-controls="wp-movies-video-player">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff" class="play-icon">
 							<path d="M3 22v-20l18 10-18 10z" />

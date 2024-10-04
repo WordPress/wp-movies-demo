@@ -25,15 +25,15 @@ if ( 0 === $revenue ) {
 <div <?php echo $wrapper_attributes; ?>>
 	<ul class="wpmovies-data-list">
 		<li class="wpmovies-data-list-item">
-			<div class="wpmovies-data-list-key">Language</div>
+			<div class="wpmovies-data-list-key"><?php _e( 'Language', 'wp-movies' ); ?></div>
 			<div class="wpmovies-data-list-value"><?php echo ucfirst( $language ); ?></div>
 		</li>
 		<li class="wpmovies-data-list-item">
-			<div class="wpmovies-data-list-key">Budget</div>
+			<div class="wpmovies-data-list-key"><?php _e( 'Budget', 'wp-movies' ); ?></div>
 			<div class="wpmovies-data-list-value"><?php echo $budget; ?></div>
 		</li>
 		<li class="wpmovies-data-list-item">
-			<div class="wpmovies-data-list-key">Revenue</div>
+			<div class="wpmovies-data-list-key"><?php _e( 'Revenue', 'wp-movies' ); ?></div>
 			<div class="wpmovies-data-list-value"><?php echo $revenue; ?></div>
 		</li>
 	</ul>

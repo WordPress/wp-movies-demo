@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Register the actor birthday source.
+ * Register the movie release date source.
  */
 function wp_movies_register_block_bindings_movie_release_date() {
 	register_block_bindings_source(

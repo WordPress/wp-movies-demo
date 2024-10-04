@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Register the actor birthday source.
+ * Register the actor birth place source.
  */
 function wp_movies_register_block_bindings_actor_birth_place() {
 	register_block_bindings_source(

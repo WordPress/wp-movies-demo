@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Register the actor birthday source.
+ * Register the move runtime source.
  */
 function wp_movies_register_block_bindings_movie_runtime() {
 	register_block_bindings_source(

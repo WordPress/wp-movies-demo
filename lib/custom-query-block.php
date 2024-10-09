@@ -49,17 +49,17 @@ function wpmovies_build_query( $query ) {
 	// Order by popularity.
 	$order_metafield = '';
 	if ( 'movies' === $query['post_type'] ) {
-		$order_metafield     = '_wpmovies_vote_average';
+		$order_metafield     = 'wpmovies_vote_average';
 		$query['meta_query'] = array(
 			array(
-				'key'     => '_wpmovies_vote_count',
+				'key'     => 'wpmovies_vote_count',
 				'value'   => '3000',
 				'type'    => 'NUMERIC',
 				'compare' => '>',
 			),
 		);
 	} elseif ( 'actors' === $query['post_type'] ) {
-		$order_metafield = '_wpmovies_actors_popularity';
+		$order_metafield = 'wpmovies_actors_popularity';
 	};
 	$query['meta_key'] = $order_metafield;
 	$query['orderby']  = 'meta_value_num';

@@ -139,8 +139,8 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	array( 'class' => 'wpmovies-tabs' )
 );
 
-$images = json_decode( get_post_meta( $post->ID, '_wpmovies_images', true ), true );
-$videos = json_decode( get_post_meta( $post->ID, '_wpmovies_videos', true ), true );
+$images = json_decode( get_post_meta( $post->ID, 'wpmovies_images', true ), true );
+$videos = json_decode( get_post_meta( $post->ID, 'wpmovies_videos', true ), true );
 
 wp_interactivity_state(
 	'wpmovies',

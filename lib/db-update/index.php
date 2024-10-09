@@ -46,11 +46,11 @@ function add_actor( $actor_info, $movie_id, $movie_term_data ) {
 		'guid'         => $actor_guid,
 		'post_type'    => 'actors',
 		'meta_input'   => array(
-			'_wpmovies_actors_homepage'              => $actor_info['homepage'],
-			'_wpmovies_actors_birthday'              => $actor_info['birthday'],
-			'_wpmovies_actors_popularity'            => $actor_info['popularity'],
-			'_wpmovies_actors_place_of_birth'        => $actor_info['place_of_birth'],
-			'_wpmovies_actor_character_' . $movie_id => $actor_info['character'],
+			'wpmovies_actors_homepage'              => $actor_info['homepage'],
+			'wpmovies_actors_birthday'              => $actor_info['birthday'],
+			'wpmovies_actors_popularity'            => $actor_info['popularity'],
+			'wpmovies_actors_place_of_birth'        => $actor_info['place_of_birth'],
+			'wpmovies_actor_character_' . $movie_id => $actor_info['character'],
 		),
 	);
 
@@ -69,7 +69,7 @@ function add_actor( $actor_info, $movie_id, $movie_term_data ) {
 			'post_author' => 1,
 			'guid'        => get_site_url() . '?tmdb_image_id=' . $actor_info['profile_img_path'],
 			'meta_input'  => array(
-				'_wpmovies_img_source' => $actor_profile_img_url,
+				'wpmovies_img_source' => $actor_profile_img_url,
 			),
 		);
 		$profile_img_id   = attach_image_to_post( $actor_profile_img_url, intval( $post_id ), $profile_img_data );
@@ -182,16 +182,16 @@ function wpmovies_add_movies() {
 				'guid'         => $movie_guid,
 				'post_type'    => 'movies',
 				'meta_input'   => array(
-					'_wpmovies_vote_count'   => $movie_vote_count,
-					'_wpmovies_vote_average' => $movie_vote_average,
-					'_wpmovies_popularity'   => $movie_popularity,
-					'_wpmovies_status'       => $movie_status,
-					'_wpmovies_homepage'     => $movie_homepage,
-					'_wpmovies_release_date' => $movie_release_date,
-					'_wpmovies_revenue'      => $movie_revenue,
-					'_wpmovies_budget'       => $movie_budget,
-					'_wpmovies_runtime'      => $movie_runtime,
-					'_wpmovies_language'     => $movie_language,
+					'wpmovies_vote_count'   => $movie_vote_count,
+					'wpmovies_vote_average' => $movie_vote_average,
+					'wpmovies_popularity'   => $movie_popularity,
+					'wpmovies_status'       => $movie_status,
+					'wpmovies_homepage'     => $movie_homepage,
+					'wpmovies_release_date' => $movie_release_date,
+					'wpmovies_revenue'      => $movie_revenue,
+					'wpmovies_budget'       => $movie_budget,
+					'wpmovies_runtime'      => $movie_runtime,
+					'wpmovies_language'     => $movie_language,
 				),
 			);
 
@@ -210,7 +210,7 @@ function wpmovies_add_movies() {
 					'post_author' => 1,
 					'guid'        => get_site_url() . '?tmdb_image_id=' . $movie_poster_path,
 					'meta_input'  => array(
-						'_wpmovies_img_source' => $movie_poster_url,
+						'wpmovies_img_source' => $movie_poster_url,
 					),
 				);
 				$poster_id   = attach_image_to_post( $movie_poster_url, $post_id, $poster_data );
@@ -225,11 +225,11 @@ function wpmovies_add_movies() {
 					'post_author' => 1,
 					'guid'        => get_site_url() . '?tmdb_image_id=' . $movie_backdrop_img_path,
 					'meta_input'  => array(
-						'_wpmovies_img_source' => $movie_backdrop_img_url,
+						'wpmovies_img_source' => $movie_backdrop_img_url,
 					),
 				);
 				$backdrop_img_id   = attach_image_to_post( $movie_backdrop_img_url, $post_id, $backdrop_img_data );
-				update_post_meta( intval( $post_id ), '_wpmovies_backdrop_img_id', intval( $backdrop_img_id ) );
+				update_post_meta( intval( $post_id ), 'wpmovies_backdrop_img_id', intval( $backdrop_img_id ) );
 			};
 
 			// 4. ADD MORE IMAGES
@@ -244,7 +244,7 @@ function wpmovies_add_movies() {
 							'post_author' => 1,
 							'guid'        => get_site_url() . '?tmdb_image_id=' . $image->getFilePath(),
 							'meta_input'  => array(
-								'_wpmovies_img_source' => 'https://www.themoviedb.org/t/p/w1280' . $image->getFilePath(),
+								'wpmovies_img_source' => 'https://www.themoviedb.org/t/p/w1280' . $image->getFilePath(),
 							),
 						);
 						$img_id   = attach_image_to_post( 'https://www.themoviedb.org/t/p/w1280' . $image->getFilePath(), $post_id, $img_data );
@@ -253,7 +253,7 @@ function wpmovies_add_movies() {
 					$image_count++;
 				}
 			}
-			update_post_meta( intval( $post_id ), '_wpmovies_images', wp_json_encode( $images_array ) );
+			update_post_meta( intval( $post_id ), 'wpmovies_images', wp_json_encode( $images_array ) );
 
 			// 5. ADD VIDEOS
 			// No limit to ensure we include trailers
@@ -271,7 +271,7 @@ function wpmovies_add_movies() {
 					'url'  => $video_url,
 				);
 			}
-			update_post_meta( intval( $post_id ), '_wpmovies_videos', wp_json_encode( $videos_array ) );
+			update_post_meta( intval( $post_id ), 'wpmovies_videos', wp_json_encode( $videos_array ) );
 
 			// 6. ADD RECOMMENDED MOVIES
 			// Add the ids
@@ -279,7 +279,7 @@ function wpmovies_add_movies() {
 			foreach ( $movie_recommendations as $recommended_movie ) {
 				$recommended_movies_array[] = $recommended_movie->getId();
 			}
-			update_post_meta( intval( $post_id ), '_wpmovies_recommended', wp_json_encode( $recommended_movies_array ) );
+			update_post_meta( intval( $post_id ), 'wpmovies_recommended', wp_json_encode( $recommended_movies_array ) );
 
 			// 7. ADD SIMILAR MOVIES
 			// Add the ids
@@ -287,7 +287,7 @@ function wpmovies_add_movies() {
 			foreach ( $similar_movies as $similar_movie ) {
 				$similar_movies_array[] = $similar_movie->getId();
 			}
-			update_post_meta( intval( $post_id ), '_wpmovies_similar', wp_json_encode( $similar_movies_array ) );
+			update_post_meta( intval( $post_id ), 'wpmovies_similar', wp_json_encode( $similar_movies_array ) );
 
 			// 8. ADD GENRES AS CATEGORIES
 			foreach ( $movie_genres as $genre ) {

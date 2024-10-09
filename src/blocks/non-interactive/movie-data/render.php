@@ -7,14 +7,14 @@
 
 $post               = get_post();
 $wrapper_attributes = get_block_wrapper_attributes();
-$language           = get_post_meta( $post->ID, '_wpmovies_language', true );
-$budget             = intval( get_post_meta( $post->ID, '_wpmovies_budget', true ) );
+$language           = get_post_meta( $post->ID, 'wpmovies_language', true );
+$budget             = intval( get_post_meta( $post->ID, 'wpmovies_budget', true ) );
 if ( 0 === $budget ) {
 	$budget = '-';
 } else {
 	$budget = '$' . strval( number_format( $budget ) );
 }
-$revenue = intval( get_post_meta( $post->ID, '_wpmovies_revenue', true ) );
+$revenue = intval( get_post_meta( $post->ID, 'wpmovies_revenue', true ) );
 if ( 0 === $revenue ) {
 	$revenue = '-';
 } else {

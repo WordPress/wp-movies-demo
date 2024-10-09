@@ -55,7 +55,7 @@ foreach ( $items as $item ) {
 	$img_source     = '';
 	$postmeta_array = $item->getElementsByTagName( 'postmeta' );
 	foreach ( $postmeta_array as $postmeta ) {
-		if ( $postmeta->getElementsByTagName( 'meta_key' )->item( 0 )->textContent === '_wpmovies_img_source' ) {
+		if ( $postmeta->getElementsByTagName( 'meta_key' )->item( 0 )->textContent === 'wpmovies_img_source' ) {
 			$img_source = $postmeta->getElementsByTagName( 'meta_value' )->item( 0 )->textContent;
 		}
 	};

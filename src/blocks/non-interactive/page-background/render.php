@@ -18,7 +18,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	if ( is_search() ) {
 		// Do not display background image on search page.
 	} elseif ( get_post_type() === 'movies' ) {
-		$background_image_id  = get_post_meta( $post->ID, '_wpmovies_backdrop_img_id', true );
+		$background_image_id  = get_post_meta( $post->ID, 'wpmovies_backdrop_img_id', true );
 		$background_image_url = wp_get_attachment_image_url( $background_image_id, '' );
 		?>
 		<div class="wpmovies-movie-background">

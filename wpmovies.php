@@ -15,7 +15,6 @@
 require_once __DIR__ . '/lib/custom-post-types.php';
 require_once __DIR__ . '/lib/custom-taxonomies.php';
 require_once __DIR__ . '/lib/custom-query-block.php';
-require_once __DIR__ . '/lib/db-update/index.php';
 
 add_action( 'init', 'auto_register_block_types' );
 
@@ -34,30 +33,6 @@ function auto_register_block_types() {
 			register_block_type( $block_folder );
 		};
 	};
-}
-
-// ADD CRON EVENTS TO IMPORT MOVIES DAILY
-// Create the necessary hook.
-add_action( 'cron_wpmovies_add_movies', 'wpmovies_add_movies' );
-
-// Start cron when plugin is activated.
-register_activation_hook( __FILE__, 'movies_demo_plugin_activation' );
-/**
- * Add cron events when plugin is activated.
- */
-function movies_demo_plugin_activation() {
-	if ( ! wp_next_scheduled( 'cron_wpmovies_add_movies' ) ) {
-		wp_schedule_event( time(), 'daily', 'cron_wpmovies_add_movies' );
-	}
-}
-
-register_deactivation_hook( __FILE__, 'movies_demo_plugin_deactivation' );
-/**
- * Remove cron events when plugin is deactivated.
- */
-function movies_demo_plugin_deactivation() {
-	$timestamp = wp_next_scheduled( 'cron_wpmovies_add_movies' );
-	wp_unschedule_event( $timestamp, 'cron_wpmovies_add_movies' );
 }
 
 // Avoid sending any JavaScript not related to the Interactivity API.

@@ -42,7 +42,6 @@
 	},
 	"scripts": {
 		"format": "phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
-		"lint": "phpcs --standard=phpcs.xml.dist",
-		"update-xml": "php ./lib/db-update/update-xml.php"
+		"lint": "phpcs --standard=phpcs.xml.dist"
 	}
 }

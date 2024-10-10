@@ -12,7 +12,7 @@
  $score_color = '#5EFD26'; // Green.
 
 if ( $score === null ) {
-	$score_color = '#808080'; // Gray for no score
+	$score_color = '#808080'; // Gray for no score.
 	$degrees_css = 0;
 } else {
 	if ( $score < 7 && $score >= 3 ) {

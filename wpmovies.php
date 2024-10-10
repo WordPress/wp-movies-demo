@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       WP Movies
  * Version:           0.1.37
- * Requires at least: 6.5
+ * Requires at least: 6.7
  * Requires PHP:      7.0
  * Description:       Plugin that demoes the usage of the Interactivity API.
  * Author:            WordPress Team
@@ -15,6 +15,8 @@
 require_once __DIR__ . '/lib/custom-post-types.php';
 require_once __DIR__ . '/lib/custom-taxonomies.php';
 require_once __DIR__ . '/lib/custom-query-block.php';
+require_once __DIR__ . '/lib/custom-post-meta.php';
+require_once __DIR__ . '/lib/custom-block-variations.php';
 
 add_action( 'init', 'auto_register_block_types' );
 

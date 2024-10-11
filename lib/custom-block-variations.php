@@ -25,6 +25,7 @@ function wpmovies_block_type_variations( $variations, $block_type ) {
 					),
 				),
 			),
+			'isActive'   => array( 'metadata.bindings.content' ),
 		);
 		$variations[] = array(
 			'name'       => 'wpmovies/movie-release-date',
@@ -42,6 +43,7 @@ function wpmovies_block_type_variations( $variations, $block_type ) {
 					),
 				),
 			),
+			'isActive'   => array( 'metadata.bindings.content' ),
 		);
 	}
 	return $variations;

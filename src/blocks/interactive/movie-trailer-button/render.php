@@ -12,7 +12,6 @@ $wrapper_attributes = get_block_wrapper_attributes(
 $post      = get_post();
 $play_icon = file_get_contents( get_template_directory() . '/assets/play.svg' );
 $videos    = get_post_meta( $post->ID, 'wpmovies_videos', true );
-$trailers  = array();
 
 if ( ! $videos ) {
 	return;

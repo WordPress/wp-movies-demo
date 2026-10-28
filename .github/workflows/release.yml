@@ -53,6 +53,11 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+
             - name: Install Composer dependencies
               run: composer install --no-dev
 
